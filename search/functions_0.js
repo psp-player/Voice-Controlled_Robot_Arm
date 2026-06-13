@@ -1,0 +1,14 @@
+var searchData=
+[
+  ['arm_5fdbg_5fioin_0',['arm_dbg_ioin',['../arm__control_8h.html#a9f291de84357ee9b2aa3aa153330a5c8',1,'arm_dbg_ioin(int joint):&#160;arm_control.c'],['../arm__control_8c.html#a9f291de84357ee9b2aa3aa153330a5c8',1,'arm_dbg_ioin(int joint):&#160;arm_control.c']]],
+  ['arm_5fdrivers_5finit_1',['arm_drivers_init',['../arm__control_8c.html#a124bc663f4af8212bf6eae6aa6a7b843',1,'arm_drivers_init(void):&#160;arm_control.c'],['../arm__control_8h.html#a124bc663f4af8212bf6eae6aa6a7b843',1,'arm_drivers_init(void):&#160;arm_control.c']]],
+  ['arm_5fdrv_5fstatus_2',['arm_drv_status',['../arm__control_8c.html#ab794187a34d554fbe4e899fc0cdb186b',1,'arm_drv_status(int joint):&#160;arm_control.c'],['../arm__control_8h.html#ab794187a34d554fbe4e899fc0cdb186b',1,'arm_drv_status(int joint):&#160;arm_control.c']]],
+  ['arm_5ffk_3',['arm_fk',['../arm__control_8c.html#a1051cf6d9c68a781c722d0b49995ed56',1,'arm_fk(float th0, float th1, float th2, float *x, float *y, float *z):&#160;arm_control.c'],['../arm__control_8h.html#a1051cf6d9c68a781c722d0b49995ed56',1,'arm_fk(float th0, float th1, float th2, float *x, float *y, float *z):&#160;arm_control.c']]],
+  ['arm_5fget_5fxyz_4',['arm_get_xyz',['../arm__control_8c.html#af26fd2f9f2560c9f4e66adf1f6c8bd22',1,'arm_get_xyz(float *x, float *y, float *z):&#160;arm_control.c'],['../arm__control_8h.html#af26fd2f9f2560c9f4e66adf1f6c8bd22',1,'arm_get_xyz(float *x, float *y, float *z):&#160;arm_control.c']]],
+  ['arm_5fik_5',['arm_ik',['../arm__control_8c.html#aa331a707d18869bc9757b8b730900995',1,'arm_control.c']]],
+  ['arm_5finit_6',['arm_init',['../arm__control_8c.html#af5be512e918214837a83d53e9cdce670',1,'arm_init(void):&#160;arm_control.c'],['../arm__control_8h.html#af5be512e918214837a83d53e9cdce670',1,'arm_init(void):&#160;arm_control.c']]],
+  ['arm_5fis_5fmoving_7',['arm_is_moving',['../arm__control_8c.html#a8f968845bed53fc271203985683bf22b',1,'arm_is_moving(void):&#160;arm_control.c'],['../arm__control_8h.html#a8f968845bed53fc271203985683bf22b',1,'arm_is_moving(void):&#160;arm_control.c']]],
+  ['arm_5fmove_5fto_8',['arm_move_to',['../arm__control_8c.html#a27b542a5c8929623641dcc24a64b2083',1,'arm_move_to(float x, float y, float z, int elbow_up):&#160;arm_control.c'],['../arm__control_8h.html#a27b542a5c8929623641dcc24a64b2083',1,'arm_move_to(float x, float y, float z, int elbow_up):&#160;arm_control.c']]],
+  ['arm_5ftest_5fspin_9',['arm_test_spin',['../arm__control_8c.html#a01d82ca40bc6de118301c37dc9aa8198',1,'arm_test_spin(int joint, int dir, int32_t nsteps, float hz):&#160;arm_control.c'],['../arm__control_8h.html#a01d82ca40bc6de118301c37dc9aa8198',1,'arm_test_spin(int joint, int dir, int32_t nsteps, float hz):&#160;arm_control.c']]],
+  ['audio_5fcb_10',['audio_cb',['../namespacevoiceplusvision.html#a5d024f8e2e565604e87f8ae61cada723',1,'voiceplusvision']]]
+];

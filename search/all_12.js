@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['table_5frobot_5fpoints_0',['TABLE_ROBOT_POINTS',['../namespaceblock__detection.html#a8d8e398aa3fc0654d975afb7f28ccb3b',1,'block_detection']]],
+  ['table_5fto_5frobot_1',['table_to_robot',['../namespaceblock__detection.html#ab7565ee9d09595fd2ecba3b67dcfeebe',1,'block_detection.table_to_robot()'],['../namespacevoiceplusvision.html#a652e747fc6558a4ea2dde9f7e8bb0de8',1,'voiceplusvision.table_to_robot(x, y, M)']]],
+  ['target_5fcolor_2',['target_color',['../namespacevoiceplusvision.html#a87b2c0f8538f2ea50678022498bedb18',1,'voiceplusvision']]],
+  ['tim_5ftick_5fhz_3',['TIM_TICK_HZ',['../arm__control_8c.html#a4f80ae25af7079e29fe08ab27467e1c7',1,'arm_control.c']]],
+  ['tmc_5fchopconf_4',['TMC_CHOPCONF',['../arm__control_8c.html#a8120f8ee4c5f576281fad27e1727ebee',1,'arm_control.c']]],
+  ['tmc_5fdrv_5fconf_5',['TMC_DRV_CONF',['../arm__control_8c.html#ad05b0b7078fe991aae783ba6d48eb646',1,'arm_control.c']]],
+  ['tmc_5fdrv_5fstatus_6',['TMC_DRV_STATUS',['../arm__control_8c.html#af130c348cad930e1d4b960c459261b6b',1,'arm_control.c']]],
+  ['tmc_5fgconf_7',['TMC_GCONF',['../arm__control_8c.html#a11f5ad15f8438e7c2b241203a94a803b',1,'arm_control.c']]],
+  ['tmc_5fglobalscaler_8',['TMC_GLOBALSCALER',['../arm__control_8c.html#ae212eab638e75ee27f35884b29f35648',1,'arm_control.c']]],
+  ['tmc_5fgstat_9',['TMC_GSTAT',['../arm__control_8c.html#aefe6218ed59cdd249242fd0b086c6d93',1,'arm_control.c']]],
+  ['tmc_5fihold_5firun_10',['TMC_IHOLD_IRUN',['../arm__control_8c.html#af1ec3fe7f75b90fce1623249a5fb23d4',1,'arm_control.c']]],
+  ['tmc_5fioin_11',['TMC_IOIN',['../arm__control_8c.html#a300fefb64b2b2dff9b894283596e94da',1,'arm_control.c']]],
+  ['tmc_5fread_12',['tmc_read',['../arm__control_8c.html#a576cc4e629ce0c7885eb337ad4da49e4',1,'arm_control.c']]],
+  ['tmc_5fspi_5ftimeout_13',['TMC_SPI_TIMEOUT',['../arm__control_8c.html#a08a002d13ccbe210ba682da20d16a6aa',1,'arm_control.c']]],
+  ['tmc_5ftpowerdown_14',['TMC_TPOWERDOWN',['../arm__control_8c.html#ada14f06d7c807d4ac18e6e0d3ee9a5c2',1,'arm_control.c']]],
+  ['tmc_5ftpwmthrs_15',['TMC_TPWMTHRS',['../arm__control_8c.html#a476bffd42888b3d3fb7b5b207bf8d252',1,'arm_control.c']]],
+  ['tmc_5fwrite_16',['tmc_write',['../arm__control_8c.html#af6300c4c1948573167fef567f7fdc9bd',1,'arm_control.c']]],
+  ['tmc_5fwrite_17',['TMC_WRITE',['../arm__control_8c.html#ab9b2682b0ad2e83f4ba39fd208a195df',1,'arm_control.c']]],
+  ['try_18',['try',['../namespaceblock__detection.html#a4ea852539ecce7c036e2b736db7d3b52',1,'block_detection']]],
+  ['tvecs_19',['tvecs',['../namespacecamera__calibration.html#a2647923cd4dfc11d05e0b7b3a0d85385',1,'camera_calibration']]],
+  ['tx_20',['tx',['../namespaceblock__detection.html#a8b8c9ceb247596bcc8b3ea433fe6459b',1,'block_detection']]],
+  ['ty_21',['ty',['../namespaceblock__detection.html#a7e4b4808780f77e03cb10ddde0919e97',1,'block_detection']]]
+];

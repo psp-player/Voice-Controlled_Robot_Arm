@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['calib_5ffile_0',['CALIB_FILE',['../namespaceblock__detection.html#a91e1bccb74fda71690120c6298486f45',1,'block_detection.CALIB_FILE()'],['../namespacevoiceplusvision.html#a4c80c4e862dc6622ad9f7a04e120c26f',1,'voiceplusvision.CALIB_FILE()']]],
+  ['cam_5findex_1',['CAM_INDEX',['../namespacevoiceplusvision.html#a3216318313f3bd1851434fd2ee1df444',1,'voiceplusvision']]],
+  ['camera_5fcalibration_2',['camera_calibration',['../namespacecamera__calibration.html',1,'']]],
+  ['camera_5fcalibration_2epy_3',['camera_calibration.py',['../camera__calibration_8py.html',1,'']]],
+  ['cap_4',['cap',['../namespaceblock__detection.html#a39f2d91558b87d9932c6c50d628df61c',1,'block_detection.cap()'],['../namespacecamera__calibration.html#a6993f3a370f0560b1e517679b32c66bf',1,'camera_calibration.cap()']]],
+  ['cdc_5fcontrol_5ffs_5',['CDC_Control_FS',['../group__USBD__CDC__IF__Private__FunctionPrototypes.html#ga617e289cd860bc4c6831e01c7f2893a2',1,'usbd_cdc_if.c']]],
+  ['cdc_5fdeinit_5ffs_6',['CDC_DeInit_FS',['../group__USBD__CDC__IF__Private__FunctionPrototypes.html#ga3aaa6d7ac8cd77d9aed892348d83a8a8',1,'usbd_cdc_if.c']]],
+  ['cdc_5finit_5ffs_7',['CDC_Init_FS',['../group__USBD__CDC__IF__Private__FunctionPrototypes.html#ga400c7977253a3ee946cf2a1197bc940d',1,'usbd_cdc_if.c']]],
+  ['cdc_5freceive_5ffs_8',['CDC_Receive_FS',['../group__USBD__CDC__IF__Private__FunctionPrototypes.html#ga89250023659c1f485873b20514959f0a',1,'usbd_cdc_if.c']]],
+  ['cdc_5ftransmit_5ffs_9',['CDC_Transmit_FS',['../group__USBD__CDC__IF.html#ga5137d6201dbdef2bf351c5b4941c24f4',1,'CDC_Transmit_FS(uint8_t *Buf, uint16_t Len):&#160;usbd_cdc_if.c'],['../group__USBD__CDC__IF__Exported__FunctionsPrototype.html#ga5137d6201dbdef2bf351c5b4941c24f4',1,'CDC_Transmit_FS(uint8_t *Buf, uint16_t Len):&#160;usbd_cdc_if.c']]],
+  ['cdc_5ftransmitcplt_5ffs_10',['CDC_TransmitCplt_FS',['../group__USBD__CDC__IF__Private__FunctionPrototypes.html#gae24fdd4367d73478b63eec15af3f5f70',1,'usbd_cdc_if.c']]],
+  ['chessboard_11',['CHESSBOARD',['../namespacevoiceplusvision.html#a4e924cd8d12af99c8b543efb27b272e3',1,'voiceplusvision.CHESSBOARD()'],['../namespaceblock__detection.html#a72faef20a49a5ccf3cf170bb3f1dfae5',1,'block_detection.CHESSBOARD()'],['../namespacecamera__calibration.html#a82dc3e785aee61a23ac468b874989300',1,'camera_calibration.CHESSBOARD()']]],
+  ['cmd_5fbuf_12',['cmd_buf',['../main_8c.html#aa4f391c9ea24b6f9afb68ad06e13dbba',1,'main.c']]],
+  ['cmd_5fready_13',['cmd_ready',['../main_8c.html#a73ecb17475b6b09997fcb3a6fb9fbeb6',1,'main.c']]],
+  ['color_5franges_14',['COLOR_RANGES',['../namespaceblock__detection.html#a355df717a03b93b7bb17e21b12bba4ca',1,'block_detection.COLOR_RANGES()'],['../namespacevoiceplusvision.html#ad6bd73b0b1213960349b7a8109efe02b',1,'voiceplusvision.COLOR_RANGES()']]],
+  ['compute_5fworkspace_5fhomography_15',['compute_workspace_homography',['../namespaceblock__detection.html#afe55115f64d29928dfb2da61e6856c3c',1,'block_detection.compute_workspace_homography()'],['../namespacevoiceplusvision.html#a4894f87f3e62b4ded2bf842dddd6e422',1,'voiceplusvision.compute_workspace_homography()']]],
+  ['corners_16',['corners',['../namespacecamera__calibration.html#af455a4646fe7cd35ff6ddde10aad4c70',1,'camera_calibration']]],
+  ['corners2_17',['corners2',['../namespacecamera__calibration.html#a618c4599550cb8c29003b2aebd935333',1,'camera_calibration']]],
+  ['criteria_18',['criteria',['../namespaceblock__detection.html#a21740c2a73cd25e46d433a64ca99f211',1,'block_detection.criteria()'],['../namespacecamera__calibration.html#a03d5a93bf6ad4e7bfeee77b4ef4fda0d',1,'camera_calibration.criteria()'],['../namespacevoiceplusvision.html#a57ef26ab36898dca422af05944ee5181',1,'voiceplusvision.criteria()']]],
+  ['cs_5fpin_19',['cs_pin',['../arm__control_8c.html#a54f68c4e8e8f5a5e4dba296f04d434b1',1,'arm_control.c']]],
+  ['cs_5fport_20',['cs_port',['../arm__control_8c.html#a9c751319fea98baf6b200dae443da746',1,'arm_control.c']]],
+  ['cur_5fang_21',['cur_ang',['../arm__control_8c.html#a34973089cd02a7787d21f8b7e87d9312',1,'arm_control.c']]],
+  ['cx_22',['cx',['../namespaceblock__detection.html#a5d4fa6e1f5b2fe7eb67bd5be897a3bbe',1,'block_detection']]],
+  ['cy_23',['cy',['../namespaceblock__detection.html#a65229cff08421dda14ea6402f7e19f22',1,'block_detection']]]
+];

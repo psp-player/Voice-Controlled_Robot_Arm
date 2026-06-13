@@ -1,0 +1,4 @@
+<map id="STM32_USB_OTG_DEVICE_LIBRARY" name="STM32_USB_OTG_DEVICE_LIBRARY">
+<area shape="rect" id="node1" title="Usb device library." alt="" coords="5,5,196,45"/>
+<area shape="rect" id="node2" href="$group__USBD__CDC__IF.html" title="Usb VCP device module." alt="" coords="244,13,357,38"/>
+</map>
