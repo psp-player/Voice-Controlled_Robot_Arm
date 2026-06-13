@@ -40,7 +40,7 @@ var searchData=
   ['make_5fmask_37',['make_mask',['../namespacevoiceplusvision.html#a90c3c325387aafe17853c3899ef432c3',1,'voiceplusvision.make_mask()'],['../namespaceblock__detection.html#a682da8b04eddf9c38cec1f96351042f1',1,'block_detection.make_mask()']]],
   ['master_5fvelocity_38',['master_velocity',['../arm__control_8c.html#a26980277a3a94b2471d63f6ffa558279',1,'arm_control.c']]],
   ['max_5fstep_5fhz_39',['MAX_STEP_HZ',['../arm__control_8c.html#a766c9456819aa9ea9474939a6fae533b',1,'arm_control.c']]],
-  ['me507_40',['ME507',['../md_README.html',1,'']]],
+  ['me_20507_20robot_20arm_20repository_40',['ME 507 Robot Arm Repository',['../md_README.html',1,'']]],
   ['microstep_41',['MICROSTEP',['../arm__control_8c.html#aca9cca604052ac7a6f173b58b7d6e126',1,'arm_control.c']]],
   ['min_5farea_42',['MIN_AREA',['../namespacevoiceplusvision.html#ab701d57c816ed64d1c89c831b6b33249',1,'voiceplusvision.MIN_AREA()'],['../namespaceblock__detection.html#a19b73282532d01d95b296cc49e073193',1,'block_detection.MIN_AREA()']]],
   ['model_5fpath_43',['MODEL_PATH',['../namespacevoiceplusvision.html#a3e98088dd91971f1be3dc56b3d5ad41a',1,'voiceplusvision']]],

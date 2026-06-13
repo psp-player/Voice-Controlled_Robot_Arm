@@ -25,7 +25,7 @@
 var NAVTREE =
 [
   [ "ME507 Final Project", "index.html", [
-    [ "ME507", "md_README.html", null ],
+    [ "ME 507 Robot Arm Repository", "md_README.html", null ],
     [ "Modules", "modules.html", "modules" ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
