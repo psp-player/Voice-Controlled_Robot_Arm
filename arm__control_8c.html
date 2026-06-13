@@ -90,12 +90,14 @@ $(document).ready(function(){initNavTree('arm__control_8c.html',''); initResizab
 
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">arm_control.c File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>3-DoF (RRR) arm: inverse/forward kinematics, coordinated stepper motion with an acceleration ramp, and TMC2240 driver control.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="arm__control_8h_source.html">arm_control.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="main_8h_source.html">main.h</a>&quot;</code><br />
 <code>#include &lt;math.h&gt;</code><br />
@@ -104,8 +106,8 @@ Include dependency graph for arm_control.c:</div>
 <div class="dyncontent">
 <div class="center"><img src="arm__control_8c__incl.png" border="0" usemap="#aarm__control_8c" alt=""/></div>
 <map name="aarm__control_8c" id="aarm__control_8c">
-<area shape="rect" title=" " alt="" coords="122,5,233,31"/>
-<area shape="rect" href="arm__control_8h.html" title=" " alt="" coords="5,79,117,104"/>
+<area shape="rect" title="3&#45;DoF (RRR) arm: inverse/forward kinematics, coordinated stepper motion with an acceleration ramp,..." alt="" coords="122,5,233,31"/>
+<area shape="rect" href="arm__control_8h.html" title="Public API for the 3&#45;DoF (RRR) robotic arm: kinematics, motion, TMC2240 stepper driver bring&#45;up,..." alt="" coords="5,79,117,104"/>
 <area shape="rect" href="main_8h.html" title=": Header for main.c file. This file contains the common defines of the application." alt="" coords="144,79,211,104"/>
 <area shape="rect" title=" " alt="" coords="235,79,303,104"/>
 <area shape="rect" title=" " alt="" coords="21,152,91,177"/>
@@ -115,12 +117,16 @@ Include dependency graph for arm_control.c:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader">Link geometry (mm)</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>Denavit-style link lengths for the RRR arm. </p>
+</div></td></tr>
 <tr class="memitem:a52deba56234661c77d4b9573d5175ae2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a52deba56234661c77d4b9573d5175ae2">D1</a>&#160;&#160;&#160;145.0f</td></tr>
 <tr class="separator:a52deba56234661c77d4b9573d5175ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ce864b284ac751ffd8a0d98d5ccab55"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a1ce864b284ac751ffd8a0d98d5ccab55">L1</a>&#160;&#160;&#160;170.0f</td></tr>
 <tr class="separator:a1ce864b284ac751ffd8a0d98d5ccab55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab983f03862f557a786ccc43b26522e16"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#ab983f03862f557a786ccc43b26522e16">L2</a>&#160;&#160;&#160;245.0f</td></tr>
 <tr class="separator:ab983f03862f557a786ccc43b26522e16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Stepping resolution</div></td></tr>
 <tr class="memitem:a2d05bcc021d66ae0458c269139222edc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a2d05bcc021d66ae0458c269139222edc">STEPS_PER_REV</a>&#160;&#160;&#160;200.0f</td></tr>
 <tr class="separator:a2d05bcc021d66ae0458c269139222edc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca9cca604052ac7a6f173b58b7d6e126"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#aca9cca604052ac7a6f173b58b7d6e126">MICROSTEP</a>&#160;&#160;&#160;16.0f</td></tr>
@@ -128,17 +134,20 @@ Macros</h2></td></tr>
 <tr class="memitem:a7db6ad55a3549de488ee239b20df3dcd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a7db6ad55a3549de488ee239b20df3dcd">GEAR</a>&#160;&#160;&#160;1.0f</td></tr>
 <tr class="separator:a7db6ad55a3549de488ee239b20df3dcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e03acdc20626dd207ec29d47ffb5ece"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a0e03acdc20626dd207ec29d47ffb5ece">STEPS_PER_RAD</a>&#160;&#160;&#160;(<a class="el" href="arm__control_8c.html#a2d05bcc021d66ae0458c269139222edc">STEPS_PER_REV</a> * <a class="el" href="arm__control_8c.html#aca9cca604052ac7a6f173b58b7d6e126">MICROSTEP</a> * <a class="el" href="arm__control_8c.html#a7db6ad55a3549de488ee239b20df3dcd">GEAR</a> / (2.0f * (float)M_PI))</td></tr>
+<tr class="memdesc:a0e03acdc20626dd207ec29d47ffb5ece"><td class="mdescLeft">&#160;</td><td class="mdescRight">Microsteps per radian of joint rotation.  <br /></td></tr>
 <tr class="separator:a0e03acdc20626dd207ec29d47ffb5ece"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f80ae25af7079e29fe08ab27467e1c7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a4f80ae25af7079e29fe08ab27467e1c7">TIM_TICK_HZ</a>&#160;&#160;&#160;1000000.0f      /* 1 MHz tick */</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Timing / motion profile</div></td></tr>
+<tr class="memitem:a4f80ae25af7079e29fe08ab27467e1c7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a4f80ae25af7079e29fe08ab27467e1c7">TIM_TICK_HZ</a>&#160;&#160;&#160;1000000.0f</td></tr>
 <tr class="separator:a4f80ae25af7079e29fe08ab27467e1c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a766c9456819aa9ea9474939a6fae533b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a766c9456819aa9ea9474939a6fae533b">MAX_STEP_HZ</a>&#160;&#160;&#160;800.0f         /* cruise rate; raise now that there's a ramp */</td></tr>
+<tr class="memitem:a766c9456819aa9ea9474939a6fae533b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a766c9456819aa9ea9474939a6fae533b">MAX_STEP_HZ</a>&#160;&#160;&#160;800.0f</td></tr>
 <tr class="separator:a766c9456819aa9ea9474939a6fae533b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa663673211dc01efc80cd30f2609f71f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#aa663673211dc01efc80cd30f2609f71f">ARR_MAX</a>&#160;&#160;&#160;0xFFFFu</td></tr>
 <tr class="separator:aa663673211dc01efc80cd30f2609f71f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05cdc26d9ba65cedb5a08c0faaf61c5d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a05cdc26d9ba65cedb5a08c0faaf61c5d">V_START_HZ</a>&#160;&#160;&#160;400.0f          /* ramp start/stop rate (below stall) */</td></tr>
+<tr class="memitem:a05cdc26d9ba65cedb5a08c0faaf61c5d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a05cdc26d9ba65cedb5a08c0faaf61c5d">V_START_HZ</a>&#160;&#160;&#160;400.0f</td></tr>
 <tr class="separator:a05cdc26d9ba65cedb5a08c0faaf61c5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab391897f030f5d197ac1417e87303ada"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#ab391897f030f5d197ac1417e87303ada">ACCEL_HZ2</a>&#160;&#160;&#160;1000.0f         /* accel, microsteps/s^2 — tune */</td></tr>
+<tr class="memitem:ab391897f030f5d197ac1417e87303ada"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#ab391897f030f5d197ac1417e87303ada">ACCEL_HZ2</a>&#160;&#160;&#160;1000.0f</td></tr>
 <tr class="separator:ab391897f030f5d197ac1417e87303ada"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">TMC2240 SPI register addresses</div></td></tr>
 <tr class="memitem:a11f5ad15f8438e7c2b241203a94a803b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a11f5ad15f8438e7c2b241203a94a803b">TMC_GCONF</a>&#160;&#160;&#160;0x00</td></tr>
 <tr class="separator:a11f5ad15f8438e7c2b241203a94a803b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefe6218ed59cdd249242fd0b086c6d93"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#aefe6218ed59cdd249242fd0b086c6d93">TMC_GSTAT</a>&#160;&#160;&#160;0x01</td></tr>
@@ -163,50 +172,70 @@ Macros</h2></td></tr>
 <tr class="separator:ab9b2682b0ad2e83f4ba39fd208a195df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08a002d13ccbe210ba682da20d16a6aa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a08a002d13ccbe210ba682da20d16a6aa">TMC_SPI_TIMEOUT</a>&#160;&#160;&#160;10</td></tr>
 <tr class="separator:a08a002d13ccbe210ba682da20d16a6aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af08dacb1a0df07571d31edcf7005b612"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#af08dacb1a0df07571d31edcf7005b612">SERVO_OPEN_US</a>&#160;&#160;&#160;2000U     /* tune to your gripper */</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Gripper servo (TIM4 CH2)</div></td></tr>
+<tr class="memitem:af08dacb1a0df07571d31edcf7005b612"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#af08dacb1a0df07571d31edcf7005b612">SERVO_OPEN_US</a>&#160;&#160;&#160;2000U</td></tr>
 <tr class="separator:af08dacb1a0df07571d31edcf7005b612"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9ef060562b225acaa799c25ef647b96"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#ae9ef060562b225acaa799c25ef647b96">SERVO_CLOSE_US</a>&#160;&#160;&#160;1000U     /* tune to your gripper */</td></tr>
+<tr class="memitem:ae9ef060562b225acaa799c25ef647b96"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#ae9ef060562b225acaa799c25ef647b96">SERVO_CLOSE_US</a>&#160;&#160;&#160;1000U</td></tr>
 <tr class="separator:ae9ef060562b225acaa799c25ef647b96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:af6300c4c1948573167fef567f7fdc9bd"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#af6300c4c1948573167fef567f7fdc9bd">tmc_write</a> (int i, uint8_t reg, uint32_t val)</td></tr>
+<tr class="memdesc:af6300c4c1948573167fef567f7fdc9bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a 32-bit value to a TMC2240 register over SPI.  <br /></td></tr>
 <tr class="separator:af6300c4c1948573167fef567f7fdc9bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a576cc4e629ce0c7885eb337ad4da49e4"><td class="memItemLeft" align="right" valign="top">static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a576cc4e629ce0c7885eb337ad4da49e4">tmc_read</a> (int i, uint8_t reg)</td></tr>
+<tr class="memdesc:a576cc4e629ce0c7885eb337ad4da49e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a 32-bit TMC2240 register over SPI.  <br /></td></tr>
 <tr class="separator:a576cc4e629ce0c7885eb337ad4da49e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a124bc663f4af8212bf6eae6aa6a7b843"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a124bc663f4af8212bf6eae6aa6a7b843">arm_drivers_init</a> (void)</td></tr>
+<tr class="memdesc:a124bc663f4af8212bf6eae6aa6a7b843"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure and enable all three TMC2240 drivers.  <br /></td></tr>
 <tr class="separator:a124bc663f4af8212bf6eae6aa6a7b843"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7558e6b03485095f7fddd76d81f71901"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a7558e6b03485095f7fddd76d81f71901">gripper_init</a> (void)</td></tr>
+<tr class="memdesc:a7558e6b03485095f7fddd76d81f71901"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the gripper servo PWM and command the open position.  <br /></td></tr>
 <tr class="separator:a7558e6b03485095f7fddd76d81f71901"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d3cd19ae4be8e7a2ffdaf5dfdf3dee7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a2d3cd19ae4be8e7a2ffdaf5dfdf3dee7">gripper_set_us</a> (uint16_t pulse_us)</td></tr>
+<tr class="memdesc:a2d3cd19ae4be8e7a2ffdaf5dfdf3dee7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the gripper servo pulse width, clamped to a safe range.  <br /></td></tr>
 <tr class="separator:a2d3cd19ae4be8e7a2ffdaf5dfdf3dee7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae00237d59d43bc4b7017b7ace022ef3d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#ae00237d59d43bc4b7017b7ace022ef3d">gripper_open</a> (void)</td></tr>
+<tr class="memdesc:ae00237d59d43bc4b7017b7ace022ef3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open the gripper.  <br /></td></tr>
 <tr class="separator:ae00237d59d43bc4b7017b7ace022ef3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2950dee063817693d0091e7f69054559"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a2950dee063817693d0091e7f69054559">gripper_close</a> (void)</td></tr>
+<tr class="memdesc:a2950dee063817693d0091e7f69054559"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close the gripper.  <br /></td></tr>
 <tr class="separator:a2950dee063817693d0091e7f69054559"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf0b692f7554b97280dd4350f935356d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#aaf0b692f7554b97280dd4350f935356d">joint_set_rate</a> (int i, float hz)</td></tr>
+<tr class="memdesc:aaf0b692f7554b97280dd4350f935356d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a joint timer's step rate by reprogramming its auto-reload.  <br /></td></tr>
 <tr class="separator:aaf0b692f7554b97280dd4350f935356d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26980277a3a94b2471d63f6ffa558279"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a26980277a3a94b2471d63f6ffa558279">master_velocity</a> (void)</td></tr>
+<tr class="memdesc:a26980277a3a94b2471d63f6ffa558279"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the master joint's instantaneous step rate along the profile.  <br /></td></tr>
 <tr class="separator:a26980277a3a94b2471d63f6ffa558279"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5be512e918214837a83d53e9cdce670"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#af5be512e918214837a83d53e9cdce670">arm_init</a> (void)</td></tr>
+<tr class="memdesc:af5be512e918214837a83d53e9cdce670"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set tracked joint angles to the mechanical home pose.  <br /></td></tr>
 <tr class="separator:af5be512e918214837a83d53e9cdce670"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa331a707d18869bc9757b8b730900995"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#aa331a707d18869bc9757b8b730900995">arm_ik</a> (float x, float y, float z, int elbow_up, float th[3])</td></tr>
+<tr class="memdesc:aa331a707d18869bc9757b8b730900995"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inverse kinematics for the RRR arm.  <br /></td></tr>
 <tr class="separator:aa331a707d18869bc9757b8b730900995"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27b542a5c8929623641dcc24a64b2083"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a27b542a5c8929623641dcc24a64b2083">arm_move_to</a> (float x, float y, float z, int elbow_up)</td></tr>
+<tr class="memdesc:a27b542a5c8929623641dcc24a64b2083"><td class="mdescLeft">&#160;</td><td class="mdescRight">Launch a coordinated Cartesian move (see public <a class="el" href="arm__control_8c.html#a27b542a5c8929623641dcc24a64b2083" title="Launch a coordinated Cartesian move (see public arm_move_to).">arm_move_to</a>).  <br /></td></tr>
 <tr class="separator:a27b542a5c8929623641dcc24a64b2083"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01d82ca40bc6de118301c37dc9aa8198"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a01d82ca40bc6de118301c37dc9aa8198">arm_test_spin</a> (int joint, int dir, int32_t nsteps, float hz)</td></tr>
+<tr class="memdesc:a01d82ca40bc6de118301c37dc9aa8198"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constant-rate single-joint spin for diagnostics.  <br /></td></tr>
 <tr class="separator:a01d82ca40bc6de118301c37dc9aa8198"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1051cf6d9c68a781c722d0b49995ed56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a1051cf6d9c68a781c722d0b49995ed56">arm_fk</a> (float th0, float th1, float th2, float *x, float *y, float *z)</td></tr>
+<tr class="memdesc:a1051cf6d9c68a781c722d0b49995ed56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forward kinematics for the RRR arm.  <br /></td></tr>
 <tr class="separator:a1051cf6d9c68a781c722d0b49995ed56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f291de84357ee9b2aa3aa153330a5c8"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a9f291de84357ee9b2aa3aa153330a5c8">arm_dbg_ioin</a> (int joint)</td></tr>
+<tr class="memdesc:a9f291de84357ee9b2aa3aa153330a5c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a driver's IOIN register.  <br /></td></tr>
 <tr class="separator:a9f291de84357ee9b2aa3aa153330a5c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab794187a34d554fbe4e899fc0cdb186b"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#ab794187a34d554fbe4e899fc0cdb186b">arm_drv_status</a> (int joint)</td></tr>
+<tr class="memdesc:ab794187a34d554fbe4e899fc0cdb186b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a driver's DRV_STATUS register.  <br /></td></tr>
 <tr class="separator:ab794187a34d554fbe4e899fc0cdb186b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f968845bed53fc271203985683bf22b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a8f968845bed53fc271203985683bf22b">arm_is_moving</a> (void)</td></tr>
+<tr class="memdesc:a8f968845bed53fc271203985683bf22b"><td class="mdescLeft">&#160;</td><td class="mdescRight">True while any joint still has steps pending.  <br /></td></tr>
 <tr class="separator:a8f968845bed53fc271203985683bf22b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af26fd2f9f2560c9f4e66adf1f6c8bd22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#af26fd2f9f2560c9f4e66adf1f6c8bd22">arm_get_xyz</a> (float *x, float *y, float *z)</td></tr>
+<tr class="memdesc:af26fd2f9f2560c9f4e66adf1f6c8bd22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current tip position from tracked angles via FK.  <br /></td></tr>
 <tr class="separator:af26fd2f9f2560c9f4e66adf1f6c8bd22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a3b0ad512a6e6c6157440b68d395eac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a8a3b0ad512a6e6c6157440b68d395eac">HAL_TIM_PeriodElapsedCallback</a> (TIM_HandleTypeDef *htim)</td></tr>
+<tr class="memdesc:a8a3b0ad512a6e6c6157440b68d395eac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer update ISR: emit one microstep and advance the velocity profile.  <br /></td></tr>
 <tr class="separator:a8a3b0ad512a6e6c6157440b68d395eac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -220,13 +249,40 @@ Variables</h2></td></tr>
 <tr class="memitem:a9c6222bae4d0328dd843ae099623b40b"><td class="memItemLeft" align="right" valign="top">SPI_HandleTypeDef&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a9c6222bae4d0328dd843ae099623b40b">hspi1</a></td></tr>
 <tr class="separator:a9c6222bae4d0328dd843ae099623b40b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c751319fea98baf6b200dae443da746"><td class="memItemLeft" align="right" valign="top">static GPIO_TypeDef *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a9c751319fea98baf6b200dae443da746">cs_port</a> [3] = { <a class="el" href="main_8h.html#ae630fb71078d39d0785ff679b2b0105a">M1_CS_GPIO_Port</a>, <a class="el" href="main_8h.html#afa59fc4eab2ed2f258be9e5e7c5db9dd">M2_CS_GPIO_Port</a>, <a class="el" href="main_8h.html#a63d98e5c3f67f9e1a8c9379f9731568a">M3_CS_GPIO_Port</a> }</td></tr>
+<tr class="memdesc:a9c751319fea98baf6b200dae443da746"><td class="mdescLeft">&#160;</td><td class="mdescRight">Per-joint chip-select GPIO ports.  <br /></td></tr>
 <tr class="separator:a9c751319fea98baf6b200dae443da746"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54f68c4e8e8f5a5e4dba296f04d434b1"><td class="memItemLeft" align="right" valign="top">static const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a54f68c4e8e8f5a5e4dba296f04d434b1">cs_pin</a> [3] = { <a class="el" href="main_8h.html#a89bb508c4c7d6aa2e2993ae894d04966">M1_CS_Pin</a>, <a class="el" href="main_8h.html#a01876023bab15ff81810e56cba0d2501">M2_CS_Pin</a>, <a class="el" href="main_8h.html#a2fc7730de596930b6e5648a684591d98">M3_CS_Pin</a> }</td></tr>
+<tr class="memdesc:a54f68c4e8e8f5a5e4dba296f04d434b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Per-joint chip-select GPIO pins.  <br /></td></tr>
 <tr class="separator:a54f68c4e8e8f5a5e4dba296f04d434b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a273a9a108e8551527d6a5b582c8d9d15"><td class="memItemLeft" align="right" valign="top">static GPIO_TypeDef *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a273a9a108e8551527d6a5b582c8d9d15">en_port</a> [3] = { <a class="el" href="main_8h.html#ae63cb01a4f10411e2ba620a3e0d43180">M1_EN_GPIO_Port</a>, <a class="el" href="main_8h.html#aa766c4a7d7a714777ff45856828139a3">M2_EN_GPIO_Port</a>, <a class="el" href="main_8h.html#aac33d3d79eee3377b015860dff621c5b">M3_EN_GPIO_Port</a> }</td></tr>
+<tr class="memdesc:a273a9a108e8551527d6a5b582c8d9d15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Per-joint driver-enable GPIO ports (active low).  <br /></td></tr>
 <tr class="separator:a273a9a108e8551527d6a5b582c8d9d15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f8135d57b3750826bb5d4fe86b67f8c"><td class="memItemLeft" align="right" valign="top">static const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a5f8135d57b3750826bb5d4fe86b67f8c">en_pin</a> [3] = { <a class="el" href="main_8h.html#a0d0dbaca6d4d2834568cff34834f2f0b">M1_EN_Pin</a>, <a class="el" href="main_8h.html#a978f53fc61d5e94c6531132726a0d513">M2_EN_Pin</a>, <a class="el" href="main_8h.html#a2369c5cbfaddf7e7fe885967957c2d3c">M3_EN_Pin</a> }</td></tr>
+<tr class="memdesc:a5f8135d57b3750826bb5d4fe86b67f8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Per-joint driver-enable GPIO pins.  <br /></td></tr>
 <tr class="separator:a5f8135d57b3750826bb5d4fe86b67f8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28fb79e9387440e86d1a468da6d0a3a5"><td class="memItemLeft" align="right" valign="top">static TIM_HandleTypeDef *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a28fb79e9387440e86d1a468da6d0a3a5">joint_tim</a> [3] = { &amp;<a class="el" href="arm__control_8c.html#a25fc663547539bc49fecc0011bd76ab5">htim1</a>, &amp;<a class="el" href="arm__control_8c.html#a2c80fd5510e2990a59a5c90d745c716c">htim2</a>, &amp;<a class="el" href="arm__control_8c.html#aac3d2c59ee0e3bbae1b99529a154eb62">htim3</a> }</td></tr>
+<tr class="memdesc:a28fb79e9387440e86d1a468da6d0a3a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Per-joint step-generation timers (one PWM channel each).  <br /></td></tr>
+<tr class="separator:a28fb79e9387440e86d1a468da6d0a3a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b48f6f151b54901fd9385417c0c0e6b"><td class="memItemLeft" align="right" valign="top">static GPIO_TypeDef *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a8b48f6f151b54901fd9385417c0c0e6b">dir_port</a> [3] = { <a class="el" href="main_8h.html#a4520df59fcf01f8c6ce7a4450149eb4e">M1_DIR_GPIO_Port</a>, <a class="el" href="main_8h.html#ac95c5e9396b2263201044c9036a0feda">M2_DIR_GPIO_Port</a>, <a class="el" href="main_8h.html#aa9a97efd61fb29f7179013fa9dac173e">M3_DIR_GPIO_Port</a> }</td></tr>
+<tr class="memdesc:a8b48f6f151b54901fd9385417c0c0e6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Per-joint direction GPIO ports.  <br /></td></tr>
+<tr class="separator:a8b48f6f151b54901fd9385417c0c0e6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c7b7edef9504ccb55ec649b7046e46f"><td class="memItemLeft" align="right" valign="top">static const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a2c7b7edef9504ccb55ec649b7046e46f">dir_pin</a> [3] = { <a class="el" href="main_8h.html#a6bd2f89266b253e31b761e77cfec182f">M1_DIR_Pin</a>, <a class="el" href="main_8h.html#a6be559111865cc3aa778e46a587a5356">M2_DIR_Pin</a>, <a class="el" href="main_8h.html#a800b993f5f07c524b386f5e32298b08b">M3_DIR_Pin</a> }</td></tr>
+<tr class="memdesc:a2c7b7edef9504ccb55ec649b7046e46f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Per-joint direction GPIO pins.  <br /></td></tr>
+<tr class="separator:a2c7b7edef9504ccb55ec649b7046e46f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c22c9707e54ea7a73f47069872546cd"><td class="memItemLeft" align="right" valign="top">static const GPIO_PinState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a1c22c9707e54ea7a73f47069872546cd">dir_pos</a> [3] = { GPIO_PIN_RESET, GPIO_PIN_RESET, GPIO_PIN_SET }</td></tr>
+<tr class="memdesc:a1c22c9707e54ea7a73f47069872546cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Direction level corresponding to positive joint rotation (per joint wiring).  <br /></td></tr>
+<tr class="separator:a1c22c9707e54ea7a73f47069872546cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e49effbadb4507d17f20473b68a310e"><td class="memItemLeft" align="right" valign="top">static volatile int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a3e49effbadb4507d17f20473b68a310e">steps_remaining</a> [3] = {0, 0, 0}</td></tr>
+<tr class="memdesc:a3e49effbadb4507d17f20473b68a310e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Steps still owed to each joint; decremented in the timer ISR.  <br /></td></tr>
+<tr class="separator:a3e49effbadb4507d17f20473b68a310e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34973089cd02a7787d21f8b7e87d9312"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a34973089cd02a7787d21f8b7e87d9312">cur_ang</a> [3]</td></tr>
+<tr class="memdesc:a34973089cd02a7787d21f8b7e87d9312"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tracked joint angles (rad), updated as moves are committed.  <br /></td></tr>
+<tr class="separator:a34973089cd02a7787d21f8b7e87d9312"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85788cec5a97ee377e4ee2e74f026484"><td class="memItemLeft" align="right" valign="top">TIM_HandleTypeDef&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a85788cec5a97ee377e4ee2e74f026484">htim4</a></td></tr>
+<tr class="separator:a85788cec5a97ee377e4ee2e74f026484"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Per-joint TMC2240 current and chopper configuration</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>Tuned individually: the shoulder carries the most load and is driven hardest. </p>
+</div></td></tr>
 <tr class="memitem:a5d8fe671cae3401652f59a4edf4cc574"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a5d8fe671cae3401652f59a4edf4cc574">drv_range</a> [3] = { 2, 2, 1 }</td></tr>
 <tr class="separator:a5d8fe671cae3401652f59a4edf4cc574"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad23416321e0d2ce62d5a04a378a473c6"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#ad23416321e0d2ce62d5a04a378a473c6">drv_irun</a> [3] = { 16, 31, 20 }</td></tr>
@@ -237,18 +293,7 @@ Variables</h2></td></tr>
 <tr class="separator:a282c04366d560228cb6a0bf6c4a91a40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac36c8cf85b20ca5fe8aff5c9fcbd9df6"><td class="memItemLeft" align="right" valign="top">static const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#ac36c8cf85b20ca5fe8aff5c9fcbd9df6">drv_tpwmthrs</a> [3] = { 0, 0, 0 }</td></tr>
 <tr class="separator:ac36c8cf85b20ca5fe8aff5c9fcbd9df6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28fb79e9387440e86d1a468da6d0a3a5"><td class="memItemLeft" align="right" valign="top">static TIM_HandleTypeDef *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a28fb79e9387440e86d1a468da6d0a3a5">joint_tim</a> [3] = { &amp;<a class="el" href="arm__control_8c.html#a25fc663547539bc49fecc0011bd76ab5">htim1</a>, &amp;<a class="el" href="arm__control_8c.html#a2c80fd5510e2990a59a5c90d745c716c">htim2</a>, &amp;<a class="el" href="arm__control_8c.html#aac3d2c59ee0e3bbae1b99529a154eb62">htim3</a> }</td></tr>
-<tr class="separator:a28fb79e9387440e86d1a468da6d0a3a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b48f6f151b54901fd9385417c0c0e6b"><td class="memItemLeft" align="right" valign="top">static GPIO_TypeDef *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a8b48f6f151b54901fd9385417c0c0e6b">dir_port</a> [3] = { <a class="el" href="main_8h.html#a4520df59fcf01f8c6ce7a4450149eb4e">M1_DIR_GPIO_Port</a>, <a class="el" href="main_8h.html#ac95c5e9396b2263201044c9036a0feda">M2_DIR_GPIO_Port</a>, <a class="el" href="main_8h.html#aa9a97efd61fb29f7179013fa9dac173e">M3_DIR_GPIO_Port</a> }</td></tr>
-<tr class="separator:a8b48f6f151b54901fd9385417c0c0e6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c7b7edef9504ccb55ec649b7046e46f"><td class="memItemLeft" align="right" valign="top">static const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a2c7b7edef9504ccb55ec649b7046e46f">dir_pin</a> [3] = { <a class="el" href="main_8h.html#a6bd2f89266b253e31b761e77cfec182f">M1_DIR_Pin</a>, <a class="el" href="main_8h.html#a6be559111865cc3aa778e46a587a5356">M2_DIR_Pin</a>, <a class="el" href="main_8h.html#a800b993f5f07c524b386f5e32298b08b">M3_DIR_Pin</a> }</td></tr>
-<tr class="separator:a2c7b7edef9504ccb55ec649b7046e46f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c22c9707e54ea7a73f47069872546cd"><td class="memItemLeft" align="right" valign="top">static const GPIO_PinState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a1c22c9707e54ea7a73f47069872546cd">dir_pos</a> [3] = { GPIO_PIN_RESET, GPIO_PIN_RESET, GPIO_PIN_SET }</td></tr>
-<tr class="separator:a1c22c9707e54ea7a73f47069872546cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e49effbadb4507d17f20473b68a310e"><td class="memItemLeft" align="right" valign="top">static volatile int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a3e49effbadb4507d17f20473b68a310e">steps_remaining</a> [3] = {0, 0, 0}</td></tr>
-<tr class="separator:a3e49effbadb4507d17f20473b68a310e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34973089cd02a7787d21f8b7e87d9312"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a34973089cd02a7787d21f8b7e87d9312">cur_ang</a> [3]</td></tr>
-<tr class="separator:a34973089cd02a7787d21f8b7e87d9312"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Motion-profile state (shared between launch and ISR)</div></td></tr>
 <tr class="memitem:a947dc5617e88dabdd7eaf612cbb96c25"><td class="memItemLeft" align="right" valign="top">static volatile int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a947dc5617e88dabdd7eaf612cbb96c25">mv_total</a> [3]</td></tr>
 <tr class="separator:a947dc5617e88dabdd7eaf612cbb96c25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ea774dd04557b3593b2ca4feeaa0929"><td class="memItemLeft" align="right" valign="top">static volatile int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a9ea774dd04557b3593b2ca4feeaa0929">mv_nmax</a></td></tr>
@@ -257,10 +302,12 @@ Variables</h2></td></tr>
 <tr class="separator:aa4720fa0610fcd4e93c3968679f2ac8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec3f2f21c89587e2ed7fea5b367cd75d"><td class="memItemLeft" align="right" valign="top">static volatile uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#aec3f2f21c89587e2ed7fea5b367cd75d">mv_ramp</a></td></tr>
 <tr class="separator:aec3f2f21c89587e2ed7fea5b367cd75d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85788cec5a97ee377e4ee2e74f026484"><td class="memItemLeft" align="right" valign="top">TIM_HandleTypeDef&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="arm__control_8c.html#a85788cec5a97ee377e4ee2e74f026484">htim4</a></td></tr>
-<tr class="separator:a85788cec5a97ee377e4ee2e74f026484"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>3-DoF (RRR) arm: inverse/forward kinematics, coordinated stepper motion with an acceleration ramp, and TMC2240 driver control. </p>
+<p>Motion is generated entirely in interrupt context. Each joint owns a hardware timer (TIM1/2/3) running in PWM mode on CH1; every update event emits one microstep and decrements that joint's remaining-step counter in <a class="el" href="arm__control_8c.html#a8a3b0ad512a6e6c6157440b68d395eac" title="Timer update ISR: emit one microstep and advance the velocity profile.">HAL_TIM_PeriodElapsedCallback()</a>. For a coordinated move the joint with the most steps is the "master": its progress drives a single trapezoidal velocity <picture><source srcset="form_0_dark.png" media="(prefers-color-scheme: dark)"/><img class="formulaInl" alt="$ v(s) $" src="form_0.png"/></picture> (constant-acceleration ramp up, constant-deceleration ramp down), and every joint's timer reload is rescaled so all joints finish together.</p>
+<p>The three TMC2240 drivers are configured over a shared SPI bus with per-joint chip selects; current limits and chopper mode are tuned per joint to match the differing torque demands of the base, shoulder, and elbow. </p>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ab391897f030f5d197ac1417e87303ada" name="ab391897f030f5d197ac1417e87303ada"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab391897f030f5d197ac1417e87303ada">&#9670;&#160;</a></span>ACCEL_HZ2</h2>
 
@@ -268,10 +315,11 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define ACCEL_HZ2&#160;&#160;&#160;1000.0f         /* accel, microsteps/s^2 — tune */</td>
+          <td class="memname">#define ACCEL_HZ2&#160;&#160;&#160;1000.0f</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Acceleration (microsteps/s^2) for the ramp. </p>
 
 </div>
 </div>
@@ -286,6 +334,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Max auto-reload value (16-bit timer). </p>
 
 </div>
 </div>
@@ -300,6 +349,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Base height: shoulder pivot above the base frame. </p>
 
 </div>
 </div>
@@ -314,6 +364,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Gear ratio (1.0 = direct drive). </p>
 
 </div>
 </div>
@@ -328,6 +379,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Upper-arm length (shoulder to elbow). </p>
 
 </div>
 </div>
@@ -342,6 +394,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Forearm length (elbow to tip; includes end-effector). </p>
 
 </div>
 </div>
@@ -352,10 +405,11 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define MAX_STEP_HZ&#160;&#160;&#160;800.0f         /* cruise rate; raise now that there's a ramp */</td>
+          <td class="memname">#define MAX_STEP_HZ&#160;&#160;&#160;800.0f</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Cruise (max) step rate after ramp-up. </p>
 
 </div>
 </div>
@@ -370,6 +424,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Microsteps per full step (TMC2240 MRES). </p>
 
 </div>
 </div>
@@ -380,10 +435,11 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define SERVO_CLOSE_US&#160;&#160;&#160;1000U     /* tune to your gripper */</td>
+          <td class="memname">#define SERVO_CLOSE_US&#160;&#160;&#160;1000U</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Pulse width for "closed" (tune to gripper). </p>
 
 </div>
 </div>
@@ -394,10 +450,11 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define SERVO_OPEN_US&#160;&#160;&#160;2000U     /* tune to your gripper */</td>
+          <td class="memname">#define SERVO_OPEN_US&#160;&#160;&#160;2000U</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Pulse width for "open" (tune to gripper). </p>
 
 </div>
 </div>
@@ -413,6 +470,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Microsteps per radian of joint rotation. </p>
+
 </div>
 </div>
 <a id="a2d05bcc021d66ae0458c269139222edc" name="a2d05bcc021d66ae0458c269139222edc"></a>
@@ -426,6 +485,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Full steps per motor revolution (1.8 deg). </p>
 
 </div>
 </div>
@@ -436,10 +496,11 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define TIM_TICK_HZ&#160;&#160;&#160;1000000.0f      /* 1 MHz tick */</td>
+          <td class="memname">#define TIM_TICK_HZ&#160;&#160;&#160;1000000.0f</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Timer tick rate feeding the joint timers (1 MHz). </p>
 
 </div>
 </div>
@@ -566,6 +627,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>SPI transfer timeout (ms). </p>
 
 </div>
 </div>
@@ -608,6 +670,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>OR into the register address to write. </p>
 
 </div>
 </div>
@@ -618,10 +681,11 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define V_START_HZ&#160;&#160;&#160;400.0f          /* ramp start/stop rate (below stall) */</td>
+          <td class="memname">#define V_START_HZ&#160;&#160;&#160;400.0f</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Ramp start/stop rate, kept below stall. </p>
 
 </div>
 </div>
@@ -642,6 +706,11 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Read a driver's IOIN register. </p>
+<p>Read a TMC2240 IOIN register (input pin states + version byte).</p>
+<p>Read a driver's IOIN register.  </p>
+<p>Read a TMC2240 IOIN register (input pin states + version byte).</p>
+
 </div>
 </div>
 <a id="a124bc663f4af8212bf6eae6aa6a7b843" name="a124bc663f4af8212bf6eae6aa6a7b843"></a>
@@ -660,6 +729,11 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Configure and enable all three TMC2240 drivers. </p>
+<p>Configure all three TMC2240 stepper drivers over SPI.</p>
+<p>Configure and enable all three TMC2240 drivers.  </p>
+<p>Configure all three TMC2240 stepper drivers over SPI.</p>
+
 </div>
 </div>
 <a id="ab794187a34d554fbe4e899fc0cdb186b" name="ab794187a34d554fbe4e899fc0cdb186b"></a>
@@ -677,6 +751,11 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Read a driver's DRV_STATUS register. </p>
+<p>Read a TMC2240 DRV_STATUS register (diagnostics: stall, OT, etc.).</p>
+<p>Read a driver's DRV_STATUS register.  </p>
+<p>Read a TMC2240 DRV_STATUS register (diagnostics: stall, OT, etc.).</p>
 
 </div>
 </div>
@@ -730,6 +809,11 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Forward kinematics for the RRR arm. </p>
+<p>Forward kinematics: joint angles -&gt; Cartesian tip position.</p>
+<p>Forward kinematics for the RRR arm.  </p>
+<p>Forward kinematics: joint angles -&gt; Cartesian tip position.</p>
+
 </div>
 </div>
 <a id="af26fd2f9f2560c9f4e66adf1f6c8bd22" name="af26fd2f9f2560c9f4e66adf1f6c8bd22"></a>
@@ -763,6 +847,11 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Current tip position from tracked angles via FK. </p>
+<p>Current end-effector position from the tracked joint angles (via FK).</p>
+<p>Current tip position from tracked angles via FK.  </p>
+<p>Current end-effector position from the tracked joint angles (via FK).</p>
 
 </div>
 </div>
@@ -818,6 +907,20 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Inverse kinematics for the RRR arm. </p>
+<p>Closed-form solution: base yaw from the planar projection, then the shoulder/elbow angles in the arm plane via the law of cosines. The <code>elbow_up</code> flag selects between the two valid elbow configurations.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir"></td><td class="paramname">x</td><td>Target X (mm). </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">y</td><td>Target Y (mm). </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">z</td><td>Target Z (mm). </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">elbow_up</td><td>1 = elbow-up solution, 0 = elbow-down. </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">th</td><td>Joint angles {base, shoulder, elbow} (rad). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>1 if reachable, 0 if the target lies outside the workspace. </dd></dl>
+
 </div>
 </div>
 <a id="af5be512e918214837a83d53e9cdce670" name="af5be512e918214837a83d53e9cdce670"></a>
@@ -836,6 +939,11 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Set tracked joint angles to the mechanical home pose. </p>
+<p>Initialise joint-space state to the home pose.</p>
+<p>Set tracked joint angles to the mechanical home pose.  </p>
+<p>Initialise joint-space state to the home pose.</p>
+
 </div>
 </div>
 <a id="a8f968845bed53fc271203985683bf22b" name="a8f968845bed53fc271203985683bf22b"></a>
@@ -853,6 +961,11 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>True while any joint still has steps pending. </p>
+<p>Report whether any joint is still stepping.</p>
+<p>True while any joint still has steps pending.  </p>
+<p>Report whether any joint is still stepping.</p>
 
 </div>
 </div>
@@ -894,6 +1007,11 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Launch a coordinated Cartesian move (see public <a class="el" href="arm__control_8c.html#a27b542a5c8929623641dcc24a64b2083" title="Launch a coordinated Cartesian move (see public arm_move_to).">arm_move_to</a>). </p>
+<p>Move the end-effector to a Cartesian target via inverse kinematics.</p>
+<p>Launch a coordinated Cartesian move (see public <a class="el" href="arm__control_8c.html#a27b542a5c8929623641dcc24a64b2083" title="Launch a coordinated Cartesian move (see public arm_move_to).">arm_move_to</a>).  </p>
+<p>Move the end-effector to a Cartesian target via inverse kinematics.</p>
+
 </div>
 </div>
 <a id="a01d82ca40bc6de118301c37dc9aa8198" name="a01d82ca40bc6de118301c37dc9aa8198"></a>
@@ -934,6 +1052,12 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Constant-rate single-joint spin for diagnostics. </p>
+<p>Spin a single joint at a constant rate, bypassing IK and the profile.</p>
+<p>Bypasses IK and the velocity profile and does <b>not</b> update <a class="el" href="arm__control_8c.html#a34973089cd02a7787d21f8b7e87d9312" title="Tracked joint angles (rad), updated as moves are committed.">cur_ang</a>, so the tracked pose is invalid afterwards; re-home and call <a class="el" href="arm__control_8h.html#af5be512e918214837a83d53e9cdce670" title="Initialise joint-space state to the home pose.">arm_init()</a> before the next <a class="el" href="arm__control_8h.html#a27b542a5c8929623641dcc24a64b2083" title="Move the end-effector to a Cartesian target via inverse kinematics.">arm_move_to()</a>.</p>
+<p>Spin a single joint at a constant rate, bypassing IK and the profile.</p>
+<p>Bypasses IK and the velocity profile and does <b>not</b> update <a class="el" href="arm__control_8c.html#a34973089cd02a7787d21f8b7e87d9312" title="Tracked joint angles (rad), updated as moves are committed.">cur_ang</a>, so the tracked pose is invalid afterwards; re-home and call <a class="el" href="arm__control_8h.html#af5be512e918214837a83d53e9cdce670" title="Initialise joint-space state to the home pose.">arm_init()</a> before the next <a class="el" href="arm__control_8h.html#a27b542a5c8929623641dcc24a64b2083" title="Move the end-effector to a Cartesian target via inverse kinematics.">arm_move_to()</a>.</p>
+
 </div>
 </div>
 <a id="a2950dee063817693d0091e7f69054559" name="a2950dee063817693d0091e7f69054559"></a>
@@ -951,6 +1075,9 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Close the gripper. </p>
+<p>Command the gripper to its closed position. </p>
 
 </div>
 </div>
@@ -970,6 +1097,9 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Start the gripper servo PWM and command the open position. </p>
+<p>Start the gripper servo PWM (TIM4 CH2) and open the gripper. </p>
+
 </div>
 </div>
 <a id="ae00237d59d43bc4b7017b7ace022ef3d" name="ae00237d59d43bc4b7017b7ace022ef3d"></a>
@@ -987,6 +1117,9 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Open the gripper. </p>
+<p>Command the gripper to its open position. </p>
 
 </div>
 </div>
@@ -1006,6 +1139,10 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Set the gripper servo pulse width, clamped to a safe range. </p>
+<p>Set the gripper servo pulse width directly.</p>
+<p>Set the gripper servo pulse width directly.</p>
+
 </div>
 </div>
 <a id="a8a3b0ad512a6e6c6157440b68d395eac" name="a8a3b0ad512a6e6c6157440b68d395eac"></a>
@@ -1023,6 +1160,15 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Timer update ISR: emit one microstep and advance the velocity profile. </p>
+<p>Called by HAL on every joint-timer update event. Identifies which joint fired, decrements its remaining-step counter, and stops that joint's PWM when it reaches zero. When the <em>master</em> joint fires mid-move, recomputes the profile velocity and rescales every active joint's rate so they stay synchronised.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">htim</td><td>Handle of the timer that generated the interrupt. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1060,6 +1206,16 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Set a joint timer's step rate by reprogramming its auto-reload. </p>
+<p>Converts a desired step frequency to a timer ARR (from the 1 MHz tick) and keeps the PWM duty near 50%. Clamps to &gt;=1 Hz and the 16-bit ARR ceiling.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>Joint index 0..2. </td></tr>
+    <tr><td class="paramname">hz</td><td>Desired step rate (Hz). </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a26980277a3a94b2471d63f6ffa558279" name="a26980277a3a94b2471d63f6ffa558279"></a>
@@ -1085,6 +1241,10 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Compute the master joint's instantaneous step rate along the profile. </p>
+<p>Implements a symmetric trapezoidal profile from a constant-acceleration model: the accel branch grows with distance travelled, the decel branch grows with distance remaining, and the lower of the two (capped at <a class="el" href="arm__control_8c.html#a766c9456819aa9ea9474939a6fae533b">MAX_STEP_HZ</a>) gives a smooth ramp up, optional cruise, and ramp down.</p>
+<dl class="section return"><dt>Returns</dt><dd>Master-joint step rate (Hz) for the current position in the move. </dd></dl>
 
 </div>
 </div>
@@ -1121,6 +1281,17 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Read a 32-bit TMC2240 register over SPI. </p>
+<p>The TMC2240 returns the requested register's contents on the <em>following</em> transfer, so this issues the address twice and returns the second response.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>Joint/driver index 0..2. </td></tr>
+    <tr><td class="paramname">reg</td><td>Register address to read. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>32-bit register value (MSB first in the response). </dd></dl>
 
 </div>
 </div>
@@ -1164,6 +1335,16 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Write a 32-bit value to a TMC2240 register over SPI. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>Joint/driver index 0..2. </td></tr>
+    <tr><td class="paramname">reg</td><td>Register address (write bit is added internally). </td></tr>
+    <tr><td class="paramname">val</td><td>32-bit value to write (MSB first). </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -1187,6 +1368,8 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Per-joint chip-select GPIO pins. </p>
+
 </div>
 </div>
 <a id="a9c751319fea98baf6b200dae443da746" name="a9c751319fea98baf6b200dae443da746"></a>
@@ -1208,6 +1391,8 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Per-joint chip-select GPIO ports. </p>
 
 </div>
 </div>
@@ -1231,6 +1416,8 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Tracked joint angles (rad), updated as moves are committed. </p>
+
 </div>
 </div>
 <a id="a2c7b7edef9504ccb55ec649b7046e46f" name="a2c7b7edef9504ccb55ec649b7046e46f"></a>
@@ -1252,6 +1439,8 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Per-joint direction GPIO pins. </p>
 
 </div>
 </div>
@@ -1275,6 +1464,8 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Per-joint direction GPIO ports. </p>
+
 </div>
 </div>
 <a id="a1c22c9707e54ea7a73f47069872546cd" name="a1c22c9707e54ea7a73f47069872546cd"></a>
@@ -1297,6 +1488,8 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Direction level corresponding to positive joint rotation (per joint wiring). </p>
+
 </div>
 </div>
 <a id="a499b268bfec24fca761fb962a5a5fc19" name="a499b268bfec24fca761fb962a5a5fc19"></a>
@@ -1318,6 +1511,7 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Hold current per joint. </p>
 
 </div>
 </div>
@@ -1340,6 +1534,7 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Run current (shoulder maxed). </p>
 
 </div>
 </div>
@@ -1362,6 +1557,7 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>DRV_CONF current range per joint. </p>
 
 </div>
 </div>
@@ -1384,6 +1580,7 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>0 = SpreadCycle on all joints. </p>
 
 </div>
 </div>
@@ -1406,6 +1603,7 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>StealthChop switch threshold (unused). </p>
 
 </div>
 </div>
@@ -1429,6 +1627,8 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Per-joint driver-enable GPIO pins. </p>
+
 </div>
 </div>
 <a id="a273a9a108e8551527d6a5b582c8d9d15" name="a273a9a108e8551527d6a5b582c8d9d15"></a>
@@ -1450,6 +1650,8 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Per-joint driver-enable GPIO ports (active low). </p>
 
 </div>
 </div>
@@ -1559,6 +1761,8 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Per-joint step-generation timers (one PWM channel each). </p>
+
 </div>
 </div>
 <a id="aa4720fa0610fcd4e93c3968679f2ac8e" name="aa4720fa0610fcd4e93c3968679f2ac8e"></a>
@@ -1580,6 +1784,7 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Index of the master (longest) joint. </p>
 
 </div>
 </div>
@@ -1602,6 +1807,7 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Master joint's total step count. </p>
 
 </div>
 </div>
@@ -1624,6 +1830,7 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>1 = apply velocity profile, 0 = constant rate. </p>
 
 </div>
 </div>
@@ -1646,6 +1853,7 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Total steps for the current move, per joint. </p>
 
 </div>
 </div>
@@ -1668,6 +1876,8 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Steps still owed to each joint; decremented in the timer ISR. </p>
 
 </div>
 </div>

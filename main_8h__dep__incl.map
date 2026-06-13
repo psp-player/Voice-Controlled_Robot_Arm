@@ -1,5 +1,5 @@
 <map id="main.h" name="main.h">
 <area shape="rect" id="node1" title=": Header for main.c file. This file contains the common defines of the application." alt="" coords="83,5,150,31"/>
-<area shape="rect" id="node2" href="$arm__control_8c.html" title=" " alt="" coords="5,79,116,104"/>
-<area shape="rect" id="node3" href="$main_8c.html" title=": Minimal TIM2_CH1 PWM test — PA0 only" alt="" coords="141,79,207,104"/>
+<area shape="rect" id="node2" href="$arm__control_8c.html" title="3&#45;DoF (RRR) arm: inverse/forward kinematics, coordinated stepper motion with an acceleration ramp,..." alt="" coords="5,79,116,104"/>
+<area shape="rect" id="node3" href="$main_8c.html" title=": Voice &amp; vision controlled 3&#45;DoF arm — command loop and peripheral init. Receives ASCII pick command..." alt="" coords="141,79,207,104"/>
 </map>

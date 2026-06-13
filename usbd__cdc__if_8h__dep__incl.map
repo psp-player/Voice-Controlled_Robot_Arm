@@ -1,5 +1,5 @@
 <map id="usbd_cdc_if.h" name="usbd_cdc_if.h">
 <area shape="rect" id="node1" title=": Header for usbd_cdc_if.c file." alt="" coords="40,5,149,31"/>
-<area shape="rect" id="node2" href="$main_8c.html" title=": Minimal TIM2_CH1 PWM test — PA0 only" alt="" coords="5,79,72,104"/>
+<area shape="rect" id="node2" href="$main_8c.html" title=": Voice &amp; vision controlled 3&#45;DoF arm — command loop and peripheral init. Receives ASCII pick command..." alt="" coords="5,79,72,104"/>
 <area shape="rect" id="node3" href="$usbd__cdc__if_8c.html" title=": Usb device for Virtual Com Port." alt="" coords="97,79,205,104"/>
 </map>

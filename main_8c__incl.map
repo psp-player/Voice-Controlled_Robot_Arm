@@ -1,8 +1,8 @@
 <map id="main.c" name="main.c">
-<area shape="rect" id="node1" title=": Minimal TIM2_CH1 PWM test — PA0 only" alt="" coords="348,5,415,31"/>
+<area shape="rect" id="node1" title=": Voice &amp; vision controlled 3&#45;DoF arm — command loop and peripheral init. Receives ASCII pick command..." alt="" coords="348,5,415,31"/>
 <area shape="rect" id="node2" href="$main_8h.html" title=": Header for main.c file. This file contains the common defines of the application." alt="" coords="37,79,104,104"/>
 <area shape="rect" id="node4" title=" " alt="" coords="128,79,235,104"/>
-<area shape="rect" id="node5" href="$arm__control_8h.html" title=" " alt="" coords="259,79,371,104"/>
+<area shape="rect" id="node5" href="$arm__control_8h.html" title="Public API for the 3&#45;DoF (RRR) robotic arm: kinematics, motion, TMC2240 stepper driver bring&#45;up,..." alt="" coords="259,79,371,104"/>
 <area shape="rect" id="node7" href="$usbd__cdc__if_8h.html" title=": Header for usbd_cdc_if.c file." alt="" coords="395,79,504,104"/>
 <area shape="rect" id="node9" title=" " alt="" coords="528,79,595,104"/>
 <area shape="rect" id="node10" title=" " alt="" coords="619,79,690,104"/>
