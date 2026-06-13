@@ -20,10 +20,10 @@ extern SPI_HandleTypeDef hspi1;
 
 /* ---- timing / motion profile ---- */
 #define TIM_TICK_HZ    1000000.0f      /* 1 MHz tick */
-#define MAX_STEP_HZ    2000.0f         /* cruise rate; raise now that there's a ramp */
+#define MAX_STEP_HZ    800.0f         /* cruise rate; raise now that there's a ramp */
 #define ARR_MAX        0xFFFFu
 #define V_START_HZ     400.0f          /* ramp start/stop rate (below stall) */
-#define ACCEL_HZ2      8000.0f         /* accel, microsteps/s^2 — tune */
+#define ACCEL_HZ2      1000.0f         /* accel, microsteps/s^2 — tune */
 
 /* ---- TMC2240 registers ---- */
 #define TMC_GCONF        0x00
@@ -47,10 +47,10 @@ static const uint16_t      en_pin[3]  = { M1_EN_Pin,       M2_EN_Pin,       M3_E
 /* ===== per-joint current + chopper config ===== */
 static const uint8_t  drv_range[3]    = { 2, 2, 1 };       /* base, shoulder, elbow */
 static const uint8_t  drv_irun[3]     = { 16, 31, 20 };    /* shoulder maxed in range 2 */
-static const uint8_t  drv_ihold[3]    = { 8, 14, 8 };
+static const uint8_t  drv_ihold[3]    = { 8, 20, 8 };
 /* hybrid: enable StealthChop only on the shoulder, switch in above TPWMTHRS speed */
-static const uint8_t  drv_stealth[3]  = { 0, 1, 0 };       /* 1 = allow StealthChop */
-static const uint32_t drv_tpwmthrs[3] = { 0, 200, 0 };     /* bigger = switch at LOWER speed; tune */
+static const uint8_t  drv_stealth[3]  = { 0, 0, 0 };   /* all SpreadCycle */
+static const uint32_t drv_tpwmthrs[3] = { 0, 0, 0 };
 
 static void tmc_write(int i, uint8_t reg, uint32_t val)
 {
@@ -105,7 +105,7 @@ uint8_t arm_drivers_init(void)
 static TIM_HandleTypeDef *const joint_tim[3] = { &htim1, &htim2, &htim3 };
 static GPIO_TypeDef *const dir_port[3] = { M1_DIR_GPIO_Port, M2_DIR_GPIO_Port, M3_DIR_GPIO_Port };
 static const uint16_t      dir_pin[3]  = { M1_DIR_Pin,       M2_DIR_Pin,       M3_DIR_Pin };
-static const GPIO_PinState dir_pos[3]  = { GPIO_PIN_RESET, GPIO_PIN_SET, GPIO_PIN_SET };
+static const GPIO_PinState dir_pos[3]  = { GPIO_PIN_RESET, GPIO_PIN_RESET, GPIO_PIN_SET };
 
 /* ---- state ---- */
 static volatile int32_t steps_remaining[3] = {0, 0, 0};
@@ -116,6 +116,28 @@ static volatile int32_t mv_total[3];
 static volatile int32_t mv_nmax;
 static volatile int     mv_master;
 static volatile uint8_t mv_ramp;
+
+extern TIM_HandleTypeDef htim1, htim2, htim3, htim4;
+
+/* ---- gripper servo on TIM4 CH2 ---- */
+#define SERVO_OPEN_US    2000U     /* tune to your gripper */
+#define SERVO_CLOSE_US   1000U     /* tune to your gripper */
+
+void gripper_init(void)
+{
+    HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
+    __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, SERVO_OPEN_US);  /* start open */
+}
+
+void gripper_set_us(uint16_t pulse_us)
+{
+    if (pulse_us < 500U)  pulse_us = 500U;
+    if (pulse_us > 2500U) pulse_us = 2500U;
+    __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2, pulse_us);
+}
+
+void gripper_open(void)  { gripper_set_us(SERVO_OPEN_US);  }
+void gripper_close(void) { gripper_set_us(SERVO_CLOSE_US); }
 
 static inline void joint_set_rate(int i, float hz)
 {
@@ -243,6 +265,11 @@ uint32_t arm_drv_status(int joint) { return tmc_read(joint, TMC_DRV_STATUS); }
 int arm_is_moving(void)
 {
     return (steps_remaining[0] | steps_remaining[1] | steps_remaining[2]) != 0;
+}
+
+void arm_get_xyz(float *x, float *y, float *z)
+{
+    arm_fk(cur_ang[0], cur_ang[1], cur_ang[2], x, y, z);
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)

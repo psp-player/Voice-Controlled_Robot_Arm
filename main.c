@@ -13,6 +13,10 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "arm_control.h"
+#include "usbd_cdc_if.h"    /* for CDC_Transmit_FS */
+#include <stdio.h>
+#include <string.h>
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -43,7 +47,8 @@ TIM_HandleTypeDef htim3;
 TIM_HandleTypeDef htim4;
 
 /* USER CODE BEGIN PV */
-
+volatile uint8_t cmd_ready = 0;
+volatile char    cmd_buf[64];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -104,6 +109,8 @@ int main(void)
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
     arm_init();
+    gripper_init();
+
     uint8_t  drv_ok = arm_drivers_init();
     uint32_t ioin0  = arm_dbg_ioin(0);
     (void)drv_ok; (void)ioin0;     /* step PAST this line, THEN read both */                      /* break here first: bit 0 must be set, else motor 1 isn't enabled */
@@ -114,27 +121,54 @@ int main(void)
       /* test ONE joint, small move, watch which way it goes */
 //      arm_test_spin(2, +1, 800, 400.0f);   /* shoulder: +1 should LIFT the upper arm */
 //    	arm_move_to(0, 245, 315, 1);
-//    arm_move_to(345, 0, 100, 1);
-    arm_move_to(245, 0, 150, 1);   /* from home: tip straight down 165mm, mostly shoulder+elbow */
-      while (arm_is_moving()) { }
+//    arm_move_to(300, 0, 200, 1);
+//      while (arm_is_moving()) { }
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-    while (1)
-    {
+      while (1)
+      {
+    	  if (cmd_ready) {
+    	      cmd_ready = 0;
 
-    /* USER CODE END WHILE */
-//      arm_test_spin(0, +1, 3200, 800.0f);  /* joint 0 = motor 1: one rev fwd (200*16 ustep) at 800 Hz ~15 rpm */
-//      while (arm_is_moving()) { }
-//      HAL_Delay(500);
-//
-//      arm_test_spin(0, -1, 3200, 800.0f);  /* one rev back */
-//      while (arm_is_moving()) { }
-//      HAL_Delay(500);
-
-    /* USER CODE BEGIN 3 */
-  }
+    	      if (strncmp((char*)cmd_buf, "GRIP,OPEN", 9) == 0) {
+    	          gripper_open();
+    	          HAL_Delay(500);
+    	          CDC_Transmit_FS((uint8_t*)"DONE\n", 5);
+    	      }
+    	      else if (strncmp((char*)cmd_buf, "GRIP,CLOSE", 10) == 0) {
+    	          gripper_close();
+    	          HAL_Delay(500);
+    	          CDC_Transmit_FS((uint8_t*)"DONE\n", 5);
+    	      }
+    	      else if (strncmp((char*)cmd_buf, "WHERE", 5) == 0) {
+    	          float cx, cy, cz;
+    	          arm_get_xyz(&cx, &cy, &cz);
+    	          char out[48];
+    	          int len = snprintf(out, sizeof(out), "POS,%.1f,%.1f,%.1f\n", cx, cy, cz);
+    	          CDC_Transmit_FS((uint8_t*)out, len);
+    	      }
+    	      else {
+    	          char color[16];
+    	          float x, y, z;
+    	          int n = sscanf((char*)cmd_buf, "M,%15[^,],%f,%f,%f", color, &x, &y, &z);
+    	          if (n == 4) {
+    	              if (!arm_is_moving() && arm_move_to(x, y, z, 1)) {
+    	                  while (arm_is_moving()) { }
+    	                  HAL_Delay(300);          /* settle */
+    	                  gripper_close();         /* grab on arrival */
+    	                  HAL_Delay(500);
+    	                  CDC_Transmit_FS((uint8_t*)"DONE\n", 5);
+    	              } else {
+    	                  CDC_Transmit_FS((uint8_t*)"ERR\n", 4);
+    	              }
+    	          } else {
+    	              CDC_Transmit_FS((uint8_t*)"ERR\n", 4);
+    	          }
+    	      }
+    	  }
+      }
   /* USER CODE END 3 */
 }
 
@@ -517,7 +551,7 @@ static void MX_TIM4_Init(void)
   htim4.Instance = TIM4;
   htim4.Init.Prescaler = 79;
   htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim4.Init.Period = 9999;
+  htim4.Init.Period = 19999;
   htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
   if (HAL_TIM_Base_Init(&htim4) != HAL_OK)

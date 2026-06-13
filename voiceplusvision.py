@@ -36,15 +36,15 @@ from vosk import Model, KaldiRecognizer
 # ----------------------------- CONFIG -----------------------------
 # Which colors are live this run. Drives both the voice grammar and which
 # masks get computed. Must be keys in COLOR_RANGES below.
-ENABLED_COLORS = ["RED", "BLACK"]
+ENABLED_COLORS = ["RED", "BLUE"]
 
 CHESSBOARD     = (8, 6)
 SQUARE_SIZE_MM = 25.0
 MIN_AREA       = 800
 KERNEL         = np.ones((5, 5), np.uint8)
-PICK_Z_MM      = 5.0                # approach height in robot frame
+PICK_Z_MM      = 100.0                # approach height in robot frame
 
-SERIAL_PORT    = "COM5"             # "/dev/ttyACM0" on Linux/Mac
+SERIAL_PORT    = "COM8"             # "/dev/ttyACM0" on Linux/Mac
 BAUD           = 115200
 CAM_INDEX      = 0
 ACK_TIMEOUT_S  = 15.0               # how long to wait for the MCU to report DONE
@@ -83,10 +83,10 @@ COLOR_RANGES = {
         "ranges": [(np.array([20, 100, 100]), np.array([35, 255, 255]))],
         "bgr": (0, 255, 255),
     },
-    "BLACK": {
-        "ranges": [(np.array([0, 0, 0]), np.array([179, 90, 60]))],
-        "bgr": (0, 0, 0),
-    },
+    # "BLACK": {
+    #     "ranges": [(np.array([0, 0, 0]), np.array([179, 90, 60]))],
+    #     "bgr": (0, 0, 0),
+    # },
 }
 
 # Serial framing. PC->MCU 'M,<COLOR>,<X>,<Y>,<Z>\n'  |  MCU->PC 'DONE'/'ERR'.
@@ -247,6 +247,151 @@ def send_pick(ser, color, x, y, z):
     print("   (timed out waiting for MCU)")
     return False
 
+ROBOT_CALIB_POINTS = [   # robot-frame (x,y) targets you'll drive the arm to
+    (250.0,  30.0),
+    (250.0,  50.0),
+    (300.0,  30.0),
+    (300.0,  50.0),
+]
+
+def query_robot_pos(ser):
+    """Ask the MCU where its tip currently is. Returns (x,y) or None."""
+    ser.reset_input_buffer()
+    ser.write(b"WHERE\n")
+    deadline = time.time() + 3.0
+    while time.time() < deadline:
+        reply = ser.readline().decode("ascii", errors="ignore").strip()
+        if reply.startswith("POS,"):
+            _, sx, sy, sz = reply.split(",")
+            return float(sx), float(sy)
+    return None
+
+def calibrate_robot_transform(ser, cap):
+    """
+    Build M_robot (table-mm -> robot-mm) from N correspondences.
+    For each calibration point: arm drives to a known robot (x,y), you place a
+    block exactly under the tip, press SPACE, vision reads its table coord.
+    """
+    global M_robot
+    if H is None:
+        print("[calib] Need workspace homography first — press 'w'.")
+        return
+    if ser is None:
+        print("[calib] Need serial link to drive the arm.")
+        return
+
+    table_pts, robot_pts = [], []
+    print("\n=== ROBOT TRANSFORM CALIBRATION ===")
+    print("For each point: arm moves, place a BLACK block under the tip, press SPACE.")
+    print("Press ESC to abort.\n")
+
+    for i, (rx, ry) in enumerate(ROBOT_CALIB_POINTS):
+        # drive the arm to the known robot point (z high enough to clear, then it holds)
+        line = f"M,CAL,{rx:.2f},{ry:.2f},{PICK_Z_MM:.2f}\n"
+        ser.reset_input_buffer()
+        ser.write(line.encode("ascii"))
+        # wait for the move to finish
+        deadline = time.time() + ACK_TIMEOUT_S
+        ok = False
+        while time.time() < deadline:
+            r = ser.readline().decode("ascii", errors="ignore").strip()
+            if r == "DONE": ok = True; break
+            if r == "ERR":  break
+        if not ok:
+            print(f"[calib] point {i+1}: arm couldn't reach ({rx},{ry}), skipping.")
+            continue
+
+        print(f"[calib] point {i+1}/{len(ROBOT_CALIB_POINTS)}: "
+              f"arm at robot({rx},{ry}). Place a block under the tip, press SPACE.")
+
+        # let the user place the block; grab the table coord on SPACE
+        captured = None
+        while True:
+            okf, frame = cap.read()
+            if not okf: continue
+            if mtx is not None: frame = cv.undistort(frame, mtx, dist)
+            dets = detect_blocks(frame)
+            # show what we see
+            for d in dets:
+                bx, by, bw, bh = d["bbox"]
+                cv.rectangle(frame, (bx,by), (bx+bw,by+bh), d["bgr"], 2)
+            cv.putText(frame, f"point {i+1}: place block, SPACE to capture",
+                       (10,30), cv.FONT_HERSHEY_SIMPLEX, 0.7, (0,255,0), 2)
+            cv.imshow("voice + vision pick (q to quit)", frame)
+            k = cv.waitKey(1) & 0xFF
+            if k == 27:   # ESC
+                print("[calib] aborted."); return
+            if k == 32:   # SPACE
+                if not dets:
+                    print("   no block detected — adjust and try again."); continue
+                d = max(dets, key=lambda d: d["area"])   # largest blob = the block
+                cx, cy = d["centroid"]
+                tx, ty = pixel_to_table(cx, cy, H)
+                captured = (tx, ty)
+                break
+
+        table_pts.append(captured)
+        robot_pts.append((rx, ry))
+        print(f"   captured table({captured[0]:.1f},{captured[1]:.1f}) "
+              f"<-> robot({rx},{ry})")
+
+    if len(table_pts) < 3:
+        print("[calib] need at least 3 points — got "
+              f"{len(table_pts)}. Aborting."); return
+
+    table_np = np.array(table_pts, dtype=np.float32)
+    robot_np = np.array(robot_pts, dtype=np.float32)
+    M2x3, inliers = cv.estimateAffine2D(table_np, robot_np)
+    if M2x3 is None:
+        print("[calib] affine solve failed."); return
+
+    M = np.vstack([M2x3, [0, 0, 1]]).astype(np.float64)
+    np.savez(ROBOT_TF_FILE, M=M)
+    M_robot = M
+
+    # report residual error so you know if it's any good
+    errs = []
+    for (tx,ty),(rx,ry) in zip(table_pts, robot_pts):
+        px = M @ np.array([tx,ty,1.0]); 
+        errs.append(np.hypot(px[0]-rx, px[1]-ry))
+    print(f"[calib] SAVED. mean residual {np.mean(errs):.1f} mm, "
+          f"max {np.max(errs):.1f} mm ({len(table_pts)} pts).")
+    if np.max(errs) > 10:
+        print("   WARNING: >10mm error — re-check block placement accuracy.")
+
+def run_ik_demo(ser):
+    """Scripted IK demo — fixed reachable poses, no vision/calibration needed.
+    Shows smooth coordinated motion + gripper. Press 'd' to run."""
+    if ser is None:
+        print("[demo] No serial link — can't run demo.")
+        return
+
+    # Known-reachable robot-frame waypoints (x, y, z) in mm.
+    # All within D1±(L1+L2); spread across the workspace to show range.
+    # Verify each in PuTTY first so you KNOW they reach on demo day.
+    sequence = [
+        ("M,DEMO,245,0,315",   "home / start"),
+        ("M,DEMO,250,80,200",  "reach right + down"),
+        ("M,DEMO,250,-80,200", "sweep left"),
+        ("M,DEMO,300,0,150",   "reach out low"),
+        ("M,DEMO,200,0,300",   "pull in high"),
+        ("M,DEMO,245,0,315",   "return home"),
+    ]
+
+    print("\n=== IK DEMO (no vision) ===")
+    for cmd, label in sequence:
+        print(f"[demo] {label}: {cmd}")
+        ser.reset_input_buffer()
+        ser.write((cmd + "\n").encode("ascii"))
+        # wait for the move to finish (DONE) before the next one
+        deadline = time.time() + ACK_TIMEOUT_S
+        while time.time() < deadline:
+            r = ser.readline().decode("ascii", errors="ignore").strip()
+            if r == "DONE": break
+            if r == "ERR":
+                print(f"   ERR — {cmd} unreachable, skipping"); break
+        time.sleep(0.3)   # brief pause between poses so it reads as distinct moves
+    print("[demo] done.\n")
 
 # -----------------------------
 # Main
@@ -343,6 +488,11 @@ def main():
                     print("Chessboard not detected.")
             elif key == ord('q'):
                 break
+            elif key == ord('c'):
+                calibrate_robot_transform(ser, cap)
+            elif key == ord('d'):
+                run_ik_demo(ser)
+
     finally:
         stop_flag.set()
         cap.release()

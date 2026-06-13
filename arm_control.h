@@ -23,4 +23,11 @@ uint32_t arm_drv_status(int joint);
 
 uint32_t arm_dbg_ioin(int joint);
 
+void arm_get_xyz(float *x, float *y, float *z);
+
+void gripper_init(void);
+void gripper_open(void);
+void gripper_close(void);
+void gripper_set_us(uint16_t pulse_us);
+
 #endif /* ARM_CONTROL_H */
