@@ -1,0 +1,260 @@
+\doxysection{voiceplusvision Namespace Reference}
+\hypertarget{namespacevoiceplusvision}{}\label{namespacevoiceplusvision}\index{voiceplusvision@{voiceplusvision}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{namespacevoiceplusvision_a226570ba187e35f4cd653501c7ac799b}\label{namespacevoiceplusvision_a226570ba187e35f4cd653501c7ac799b} 
+{\bfseries audio\+\_\+cb} (indata, frames, time\+\_\+, status)
+\item 
+\doxymbox{\hyperlink{namespacevoiceplusvision_a3acdf0ee259aaf5a30db3f64929be811}{recognizer\+\_\+loop}} ()
+\item 
+\Hypertarget{namespacevoiceplusvision_aed0dd12dc52394824aac94e72cb1f4c2}\label{namespacevoiceplusvision_aed0dd12dc52394824aac94e72cb1f4c2} 
+{\bfseries compute\+\_\+workspace\+\_\+homography} (gray)
+\item 
+\Hypertarget{namespacevoiceplusvision_a122e9c0777810cf6abe485a760d682e5}\label{namespacevoiceplusvision_a122e9c0777810cf6abe485a760d682e5} 
+{\bfseries pixel\+\_\+to\+\_\+table} (u, v, H)
+\item 
+\Hypertarget{namespacevoiceplusvision_aabb5a3ddad106b40ff38cd9799cd6a8f}\label{namespacevoiceplusvision_aabb5a3ddad106b40ff38cd9799cd6a8f} 
+{\bfseries table\+\_\+to\+\_\+robot} (x, y, M)
+\item 
+\Hypertarget{namespacevoiceplusvision_ad81aabda033ceecf399eaccf96726eb9}\label{namespacevoiceplusvision_ad81aabda033ceecf399eaccf96726eb9} 
+{\bfseries make\+\_\+mask} (hsv, color\+\_\+def)
+\item 
+\doxymbox{\hyperlink{namespacevoiceplusvision_a4eb76e5e598f621eb9cb7275e714af20}{detect\+\_\+blocks}} (frame)
+\item 
+\doxymbox{\hyperlink{namespacevoiceplusvision_ac0a0995d7a028e070a46cc39ec2b4ab1}{best\+\_\+detection}} (detections, color)
+\item 
+\doxymbox{\hyperlink{namespacevoiceplusvision_a97e5caa24fc4fc71c7a79004d7489398}{send\+\_\+pick}} (ser, color, x, y, z)
+\item 
+\doxymbox{\hyperlink{namespacevoiceplusvision_a7348bee4732ff314fcebf9e238fc557a}{query\+\_\+robot\+\_\+pos}} (ser)
+\item 
+\doxymbox{\hyperlink{namespacevoiceplusvision_ae8d3c1470d167092a6bf5561fa189b4d}{calibrate\+\_\+robot\+\_\+transform}} (ser, cap)
+\item 
+\doxymbox{\hyperlink{namespacevoiceplusvision_a282344f00180fffb803b3ba039b27620}{run\+\_\+ik\+\_\+demo}} (ser)
+\item 
+\Hypertarget{namespacevoiceplusvision_a51af30a60f9f02777c6396b8247e356f}\label{namespacevoiceplusvision_a51af30a60f9f02777c6396b8247e356f} 
+{\bfseries main} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{namespacevoiceplusvision_a87ec06dc0a8e1a71fbcda9bff0ee7b54}\label{namespacevoiceplusvision_a87ec06dc0a8e1a71fbcda9bff0ee7b54} 
+list {\bfseries ENABLED\+\_\+\+COLORS} = \+["{}RED"{}, "{}BLUE"{}]\+
+\item 
+\Hypertarget{namespacevoiceplusvision_a4e924cd8d12af99c8b543efb27b272e3}\label{namespacevoiceplusvision_a4e924cd8d12af99c8b543efb27b272e3} 
+tuple {\bfseries CHESSBOARD} = (8, 6)
+\item 
+\Hypertarget{namespacevoiceplusvision_a146bf9df75b73efd87fed7d802bc70a1}\label{namespacevoiceplusvision_a146bf9df75b73efd87fed7d802bc70a1} 
+float {\bfseries SQUARE\+\_\+\+SIZE\+\_\+\+MM} = 25.\+0
+\item 
+\Hypertarget{namespacevoiceplusvision_ab701d57c816ed64d1c89c831b6b33249}\label{namespacevoiceplusvision_ab701d57c816ed64d1c89c831b6b33249} 
+int {\bfseries MIN\+\_\+\+AREA} = 800
+\item 
+\Hypertarget{namespacevoiceplusvision_a23d7e6b58b98173de565fcd441d985f3}\label{namespacevoiceplusvision_a23d7e6b58b98173de565fcd441d985f3} 
+{\bfseries KERNEL} = np.\+ones((5, 5), np.\+uint8)
+\item 
+\Hypertarget{namespacevoiceplusvision_abc28c65ee33887598bc8b1475b35b10a}\label{namespacevoiceplusvision_abc28c65ee33887598bc8b1475b35b10a} 
+float {\bfseries PICK\+\_\+\+Z\+\_\+\+MM} = 100.\+0
+\item 
+\Hypertarget{namespacevoiceplusvision_a7a57d67f8d4504dd664452dff3229d49}\label{namespacevoiceplusvision_a7a57d67f8d4504dd664452dff3229d49} 
+str {\bfseries SERIAL\+\_\+\+PORT} = "{}COM8"{}
+\item 
+\Hypertarget{namespacevoiceplusvision_a5a61c166303e781775cc90d1c0dcb0fa}\label{namespacevoiceplusvision_a5a61c166303e781775cc90d1c0dcb0fa} 
+int {\bfseries BAUD} = 115200
+\item 
+\Hypertarget{namespacevoiceplusvision_a3216318313f3bd1851434fd2ee1df444}\label{namespacevoiceplusvision_a3216318313f3bd1851434fd2ee1df444} 
+int {\bfseries CAM\+\_\+\+INDEX} = 0
+\item 
+\Hypertarget{namespacevoiceplusvision_a9851cfac8de6d43181afbde6a8243e63}\label{namespacevoiceplusvision_a9851cfac8de6d43181afbde6a8243e63} 
+float {\bfseries ACK\+\_\+\+TIMEOUT\+\_\+S} = 15.\+0
+\item 
+\Hypertarget{namespacevoiceplusvision_a15ac248e2989ab563add802c0752311c}\label{namespacevoiceplusvision_a15ac248e2989ab563add802c0752311c} 
+{\bfseries SCRIPT\+\_\+\+DIR} = os.\+path.\+dirname(os.\+path.\+abspath(\+\_\+\+\_\+file\+\_\+\+\_\+))
+\item 
+\Hypertarget{namespacevoiceplusvision_a0c5fe940e4bac0980d4f5426fb2c0de2}\label{namespacevoiceplusvision_a0c5fe940e4bac0980d4f5426fb2c0de2} 
+{\bfseries MODEL\+\_\+\+PATH} = os.\+path.\+join(SCRIPT\+\_\+\+DIR, "{}vosk-\/model-\/small-\/en-\/us-\/0.\+15"{})
+\item 
+\Hypertarget{namespacevoiceplusvision_ad9383ad71fa5d4f7bcbed9abae596ff6}\label{namespacevoiceplusvision_ad9383ad71fa5d4f7bcbed9abae596ff6} 
+int {\bfseries SAMPLE\+\_\+\+RATE} = 16000
+\item 
+\Hypertarget{namespacevoiceplusvision_a4c80c4e862dc6622ad9f7a04e120c26f}\label{namespacevoiceplusvision_a4c80c4e862dc6622ad9f7a04e120c26f} 
+str {\bfseries CALIB\+\_\+\+FILE} = "{}camera\+\_\+calib.\+npz"{}
+\item 
+\Hypertarget{namespacevoiceplusvision_a02fe60e81eb4269387a86669ce1ebd9d}\label{namespacevoiceplusvision_a02fe60e81eb4269387a86669ce1ebd9d} 
+str {\bfseries HOMOGRAPHY\+\_\+\+FILE} = "{}workspace\+\_\+homography.\+npz"{}
+\item 
+\Hypertarget{namespacevoiceplusvision_a558fa9b4a6a635c9f4a57adcf97e6e38}\label{namespacevoiceplusvision_a558fa9b4a6a635c9f4a57adcf97e6e38} 
+str {\bfseries ROBOT\+\_\+\+TF\+\_\+\+FILE} = "{}robot\+\_\+transform.\+npz"{}
+\item 
+\Hypertarget{namespacevoiceplusvision_a57ef26ab36898dca422af05944ee5181}\label{namespacevoiceplusvision_a57ef26ab36898dca422af05944ee5181} 
+tuple {\bfseries criteria} = (cv.\+TERM\+\_\+\+CRITERIA\+\_\+\+EPS + cv.\+TERM\+\_\+\+CRITERIA\+\_\+\+MAX\+\_\+\+ITER, 30, 0.\+001)
+\item 
+dict \doxymbox{\hyperlink{namespacevoiceplusvision_ad6bd73b0b1213960349b7a8109efe02b}{COLOR\+\_\+\+RANGES}}
+\item 
+\Hypertarget{namespacevoiceplusvision_aa481e0eb000663851022ff869c57053f}\label{namespacevoiceplusvision_aa481e0eb000663851022ff869c57053f} 
+{\bfseries audio\+\_\+q} = queue.\+Queue()
+\item 
+\Hypertarget{namespacevoiceplusvision_ada6c60a1a721926b0b9b6705819380fc}\label{namespacevoiceplusvision_ada6c60a1a721926b0b9b6705819380fc} 
+{\bfseries target\+\_\+color} = None
+\item 
+\Hypertarget{namespacevoiceplusvision_a2162aebe8ce9cb783e586cf53d57e57e}\label{namespacevoiceplusvision_a2162aebe8ce9cb783e586cf53d57e57e} 
+{\bfseries new\+\_\+command} = threading.\+Event()
+\item 
+\Hypertarget{namespacevoiceplusvision_a3c745c1ff9bcfcc18a71e6da3425e3da}\label{namespacevoiceplusvision_a3c745c1ff9bcfcc18a71e6da3425e3da} 
+{\bfseries stop\+\_\+flag} = threading.\+Event()
+\item 
+\Hypertarget{namespacevoiceplusvision_a7be159f9920b96c1088a99a9e3a7960e}\label{namespacevoiceplusvision_a7be159f9920b96c1088a99a9e3a7960e} 
+{\bfseries mtx} = None
+\item 
+\Hypertarget{namespacevoiceplusvision_a43571875f49559f4f6ab3e01fed88209}\label{namespacevoiceplusvision_a43571875f49559f4f6ab3e01fed88209} 
+{\bfseries data} = np.\+load(CALIB\+\_\+\+FILE)
+\item 
+\Hypertarget{namespacevoiceplusvision_a1835fb2c0a222df76e4917f3a4ab2df2}\label{namespacevoiceplusvision_a1835fb2c0a222df76e4917f3a4ab2df2} 
+{\bfseries dist}
+\item 
+\Hypertarget{namespacevoiceplusvision_aeb885567e87d5a74688b0b4ee8523635}\label{namespacevoiceplusvision_aeb885567e87d5a74688b0b4ee8523635} 
+{\bfseries H} = None
+\item 
+\Hypertarget{namespacevoiceplusvision_ae0c97152e8ff4354466b1ac60525c2ef}\label{namespacevoiceplusvision_ae0c97152e8ff4354466b1ac60525c2ef} 
+{\bfseries M\+\_\+robot} = None
+\item 
+list \doxymbox{\hyperlink{namespacevoiceplusvision_af2a36ed0330bafd047e26d56800b80b0}{ROBOT\+\_\+\+CALIB\+\_\+\+POINTS}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Voice + vision pick pipeline for the 3-DoF robot arm  (laptop side).
+
+Say a color ("red", "black", ...).  Vosk recognizes it (grammar-constrained),
+OpenCV finds the largest block of that color in the camera frame, the two-stage
+transform maps pixel -> table -> robot coordinates, and the pick is sent as an
+ASCII line over serial to the STM32 with an ACK handshake.  The MCU receives
+coordinates + does IK.
+
+Backbone is the chessboard/affine vision+serial pipeline; the only thing voice
+adds is *which* color the vision stage looks for on each command.
+
+Keys (preview window):
+    w - calibrate workspace homography (chessboard flat in view)
+    q - quit
+Voice:
+    say an enabled color to pick the largest block of that color.
+
+Deps:
+    pip install vosk sounddevice pyserial opencv-python numpy
+    Model: download e.g. vosk-model-small-en-us-0.15 and point MODEL_PATH at it.
+\end{DoxyVerb}
+ 
+
+\label{namespacevoiceplusvision_doc-func-members}
+\Hypertarget{namespacevoiceplusvision_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacevoiceplusvision_ac0a0995d7a028e070a46cc39ec2b4ab1}\index{voiceplusvision@{voiceplusvision}!best\_detection@{best\_detection}}
+\index{best\_detection@{best\_detection}!voiceplusvision@{voiceplusvision}}
+\doxysubsubsection{\texorpdfstring{best\_detection()}{best\_detection()}}
+{\footnotesize\ttfamily \label{namespacevoiceplusvision_ac0a0995d7a028e070a46cc39ec2b4ab1} 
+best\+\_\+detection (\begin{DoxyParamCaption}\item[{}]{detections}{, }\item[{}]{color}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Largest detected blob of the given color, or None.\end{DoxyVerb}
+ \Hypertarget{namespacevoiceplusvision_ae8d3c1470d167092a6bf5561fa189b4d}\index{voiceplusvision@{voiceplusvision}!calibrate\_robot\_transform@{calibrate\_robot\_transform}}
+\index{calibrate\_robot\_transform@{calibrate\_robot\_transform}!voiceplusvision@{voiceplusvision}}
+\doxysubsubsection{\texorpdfstring{calibrate\_robot\_transform()}{calibrate\_robot\_transform()}}
+{\footnotesize\ttfamily \label{namespacevoiceplusvision_ae8d3c1470d167092a6bf5561fa189b4d} 
+calibrate\+\_\+robot\+\_\+transform (\begin{DoxyParamCaption}\item[{}]{ser}{, }\item[{}]{cap}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Build M_robot (table-mm -> robot-mm) from N correspondences.
+For each calibration point: arm drives to a known robot (x,y), you place a
+block exactly under the tip, press SPACE, vision reads its table coord.
+\end{DoxyVerb}
+ \Hypertarget{namespacevoiceplusvision_a4eb76e5e598f621eb9cb7275e714af20}\index{voiceplusvision@{voiceplusvision}!detect\_blocks@{detect\_blocks}}
+\index{detect\_blocks@{detect\_blocks}!voiceplusvision@{voiceplusvision}}
+\doxysubsubsection{\texorpdfstring{detect\_blocks()}{detect\_blocks()}}
+{\footnotesize\ttfamily \label{namespacevoiceplusvision_a4eb76e5e598f621eb9cb7275e714af20} 
+detect\+\_\+blocks (\begin{DoxyParamCaption}\item[{}]{frame}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Detect every enabled color in the frame (used for the live overlay).\end{DoxyVerb}
+ \Hypertarget{namespacevoiceplusvision_a7348bee4732ff314fcebf9e238fc557a}\index{voiceplusvision@{voiceplusvision}!query\_robot\_pos@{query\_robot\_pos}}
+\index{query\_robot\_pos@{query\_robot\_pos}!voiceplusvision@{voiceplusvision}}
+\doxysubsubsection{\texorpdfstring{query\_robot\_pos()}{query\_robot\_pos()}}
+{\footnotesize\ttfamily \label{namespacevoiceplusvision_a7348bee4732ff314fcebf9e238fc557a} 
+query\+\_\+robot\+\_\+pos (\begin{DoxyParamCaption}\item[{}]{ser}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Ask the MCU where its tip currently is. Returns (x,y) or None.\end{DoxyVerb}
+ \Hypertarget{namespacevoiceplusvision_a3acdf0ee259aaf5a30db3f64929be811}\index{voiceplusvision@{voiceplusvision}!recognizer\_loop@{recognizer\_loop}}
+\index{recognizer\_loop@{recognizer\_loop}!voiceplusvision@{voiceplusvision}}
+\doxysubsubsection{\texorpdfstring{recognizer\_loop()}{recognizer\_loop()}}
+{\footnotesize\ttfamily \label{namespacevoiceplusvision_a3acdf0ee259aaf5a30db3f64929be811} 
+recognizer\+\_\+loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Vosk with a color-only grammar; updates target_color on each command.\end{DoxyVerb}
+ \Hypertarget{namespacevoiceplusvision_a282344f00180fffb803b3ba039b27620}\index{voiceplusvision@{voiceplusvision}!run\_ik\_demo@{run\_ik\_demo}}
+\index{run\_ik\_demo@{run\_ik\_demo}!voiceplusvision@{voiceplusvision}}
+\doxysubsubsection{\texorpdfstring{run\_ik\_demo()}{run\_ik\_demo()}}
+{\footnotesize\ttfamily \label{namespacevoiceplusvision_a282344f00180fffb803b3ba039b27620} 
+run\+\_\+ik\+\_\+demo (\begin{DoxyParamCaption}\item[{}]{ser}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Scripted IK demo — fixed reachable poses, no vision/calibration needed.
+Shows smooth coordinated motion + gripper. Press 'd' to run.\end{DoxyVerb}
+ \Hypertarget{namespacevoiceplusvision_a97e5caa24fc4fc71c7a79004d7489398}\index{voiceplusvision@{voiceplusvision}!send\_pick@{send\_pick}}
+\index{send\_pick@{send\_pick}!voiceplusvision@{voiceplusvision}}
+\doxysubsubsection{\texorpdfstring{send\_pick()}{send\_pick()}}
+{\footnotesize\ttfamily \label{namespacevoiceplusvision_a97e5caa24fc4fc71c7a79004d7489398} 
+send\+\_\+pick (\begin{DoxyParamCaption}\item[{}]{ser}{, }\item[{}]{color}{, }\item[{}]{x}{, }\item[{}]{y}{, }\item[{}]{z}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}PC->MCU 'M,<COLOR>,<X>,<Y>,<Z>\\n'  |  MCU->PC 'DONE'/'ERR'.\end{DoxyVerb}
+ 
+
+\label{namespacevoiceplusvision_doc-var-members}
+\Hypertarget{namespacevoiceplusvision_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacevoiceplusvision_ad6bd73b0b1213960349b7a8109efe02b}\index{voiceplusvision@{voiceplusvision}!COLOR\_RANGES@{COLOR\_RANGES}}
+\index{COLOR\_RANGES@{COLOR\_RANGES}!voiceplusvision@{voiceplusvision}}
+\doxysubsubsection{\texorpdfstring{COLOR\_RANGES}{COLOR\_RANGES}}
+{\footnotesize\ttfamily \label{namespacevoiceplusvision_ad6bd73b0b1213960349b7a8109efe02b} 
+dict voiceplusvision.\+COLOR\+\_\+\+RANGES}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}RED"{}}:\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}ranges"{}}:\ [}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ (np.array([0,\ \ \ 120,\ 70]),\ \ np.array([10,\ \ 255,\ 255])),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ (np.array([170,\ 120,\ 70]),\ \ np.array([179,\ 255,\ 255])),}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ ],}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}bgr"{}}:\ (0,\ 0,\ 255),}
+\DoxyCodeLine{\ \ \ \ \},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}GREEN"{}}:\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}ranges"{}}:\ [(np.array([40,\ 80,\ 70]),\ np.array([80,\ 255,\ 255]))],}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}bgr"{}}:\ (0,\ 255,\ 0),}
+\DoxyCodeLine{\ \ \ \ \},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}BLUE"{}}:\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}ranges"{}}:\ [(np.array([100,\ 120,\ 70]),\ np.array([130,\ 255,\ 255]))],}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}bgr"{}}:\ (255,\ 0,\ 0),}
+\DoxyCodeLine{\ \ \ \ \},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}YELLOW"{}}:\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}ranges"{}}:\ [(np.array([20,\ 100,\ 100]),\ np.array([35,\ 255,\ 255]))],}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}bgr"{}}:\ (0,\ 255,\ 255),}
+\DoxyCodeLine{\ \ \ \ \},}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{\#\ "{}BLACK"{}:\ \{}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{\#\ \ \ \ \ "{}ranges"{}:\ [(np.array([0,\ 0,\ 0]),\ np.array([179,\ 90,\ 60]))],}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{\#\ \ \ \ \ "{}bgr"{}:\ (0,\ 0,\ 0),}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{\#\ \},}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{namespacevoiceplusvision_af2a36ed0330bafd047e26d56800b80b0}\index{voiceplusvision@{voiceplusvision}!ROBOT\_CALIB\_POINTS@{ROBOT\_CALIB\_POINTS}}
+\index{ROBOT\_CALIB\_POINTS@{ROBOT\_CALIB\_POINTS}!voiceplusvision@{voiceplusvision}}
+\doxysubsubsection{\texorpdfstring{ROBOT\_CALIB\_POINTS}{ROBOT\_CALIB\_POINTS}}
+{\footnotesize\ttfamily \label{namespacevoiceplusvision_af2a36ed0330bafd047e26d56800b80b0} 
+list voiceplusvision.\+ROBOT\+\_\+\+CALIB\+\_\+\+POINTS}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \ [\ \ \ \textcolor{comment}{\#\ robot-\/frame\ (x,y)\ targets\ you'll\ drive\ the\ arm\ to}}
+\DoxyCodeLine{\ \ \ \ (250.0,\ \ 30.0),}
+\DoxyCodeLine{\ \ \ \ (250.0,\ \ 50.0),}
+\DoxyCodeLine{\ \ \ \ (300.0,\ \ 30.0),}
+\DoxyCodeLine{\ \ \ \ (300.0,\ \ 50.0),}
+\DoxyCodeLine{]}
+
+\end{DoxyCode}

@@ -1,0 +1,38 @@
+\doxysection{arm\+\_\+control.\+h}
+\hypertarget{arm__control_8h_source}{}\label{arm__control_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ARM\_CONTROL\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ARM\_CONTROL\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{comment}{/*\ Call\ once\ after\ MX\_*\_Init()\ /\ homing.\ Sets\ current\ angles\ to\ your\ home\ pose.\ */}}
+\DoxyCodeLine{00007\ \textcolor{keywordtype}{void}\ arm\_init(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{comment}{/*\ Drive\ the\ tip\ (end-\/effector\ point,\ since\ L2\ includes\ it)\ to\ (x,y,z)\ in\ mm.}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ elbow\_up\ =\ 1\ for\ the\ elbow-\/up\ solution,\ 0\ for\ elbow-\/down.}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ Returns\ 1\ if\ the\ target\ is\ reachable\ and\ motion\ was\ launched,\ 0\ otherwise.\ */}}
+\DoxyCodeLine{00012\ \textcolor{keywordtype}{int}\ arm\_move\_to(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ z,\ \textcolor{keywordtype}{int}\ elbow\_up);}
+\DoxyCodeLine{00013\ \textcolor{keywordtype}{void}\ arm\_fk(\textcolor{keywordtype}{float}\ th0,\ \textcolor{keywordtype}{float}\ th1,\ \textcolor{keywordtype}{float}\ th2,\ \textcolor{keywordtype}{float}\ *x,\ \textcolor{keywordtype}{float}\ *y,\ \textcolor{keywordtype}{float}\ *z);}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{comment}{/*\ True\ while\ any\ joint\ is\ still\ stepping.\ Poll\ this\ to\ know\ when\ a\ move\ ends.\ */}}
+\DoxyCodeLine{00016\ \textcolor{keywordtype}{int}\ arm\_is\_moving(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ uint8\_t\ arm\_drivers\_init(\textcolor{keywordtype}{void});\ \ \ \textcolor{comment}{/*\ call\ after\ MX\_SPI1\_Init;\ returns\ bitmask\ of\ OK\ drivers\ */}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keywordtype}{void}\ arm\_test\_spin(\textcolor{keywordtype}{int}\ joint,\ \textcolor{keywordtype}{int}\ dir,\ int32\_t\ nsteps,\ \textcolor{keywordtype}{float}\ hz);}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ uint32\_t\ arm\_drv\_status(\textcolor{keywordtype}{int}\ joint);}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ uint32\_t\ arm\_dbg\_ioin(\textcolor{keywordtype}{int}\ joint);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keywordtype}{void}\ arm\_get\_xyz(\textcolor{keywordtype}{float}\ *x,\ \textcolor{keywordtype}{float}\ *y,\ \textcolor{keywordtype}{float}\ *z);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keywordtype}{void}\ gripper\_init(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00029\ \textcolor{keywordtype}{void}\ gripper\_open(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00030\ \textcolor{keywordtype}{void}\ gripper\_close(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00031\ \textcolor{keywordtype}{void}\ gripper\_set\_us(uint16\_t\ pulse\_us);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ ARM\_CONTROL\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

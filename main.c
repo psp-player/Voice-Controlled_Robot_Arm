@@ -1,9 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
   * @file           : main.c
-  * @brief          : Minimal TIM2_CH1 PWM test — PA0 only
-  ******************************************************************************
+  * @brief          : Voice & vision controlled 3-DoF arm — command loop and
+  *                   peripheral init. Receives ASCII pick commands over USB CDC,
+  *                   runs inverse kinematics, and drives the steppers + gripper.
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
@@ -47,8 +47,8 @@ TIM_HandleTypeDef htim3;
 TIM_HandleTypeDef htim4;
 
 /* USER CODE BEGIN PV */
-volatile uint8_t cmd_ready = 0;
-volatile char    cmd_buf[64];
+volatile uint8_t cmd_ready = 0;   /**< Set by the USB CDC RX callback when a full command line is buffered. */
+volatile char    cmd_buf[64];     /**< Latest received ASCII command line. */
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -127,6 +127,15 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  /**
+   * @brief Main command loop.
+   *
+   * Polls ::cmd_ready and dispatches one ASCII command per line:
+   *   - "M,<color>,<x>,<y>,<z>" : solve IK, move to (x,y,z), close gripper on arrival
+   *   - "GRIP,OPEN" / "GRIP,CLOSE" : actuate the gripper
+   *   - "WHERE" : reply "POS,x,y,z" from forward kinematics
+   * Replies "DONE" on success or "ERR" on an unreachable target / parse failure.
+   */
       while (1)
       {
     	  if (cmd_ready) {
