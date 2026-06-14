@@ -1,6 +1,5 @@
 # ME507 — Voice & Vision Controlled 3-DoF Robotic Arm
 
-### ME 507 Robot Arm Repository
 By: Evan Tran, Lucas Kaemmerer
 
 ME 507 - Charlie Refvem
