@@ -25,7 +25,31 @@
 var NAVTREE =
 [
   [ "ME507 Final Project", "index.html", [
-    [ "ME 507 Robot Arm Repository", "md_README.html", null ],
+    [ "ME507 — Voice & Vision Controlled 3-DoF Robotic Arm", "md_README.html", [
+      [ "Table of Contents", "md_README.html#autotoc_md2", null ],
+      [ "System Overview", "md_README.html#autotoc_md4", null ],
+      [ "Hardware", "md_README.html#autotoc_md6", [
+        [ "Actuators", "md_README.html#autotoc_md7", null ],
+        [ "Sensors", "md_README.html#autotoc_md8", null ],
+        [ "Custom PCB", "md_README.html#autotoc_md9", null ],
+        [ "Mechanical Design", "md_README.html#autotoc_md10", null ]
+      ] ],
+      [ "Software Implementation", "md_README.html#autotoc_md12", [
+        [ "Coding Style", "md_README.html#autotoc_md13", null ],
+        [ "Drivers Worth Highlighting", "md_README.html#autotoc_md14", null ],
+        [ "Main Loop & Intelligence", "md_README.html#autotoc_md15", null ]
+      ] ],
+      [ "Mathematical & Physical Modeling", "md_README.html#autotoc_md17", [
+        [ "Inverse & Forward Kinematics", "md_README.html#autotoc_md18", null ],
+        [ "Motion Profiling (actuation dynamics)", "md_README.html#autotoc_md19", null ],
+        [ "Sensor Data Processing (vision)", "md_README.html#autotoc_md20", null ]
+      ] ],
+      [ "Repository Structure", "md_README.html#autotoc_md22", null ],
+      [ "Build & Run", "md_README.html#autotoc_md24", [
+        [ "Firmware (STM32)", "md_README.html#autotoc_md25", null ],
+        [ "Host pipeline (Python)", "md_README.html#autotoc_md26", null ]
+      ] ]
+    ] ],
     [ "Modules", "modules.html", "modules" ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
@@ -50,7 +74,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "arm__control_8c.html",
-"namespaceblock__detection.html#a08a2d1dd9379bb2c0a697a8fb18d96cb"
+"md_README.html#autotoc_md17"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
