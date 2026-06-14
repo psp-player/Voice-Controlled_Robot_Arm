@@ -92,17 +92,15 @@ $(document).ready(function(){initNavTree('md_README.html',''); initResizable(); 
   <div class="headertitle"><div class="title">ME507 — Voice &amp; Vision Controlled 3-DoF Robotic Arm </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h2><a class="anchor" id="autotoc_md1"></a>
-ME 507 Robot Arm Repository</h2>
-<p>By: Evan Tran, Lucas Kaemmerer</p>
+<div class="textblock"><p>By: Evan Tran, Lucas Kaemmerer</p>
 <p>ME 507 - Charlie Refvem</p>
 <p>California Polytechnic State University, San Luis Obispo</p>
-<h3><a class="anchor" id="autotoc_md2"></a>
+<h3><a class="anchor" id="autotoc_md1"></a>
 Overview</h3>
 <p>This is the codebase for the mircocontroller code, drivers, vision control, and logic that the robot arm uses to operate. The arm runs using 2 NEMA 17 stepper motors and a NEMA 23, all driven by 3 TMC2240 driver + motion controller chips. The microcontroller is a STM32L4A6ZG (144 pin).</p>
 <p>More details hosted at the documentation page: (<a href="https://psp-player.github.io/ME507/">page link</a>).</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md4"></a>
+<h1><a class="anchor" id="autotoc_md3"></a>
 Table of Contents</h1>
 <ul>
 <li>System Overview</li>
@@ -113,7 +111,7 @@ Table of Contents</h1>
 <li>Build &amp; Run</li>
 </ul>
 <hr  />
-<h1><a class="anchor" id="autotoc_md6"></a>
+<h1><a class="anchor" id="autotoc_md5"></a>
 System Overview</h1>
 <p>The project splits across two processors connected by a single USB CDC serial link:</p>
 <table class="markdownTable">
@@ -130,23 +128,23 @@ System Overview</h1>
 </table>
 <p>The PC sends an ASCII command (<code>M,&lt;COLOR&gt;,&lt;X&gt;,&lt;Y&gt;,&lt;Z&gt;\n</code>); the firmware performs the motion and replies <code>DONE</code> or <code>ERR</code>. Keeping IK and real-time step generation on the MCU means the host never has to meet hard timing deadlines.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md8"></a>
+<h1><a class="anchor" id="autotoc_md7"></a>
 Hardware</h1>
-<h2><a class="anchor" id="autotoc_md9"></a>
+<h2><a class="anchor" id="autotoc_md8"></a>
 Actuators</h2>
 <ul>
 <li><b>Three stepper-driven joints (base, shoulder, elbow).</b> Each joint is a NEMA-frame stepper run at 16× microstepping for smooth, quiet motion.</li>
 <li><b>TMC2240 stepper drivers (one per joint).</b> SPI-configurable drivers chosen for their quiet SpreadCycle chopper, fine microstepping, and built-in diagnostics (stall, over-temperature, supply monitoring) read back over SPI. Run/hold currents are tuned <b>per joint</b> in firmware — the shoulder, which carries the most load, runs at maximum current in its range, while the lighter base and elbow run lower to stay cool.</li>
 <li><b>Hobby servo gripper.</b> A single RC servo on a 50 Hz PWM channel (TIM4 CH2), with calibrated open/close pulse widths.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md10"></a>
+<h2><a class="anchor" id="autotoc_md9"></a>
 Sensors</h2>
 <ul>
 <li><b>PDM MEMS microphone</b> routed into the STM32's DFSDM peripheral with DMA, for on-board audio capture.</li>
 <li><b>USB webcam</b> on the host PC for block detection and workspace calibration.</li>
 <li><b>TMC2240 driver telemetry</b> — each driver's <code>DRV_STATUS</code> register is readable over SPI, providing stall and fault flags that act as motion sensing.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md11"></a>
+<h2><a class="anchor" id="autotoc_md10"></a>
 Custom PCB</h2>
 <p>A custom 4-layer board carries the MCU, the three TMC2240 drivers, power regulation, and connectors for the motors, microphone, and USB.</p>
 <ul>
@@ -154,21 +152,21 @@ Custom PCB</h2>
 <li><b>USB protection:</b> an ESD-protection device on the USB data lines.</li>
 <li><b>Layout:</b> dedicated power and ground planes, local decoupling at each driver, and short SPI/step/dir routing to the drivers.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md12"></a>
+<h2><a class="anchor" id="autotoc_md11"></a>
 Mechanical Design</h2>
 <p>The RRR linkage uses link lengths of <b>D1 = 145 mm</b> (base height), <b>L1 = 170 mm</b> (upper arm), and <b>L2 = 245 mm</b> (forearm, measured to the tool point), giving a reachable envelope of roughly L1 + L2 from the shoulder pivot.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md14"></a>
+<h1><a class="anchor" id="autotoc_md13"></a>
 Software Implementation</h1>
-<h2><a class="anchor" id="autotoc_md15"></a>
+<h2><a class="anchor" id="autotoc_md14"></a>
 Coding Style</h2>
 <p>The firmware is written in <b>C</b> for STM32 HAL, <b>bare-metal (no RTOS)</b>. It follows a deliberately small, flat structure: a single application module (<code><a class="el" href="arm__control_8c.html" title="3-DoF (RRR) arm: inverse/forward kinematics, coordinated stepper motion with an acceleration ramp,...">arm_control.c</a></code>) exposes a clean Cartesian API, and all peripheral setup stays in the CubeMX-generated <code><a class="el" href="main_8c.html" title=": Voice &amp; vision controlled 3-DoF arm — command loop and peripheral init. Receives ASCII pick command...">main.c</a></code>. State that belongs to the motion engine is kept <code>static</code> and module-private rather than global, so the public surface in <code><a class="el" href="arm__control_8h.html" title="Public API for the 3-DoF (RRR) robotic arm: kinematics, motion, TMC2240 stepper driver bring-up,...">arm_control.h</a></code> is just the handful of functions a caller actually needs.</p>
 <p>Concurrency is handled with a <b>cooperative, flag-driven main loop</b> plus <b>interrupt-driven step generation</b> — there are no tasks or threads on the MCU. The main loop blocks on nothing except an incoming-command flag; everything time-critical happens in timer ISRs. This keeps the control flow easy to reason about and the timing jitter low.</p>
-<h2><a class="anchor" id="autotoc_md16"></a>
+<h2><a class="anchor" id="autotoc_md15"></a>
 Drivers Worth Highlighting</h2>
 <p>**<code><a class="el" href="arm__control_8c.html" title="3-DoF (RRR) arm: inverse/forward kinematics, coordinated stepper motion with an acceleration ramp,...">arm_control.c</a></code> — coordinated stepper motion.** Each joint owns a hardware timer (TIM1/2/3) in PWM mode; one update event = one microstep. The elegant part is the <b>master-joint coordination</b>: for any move, the joint with the most steps becomes the master, its progress drives a single velocity profile, and every other joint's step rate is continuously rescaled in the timer ISR so that all three joints <b>start and finish together</b> regardless of how far each must travel. The entire motion engine lives in one interrupt callback (<code>HAL_TIM_PeriodElapsedCallback</code>) and a small launch function.</p>
 <p><b>TMC2240 SPI driver.</b> A compact <code>tmc_write</code> / <code>tmc_read</code> pair handles the 40-bit SPI frames, including the TMC2240's quirk of returning a register's value on the <em>following</em> transfer. <code><a class="el" href="arm__control_8c.html#a124bc663f4af8212bf6eae6aa6a7b843" title="Configure and enable all three TMC2240 drivers.">arm_drivers_init()</a></code> configures all three drivers and reads back each one's version byte to confirm communication, returning a bitmask of healthy drivers — so a wiring fault is caught at startup, not mid-demo.</p>
-<h2><a class="anchor" id="autotoc_md17"></a>
+<h2><a class="anchor" id="autotoc_md16"></a>
 Main Loop &amp; Intelligence</h2>
 <p>The "intelligence" is split across the two processors by design. The MCU's main loop is a simple command interpreter:</p>
 <ol type="1">
@@ -183,9 +181,9 @@ Main Loop &amp; Intelligence</h2>
 </ol>
 <p>The higher-level decision making — <em>which</em> color to pick and <em>where</em> it is — runs on the host (<code><a class="el" href="voiceplusvision_8py.html">voiceplusvision.py</a></code>): a Vosk recognizer constrained to a small color grammar sets the target color, OpenCV finds the largest matching blob, and the two-stage coordinate transform produces the robot-frame target that gets sent down the wire.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md19"></a>
+<h1><a class="anchor" id="autotoc_md18"></a>
 Mathematical &amp; Physical Modeling</h1>
-<h2><a class="anchor" id="autotoc_md20"></a>
+<h2><a class="anchor" id="autotoc_md19"></a>
 Inverse &amp; Forward Kinematics</h2>
 <p>The arm is a base yaw joint followed by a 2-link planar arm (shoulder + elbow).</p>
 <p><b>Inverse kinematics</b> (<code>arm_ik</code>): the base angle comes straight from the planar projection of the target, <code>θ₀ = atan2(y, x)</code>. In the arm plane, with planar reach <code>r = √(x² + y²)</code> and height &lsquo;z&rsquo; = z − D1`, the elbow angle follows from the law of cosines:</p>
@@ -193,14 +191,14 @@ Inverse &amp; Forward Kinematics</h2>
 <div class="line">θ₂ = atan2(±√(1 − D²), D)          # sign selects elbow-up vs elbow-down</div>
 <div class="line">θ₁ = atan2(z&#39;, r) − atan2(L2·sinθ₂, L1 + L2·cosθ₂)</div>
 </div><!-- fragment --><p>A target is flagged unreachable when <code>|D| &gt; 1</code>. <b>Forward kinematics</b> (<code>arm_fk</code>) inverts this to report the tip position and is used to answer <code>WHERE</code>.</p>
-<h2><a class="anchor" id="autotoc_md21"></a>
+<h2><a class="anchor" id="autotoc_md20"></a>
 Motion Profiling (actuation dynamics)</h2>
 <p>Stepping a motor straight to cruise speed stalls it, so each move uses a <b>symmetric trapezoidal velocity profile</b> derived from a constant-acceleration model. From the kinematic relation <code>v² = v₀² + 2·a·s</code>, the firmware computes two candidate speeds each master step — one that ramps <b>up</b> with distance travelled and one that ramps <b>down</b> with distance remaining — and takes the smaller, capped at the cruise rate:</p>
 <div class="fragment"><div class="line">v_acc = √(v_start² + 2·a·steps_done)</div>
 <div class="line">v_dec = √(v_start² + 2·a·steps_left)</div>
 <div class="line">v     = min(v_acc, v_dec, v_max)</div>
 </div><!-- fragment --><p>This yields a clean accelerate → cruise → decelerate motion. Joint angles are converted to microsteps via <code>STEPS_PER_RAD = 200 · 16 / (2π)</code>, and the timer auto-reload is computed from the desired step rate against the 1 MHz tick.</p>
-<h2><a class="anchor" id="autotoc_md22"></a>
+<h2><a class="anchor" id="autotoc_md21"></a>
 Sensor Data Processing (vision)</h2>
 <p>The vision pipeline turns camera pixels into robot coordinates in two calibrated stages:</p>
 <ol type="1">
@@ -210,7 +208,7 @@ Sensor Data Processing (vision)</h2>
 </ol>
 <p>Block detection itself converts each frame to HSV, builds a per-color mask (red spans two hue bands because it wraps the hue circle), cleans it with morphological open/close, and takes the largest contour above a minimum area as the target — its centroid is the pixel coordinate fed into the transform chain.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md24"></a>
+<h1><a class="anchor" id="autotoc_md23"></a>
 Repository Structure</h1>
 <div class="fragment"><div class="line">ME507/</div>
 <div class="line">├── arm_control.c            # Kinematics, motion profiling, TMC2240 driver</div>
@@ -230,12 +228,12 @@ Repository Structure</h1>
 <p>&zwj;The Doxygen site is rebuilt and redeployed automatically on every push to <code>main</code> via GitHub Actions, so the published documentation always tracks the latest source. </p>
 </blockquote>
 <hr  />
-<h1><a class="anchor" id="autotoc_md26"></a>
+<h1><a class="anchor" id="autotoc_md25"></a>
 Build &amp; Run</h1>
-<h2><a class="anchor" id="autotoc_md27"></a>
+<h2><a class="anchor" id="autotoc_md26"></a>
 Firmware (STM32)</h2>
 <p>Open the project in STM32CubeIDE, build, and flash to the board over ST-Link. The MCU enumerates as a USB CDC virtual COM port for the command link.</p>
-<h2><a class="anchor" id="autotoc_md28"></a>
+<h2><a class="anchor" id="autotoc_md27"></a>
 Host pipeline (Python)</h2>
 <div class="fragment"><div class="line">pip install vosk sounddevice pyserial opencv-python numpy</div>
 <div class="line"># download a Vosk model (e.g. vosk-model-small-en-us-0.15) next to the script</div>
