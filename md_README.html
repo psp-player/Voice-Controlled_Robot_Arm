@@ -137,7 +137,11 @@ Objective</h2>
 <td class="markdownTableBodyNone">Inverse kinematics &amp; motion   </td><td class="markdownTableBodyNone">STM32 (C firmware)   </td><td class="markdownTableBodyNone">Solve IK, generate coordinated stepper motion, drive the gripper   </td></tr>
 </table>
 <p>The PC sends an ASCII command (<code>M,&lt;COLOR&gt;,&lt;X&gt;,&lt;Y&gt;,&lt;Z&gt;\n</code>); the firmware performs the motion and replies <code>DONE</code> or <code>ERR</code>. Keeping IK and real-time step generation on the MCU means the host never has to meet hard timing deadlines.</p>
-<hr  />
+<div class="image">
+<img src="control_flowchart.drawio.png" alt=""/>
+<div class="caption">
+Figure 2. Flowchart</div></div>
+    <hr  />
 <h1><a class="anchor" id="autotoc_md9"></a>
 Hardware</h1>
 <h2><a class="anchor" id="autotoc_md10"></a>
@@ -165,32 +169,32 @@ Custom PCB</h2>
 <div class="image">
 <img src="pcbschematic1.png" alt=""/>
 <div class="caption">
-Figure 2. PCB schematic sheet 1</div></div>
+Figure 3. PCB schematic sheet 1</div></div>
     <div class="image">
 <img src="pcbschematic2.png" alt=""/>
 <div class="caption">
-Figure 3. PCB schematic sheet 2</div></div>
+Figure 4. PCB schematic sheet 2</div></div>
     <div class="image">
 <img src="pcbschematic3.png" alt=""/>
 <div class="caption">
-Figure 4. PCB schematic sheet 3</div></div>
+Figure 5. PCB schematic sheet 3</div></div>
     <div class="image">
 <img src="pcbschematic4.png" alt=""/>
 <div class="caption">
-Figure 5. PCB schematic sheet 4</div></div>
+Figure 6. PCB schematic sheet 4</div></div>
     <div class="image">
 <img src="pcbdesign.png" alt=""/>
 <div class="caption">
-Figure 6. PCB Layout</div></div>
+Figure 7. PCB Layout</div></div>
     <div class="image">
 <img src="pcbboard.png" alt=""/>
 <div class="caption">
-Figure 7. PCB 3D Render</div></div>
+Figure 8. PCB 3D Render</div></div>
     <h2><a class="anchor" id="autotoc_md13"></a>
 Mechanical Design</h2>
 <p>The RRR linkage uses link lengths of <b>D1 = 145 mm</b> (base height), <b>L1 = 170 mm</b> (upper arm), and <b>L2 = 245 mm</b> (forearm, measured to the tool point), giving a workspace of roughly L1 + L2 from the shoulder pivot.</p>
-<p><img src="Robot_arm_cad.jpg" alt="" class="inline" title="Figure 8. Robot Arm Cad"/>    </p>
-<p><img src="end_effector1.gif" alt="" class="inline" title="Figure 9. Robot Arm End Effector"/>    </p>
+<p><img src="Robot_arm_cad.jpg" alt="" class="inline" title="Figure 9. Robot Arm Cad"/>    </p>
+<p><img src="end_effector1.gif" alt="" class="inline" title="Figure 10. Robot Arm End Effector"/>    </p>
 <hr  />
 <h1><a class="anchor" id="autotoc_md15"></a>
 Software Implementation</h1>
@@ -267,7 +271,7 @@ Design Iteration &amp; Challenges</h1>
 <div class="image">
 <img src="Breadboard.HEIC" alt=""/>
 <div class="caption">
-Figure 10. Breadboard Prototype</div></div>
+Figure 11. Breadboard Prototype</div></div>
     <p>Video of NEMA 17 Robot Arm Failure:</p>
 <p><a href="https://youtu.be/QQMs0cIg0x4"><img src="https://img.youtube.com/vi/QQMs0cIg0x4/maxresdefault.jpg" alt="Robot Arm Failure" class="inline"/></a></p>
 <hr  />
@@ -286,7 +290,7 @@ Host pipeline (Python)</h2>
 <div class="image">
 <img src="final_arm2.JPG" alt=""/>
 <div class="caption">
-Figure 11. Robot Arm Wave</div></div>
+Figure 12. Robot Arm Wave</div></div>
     <p><em>Cal Poly — ME 507</em> </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
