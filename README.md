@@ -9,12 +9,8 @@ California Polytechnic State University, San Luis Obispo
 #### Overview
 
 
-![Robot Arm](./images/final_arm.jpg)
+![Figure 1. Robot Arm Structure](./images/final_arm.jpg)
 
-
-<p align="center">
-  Figure 1. Robot Arm Structure
-</p>
 
 This page covers the documentation and codebase for a 3 degree-of-freedom (RRR) robotic arm that picks colored blocks on spoken command. A spoken color is recognized on the host PC, computer vision locates the matching block, the block's location is transformed into the arm's coordinate frame, and the target is streamed over USB to an STM32, which solves inverse kinematics and drives three closed-loop stepper joints plus a gripper to complete the pick. The arm runs using 2 NEMA 17 stepper motors and a NEMA 23 stepper motor, all driven by 3 TMC2240 driver + motion controller chips. It has a cheap servo motor for the end effector. The microcontroller is a STM32L4A6ZG (144 pin).
 
@@ -84,46 +80,23 @@ A custom 4-layer board carries the MCU, the three TMC2240 drivers, power regulat
 
 <!-- TODO: add PCB renders/photos: schematic, 3D render, and the assembled board -->
 
-![PCB schematic sheet 1](./images/pcbschematic1.png)
-
-<p align="center">
-  Figure 2. PCB schematic sheet 1
-</p>
-
-![PCB schematic sheet 2](./images/pcbschematic2.png)
+![Figure 2. PCB schematic sheet 1](./images/pcbschematic1.png)
 
 
-<p align="center">
-  Figure 3. PCB schematic sheet 2
-</p>
+![Figure 3. PCB schematic sheet 2](./images/pcbschematic2.png)
 
 
-![PCB schematic sheet 3](./images/pcbschematic3.png)
-
-<p align="center">
-  Figure 4. PCB schematic sheet 3
-</p>
+![Figure 4. PCB schematic sheet 3](./images/pcbschematic3.png)
 
 
-![PCB schematic sheet 4](./images/pcbschematic4.png)
-
-<p align="center">
-  Figure 5. PCB schematic sheet 4
-</p>
+![Figure 5. PCB schematic sheet 4](./images/pcbschematic4.png)
 
 
-![PCB Layout](./images/pcbdesign.png)
-
-<p align="center">
-  Figure 6. PCB Layout
-</p>
+![Figure 6. PCB Layout](./images/pcbdesign.png)
 
 
-![PCB 3D Render](./images/pcbboard.png)
+![Figure 7. PCB 3D Render](./images/pcbboard.png)
 
-<p align="center">
-  Figure 7. PCB 3D Render
-</p>
 
 ### Mechanical Design
 The RRR linkage uses link lengths of **D1 = 145 mm** (base height), **L1 = 170 mm** (upper arm), and **L2 = 245 mm** (forearm, measured to the tool point), giving a workspace of roughly L1 + L2 from the shoulder pivot.
