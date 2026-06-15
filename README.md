@@ -15,6 +15,8 @@ A 3 degree-of-freedom (RRR) robotic arm that picks colored blocks on spoken comm
 More details hosted at the documentation page: ([page link](https://psp-player.github.io/ME507/)).
 
 <!-- TODO: add a hero photo / GIF of the finished arm here -->
+[![Watch the video](https://img.youtube.com/vi/VIDEO_ID/0.jpg)]([https://www.youtube.com/watch?v=VIDEO_ID](https://youtu.be/eV6sloEoMP8))
+
 <!-- ![The assembled arm](docs/images/arm_hero.jpg) -->
 
 ---
