@@ -9,7 +9,11 @@ California Polytechnic State University, San Luis Obispo
 #### Overview
 
 
-@image html final_arm.jpg "Robot Arm" width=50%
+<div align="center">
+
+![Robot Arm](./images/final_arm.jpg)
+
+</div>
 
 <p align="center">
   Figure 1. Robot Arm Structure
