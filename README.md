@@ -192,5 +192,7 @@ Set `SERIAL_PORT` near the top of the script to the arm's COM port. With the cam
 
 ---
 
+![Robot Arm](images/final_arm2.jpg)
+
 <!-- TODO: add team member names / acknowledgments / course info -->
 *Cal Poly — ME 507*
