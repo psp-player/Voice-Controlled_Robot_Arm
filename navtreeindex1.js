@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"md_README.html#autotoc_md13":[0,3],
 "md_README.html#autotoc_md14":[0,4],
 "md_README.html#autotoc_md15":[0,4,0],
 "md_README.html#autotoc_md17":[0,5],
@@ -135,7 +136,7 @@ var NAVTREEINDEX1 =
 "usbd__cdc__if_8c.html":[3,0,6],
 "usbd__cdc__if_8h.html":[3,0,7],
 "usbd__cdc__if_8h_source.html":[3,0,7],
-"voiceplusvision_8py.html":[1,0,1],
+"voiceplusvision_8py.html":[1,0,2],
 "voiceplusvision_8py.html":[3,0,8],
 "voiceplusvision_8py.html#a02fe60e81eb4269387a86669ce1ebd9d":[3,0,8,25],
 "voiceplusvision_8py.html#a069a960bcfed818f0733523a0e206bd0":[3,0,8,8],

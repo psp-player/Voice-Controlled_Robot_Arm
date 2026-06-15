@@ -92,9 +92,12 @@ $(document).ready(function(){initNavTree('camera__calibration_8py.html',''); ini
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#var-members">Variables</a>  </div>
-  <div class="headertitle"><div class="title">camera_calibration.py File Reference</div></div>
+  <div class="headertitle"><div class="title">camera_calibration.py File Reference<div class="ingroups"><a class="el" href="group__python__host.html">Python Host Pipeline</a></div></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Camera intrinsic calibration (host side): captures chessboard views and computes the camera matrix + distortion coefficients used to undistort frames in the detection scripts.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -106,8 +109,10 @@ Variables</h2></td></tr>
 <tr class="memitem:a82dc3e785aee61a23ac468b874989300"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecamera__calibration.html#a82dc3e785aee61a23ac468b874989300">camera_calibration.CHESSBOARD</a> = (8, 6)</td></tr>
 <tr class="separator:a82dc3e785aee61a23ac468b874989300"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a03d5a93bf6ad4e7bfeee77b4ef4fda0d"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecamera__calibration.html#a03d5a93bf6ad4e7bfeee77b4ef4fda0d">camera_calibration.criteria</a></td></tr>
+<tr class="memdesc:a03d5a93bf6ad4e7bfeee77b4ef4fda0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sub-pixel corner-refinement termination criteria.  <br /></td></tr>
 <tr class="separator:a03d5a93bf6ad4e7bfeee77b4ef4fda0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac34858654c0998e812719874f440fdc"><td class="memItemLeft" align="right" valign="top">np&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecamera__calibration.html#aac34858654c0998e812719874f440fdc">camera_calibration.objp</a> = np.zeros((CHESSBOARD[0] * CHESSBOARD[1], 3), np.float32)</td></tr>
+<tr class="memdesc:aac34858654c0998e812719874f440fdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template object points for one board view (z=0 plane, unit grid).  <br /></td></tr>
 <tr class="separator:aac34858654c0998e812719874f440fdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a385ce9a6c632085199031eec983455"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecamera__calibration.html#a6a385ce9a6c632085199031eec983455">camera_calibration.objpoints</a> = []</td></tr>
 <tr class="separator:a6a385ce9a6c632085199031eec983455"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,7 +145,10 @@ Variables</h2></td></tr>
 <tr class="memitem:a2647923cd4dfc11d05e0b7b3a0d85385"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecamera__calibration.html#a2647923cd4dfc11d05e0b7b3a0d85385">camera_calibration.tvecs</a></td></tr>
 <tr class="separator:a2647923cd4dfc11d05e0b7b3a0d85385"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Camera intrinsic calibration (host side): captures chessboard views and computes the camera matrix + distortion coefficients used to undistort frames in the detection scripts. </p>
+<p>Run once per camera. </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

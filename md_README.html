@@ -202,7 +202,7 @@ Motion Profiling (actuation dynamics)</h2>
 Sensor Data Processing (vision)</h2>
 <p>The vision pipeline turns camera pixels into robot coordinates in two calibrated stages:</p>
 <ol type="1">
-<li><b>Camera calibration</b> (<code><a class="el" href="camera__calibration_8py.html">camera_calibration.py</a></code>) removes lens distortion using a chessboard and OpenCV's <code>calibrateCamera</code>.</li>
+<li><b>Camera calibration</b> (<code><a class="el" href="camera__calibration_8py.html" title="Camera intrinsic calibration (host side): captures chessboard views and computes the camera matrix + ...">camera_calibration.py</a></code>) removes lens distortion using a chessboard and OpenCV's <code>calibrateCamera</code>.</li>
 <li><b>Workspace homography</b> maps undistorted pixels to flat <b>table</b> millimetres (<code>findHomography</code> on a chessboard lying in the workspace).</li>
 <li><b>Table → robot affine</b> (<code>estimateAffine2D</code>) maps table coordinates into the arm's base frame from a handful of touch-off correspondences, with the mean and max residual reported so a bad calibration is obvious.</li>
 </ol>
