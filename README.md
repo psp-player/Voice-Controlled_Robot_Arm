@@ -71,8 +71,12 @@ A custom 4-layer board carries the MCU, the three TMC2240 drivers, power regulat
 - **Layout:** dedicated power and ground planes, local decoupling at each driver, and short SPI/step/dir routing to the drivers.
 
 <!-- TODO: add PCB renders/photos: schematic, 3D render, and the assembled board -->
-[PCB Schematic](images/pcbdesign.png)
-[PCB 3D render](images/pcbboard.jpg)
+[PCB Schematic](images/pcbschematic1.png)
+[PCB Schematic](images/pcbschematic2.png)
+[PCB Schematic](images/pcbschematic3.png)
+[PCB Schematic](images/pcbschematic4.png)
+[PCB Design](images/pcbdesign.png)
+[PCB 3D render](images/pcbboard.png)
 
 ### Mechanical Design
 The RRR linkage uses link lengths of **D1 = 145 mm** (base height), **L1 = 170 mm** (upper arm), and **L2 = 245 mm** (forearm, measured to the tool point), giving a workspace of roughly L1 + L2 from the shoulder pivot.
