@@ -99,18 +99,25 @@ $(document).ready(function(){initNavTree('namespaceblock__detection.html',''); i
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a71196de36d2d0be2fd5549ca0fb21471"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#a71196de36d2d0be2fd5549ca0fb21471">fit_table_to_robot</a> (points)</td></tr>
+<tr class="memdesc:a71196de36d2d0be2fd5549ca0fb21471"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fit a full 2D affine (rotation, scale, reflection, slight shear).  <br /></td></tr>
 <tr class="separator:a71196de36d2d0be2fd5549ca0fb21471"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe55115f64d29928dfb2da61e6856c3c"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#afe55115f64d29928dfb2da61e6856c3c">compute_workspace_homography</a> (<a class="el" href="namespaceblock__detection.html#a3e587efc9b965161c3591d34f8524923">gray</a>)</td></tr>
+<tr class="memdesc:afe55115f64d29928dfb2da61e6856c3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estimate the pixel -&gt; table-mm homography from a chessboard.  <br /></td></tr>
 <tr class="separator:afe55115f64d29928dfb2da61e6856c3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a661ac7d3f3c3f5e49dd23f903460b204"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#a661ac7d3f3c3f5e49dd23f903460b204">pixel_to_table</a> (u, v, <a class="el" href="namespaceblock__detection.html#a605226747a478ead807b6ebccdc268fd">H</a>)</td></tr>
+<tr class="memdesc:a661ac7d3f3c3f5e49dd23f903460b204"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map an image pixel to table-frame millimetres via homography.  <br /></td></tr>
 <tr class="separator:a661ac7d3f3c3f5e49dd23f903460b204"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7565ee9d09595fd2ecba3b67dcfeebe"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#ab7565ee9d09595fd2ecba3b67dcfeebe">table_to_robot</a> (<a class="el" href="namespaceblock__detection.html#a40265d9576f43750a8ea3382fed7cfa1">x</a>, <a class="el" href="namespaceblock__detection.html#a03ddc30a1948646625077968bf1321e8">y</a>, <a class="el" href="namespaceblock__detection.html#a642f50db5d78df90a14336c93ed90f7e">M</a>)</td></tr>
+<tr class="memdesc:ab7565ee9d09595fd2ecba3b67dcfeebe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map a table-frame point into the robot base frame via affine M.  <br /></td></tr>
 <tr class="separator:ab7565ee9d09595fd2ecba3b67dcfeebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a682da8b04eddf9c38cec1f96351042f1"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#a682da8b04eddf9c38cec1f96351042f1">make_mask</a> (hsv, color_def)</td></tr>
+<tr class="memdesc:a682da8b04eddf9c38cec1f96351042f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build a cleaned binary mask for one color definition.  <br /></td></tr>
 <tr class="separator:a682da8b04eddf9c38cec1f96351042f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7142b1a24957f9bfce222eeef84ff218"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#a7142b1a24957f9bfce222eeef84ff218">detect_blocks</a> (<a class="el" href="namespaceblock__detection.html#ab9fc9e6ef610fb7199681f4012d99565">frame</a>)</td></tr>
+<tr class="memdesc:a7142b1a24957f9bfce222eeef84ff218"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detect all configured colors in a frame.  <br /></td></tr>
 <tr class="separator:a7142b1a24957f9bfce222eeef84ff218"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf36f11a8aa5d8434cabf6501e18e2c9"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#adf36f11a8aa5d8434cabf6501e18e2c9">send_pick</a> (<a class="el" href="namespaceblock__detection.html#a55277754d69705f4ff09e8deef9c18a9">ser</a>, color, <a class="el" href="namespaceblock__detection.html#a40265d9576f43750a8ea3382fed7cfa1">x</a>, <a class="el" href="namespaceblock__detection.html#a03ddc30a1948646625077968bf1321e8">y</a>, z)</td></tr>
+<tr class="memdesc:adf36f11a8aa5d8434cabf6501e18e2c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a pick command and wait for the MCU's ACK.  <br /></td></tr>
 <tr class="separator:adf36f11a8aa5d8434cabf6501e18e2c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -138,10 +145,13 @@ Variables</h2></td></tr>
 <tr class="memitem:af9e31d0b3e750f06520d9fbec9945b61"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#af9e31d0b3e750f06520d9fbec9945b61">ROBOT_TF_FILE</a> = &quot;robot_transform.npz&quot;</td></tr>
 <tr class="separator:af9e31d0b3e750f06520d9fbec9945b61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21740c2a73cd25e46d433a64ca99f211"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#a21740c2a73cd25e46d433a64ca99f211">criteria</a> = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 30, 0.001)</td></tr>
+<tr class="memdesc:a21740c2a73cd25e46d433a64ca99f211"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sub-pixel corner-refinement termination criteria for the chessboard.  <br /></td></tr>
 <tr class="separator:a21740c2a73cd25e46d433a64ca99f211"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a355df717a03b93b7bb17e21b12bba4ca"><td class="memItemLeft" align="right" valign="top">dict&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#a355df717a03b93b7bb17e21b12bba4ca">COLOR_RANGES</a></td></tr>
+<tr class="memdesc:a355df717a03b93b7bb17e21b12bba4ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">HSV color definitions (OpenCV: H 0-179, S/V 0-255).  <br /></td></tr>
 <tr class="separator:a355df717a03b93b7bb17e21b12bba4ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d8e398aa3fc0654d975afb7f28ccb3b"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#a8d8e398aa3fc0654d975afb7f28ccb3b">TABLE_ROBOT_POINTS</a></td></tr>
+<tr class="memdesc:a8d8e398aa3fc0654d975afb7f28ccb3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manual table-&gt;robot correspondences: ((table_x, table_y), (robot_x, robot_y)).  <br /></td></tr>
 <tr class="separator:a8d8e398aa3fc0654d975afb7f28ccb3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f1e891575824d0018bb0cfecb3001e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceblock__detection.html#a66ad1af1f4afebe621eb55514f337c50">dist</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#a6f1e891575824d0018bb0cfecb3001e4">mtx</a> = None</td></tr>
 <tr class="separator:a6f1e891575824d0018bb0cfecb3001e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -217,6 +227,15 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Estimate the pixel -&gt; table-mm homography from a chessboard. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gray</td><td>Grayscale frame containing the calibration board lying flat. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>3x3 homography matrix, or None if the board was not found. </dd></dl>
+
 </div>
 </div>
 <a id="a7142b1a24957f9bfce222eeef84ff218" name="a7142b1a24957f9bfce222eeef84ff218"></a>
@@ -235,6 +254,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Detect all configured colors in a frame. </p>
+<p>Blurs, converts to HSV, masks each color in <a class="el" href="namespaceblock__detection.html#a355df717a03b93b7bb17e21b12bba4ca" title="HSV color definitions (OpenCV: H 0-179, S/V 0-255).">COLOR_RANGES</a>, and returns one record per contour above <a class="el" href="namespaceblock__detection.html#a19b73282532d01d95b296cc49e073193">MIN_AREA</a> with its centroid, bounding box, and color.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frame</td><td>BGR camera frame. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>List of detection dicts (name, centroid, bbox, bgr). </dd></dl>
+
 </div>
 </div>
 <a id="a71196de36d2d0be2fd5549ca0fb21471" name="a71196de36d2d0be2fd5549ca0fb21471"></a>
@@ -252,7 +281,16 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Full 2D affine fit (handles rotation, scale, reflection, slight shear).</pre> 
+
+<p>Fit a full 2D affine (rotation, scale, reflection, slight shear). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">points</td><td>List of ((table_x, table_y), (robot_x, robot_y)) pairs. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>2x3 affine matrix from cv.estimateAffine2D, or None if &lt;3 points. </dd></dl>
+
 </div>
 </div>
 <a id="a682da8b04eddf9c38cec1f96351042f1" name="a682da8b04eddf9c38cec1f96351042f1"></a>
@@ -280,6 +318,17 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Build a cleaned binary mask for one color definition. </p>
+<p>ORs each HSV band in <code>color_def</code> together, then applies morphological open+close to remove speckle and fill small gaps.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hsv</td><td>Frame already converted to HSV. </td></tr>
+    <tr><td class="paramname">color_def</td><td>Entry from <a class="el" href="namespaceblock__detection.html#a355df717a03b93b7bb17e21b12bba4ca" title="HSV color definitions (OpenCV: H 0-179, S/V 0-255).">COLOR_RANGES</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Single-channel binary mask. </dd></dl>
 
 </div>
 </div>
@@ -314,6 +363,17 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Map an image pixel to table-frame millimetres via homography. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">u</td><td>Pixel column. </td></tr>
+    <tr><td class="paramname">v</td><td>Pixel row. </td></tr>
+    <tr><td class="paramname">H</td><td>Pixel-&gt;table homography (3x3). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>(x, y) in table millimetres. </dd></dl>
 
 </div>
 </div>
@@ -360,7 +420,21 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Protocol: PC-&gt;MCU 'M,&lt;COLOR&gt;,&lt;X&gt;,&lt;Y&gt;,&lt;Z&gt;\\n'  |  MCU-&gt;PC 'DONE'/'ERR'.</pre> 
+
+<p>Send a pick command and wait for the MCU's ACK. </p>
+<p>Frames 'M,&lt;COLOR&gt;,&lt;X&gt;,&lt;Y&gt;,&lt;Z&gt;\n', transmits, and waits up to <a class="el" href="namespaceblock__detection.html#a066e27762947b1afb1dc037c2d382025">ACK_TIMEOUT_S</a> for 'DONE' (success) or 'ERR' (rejected).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ser</td><td>Open pyserial port. </td></tr>
+    <tr><td class="paramname">color</td><td>Color label sent with the command. </td></tr>
+    <tr><td class="paramname">x</td><td>Robot-frame X (mm). </td></tr>
+    <tr><td class="paramname">y</td><td>Robot-frame Y (mm). </td></tr>
+    <tr><td class="paramname">z</td><td>Robot-frame Z (mm). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True on 'DONE', False on 'ERR' or timeout. </dd></dl>
+
 </div>
 </div>
 <a id="ab7565ee9d09595fd2ecba3b67dcfeebe" name="ab7565ee9d09595fd2ecba3b67dcfeebe"></a>
@@ -394,6 +468,17 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Map a table-frame point into the robot base frame via affine M. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Table-frame X (mm). </td></tr>
+    <tr><td class="paramname">y</td><td>Table-frame Y (mm). </td></tr>
+    <tr><td class="paramname">M</td><td>Table-&gt;robot affine (3x3). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>(x, y) in robot-frame millimetres. </dd></dl>
 
 </div>
 </div>
@@ -515,6 +600,9 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">   20</span>    },</div>
 <div class="line"><span class="lineno">   21</span>}</div>
 </div><!-- fragment -->
+<p>HSV color definitions (OpenCV: H 0-179, S/V 0-255). </p>
+<p>RED wraps the hue circle so it uses two bands; every entry is matched with the same cv.inRange logic. </p>
+
 </div>
 </div>
 <a id="a21740c2a73cd25e46d433a64ca99f211" name="a21740c2a73cd25e46d433a64ca99f211"></a>
@@ -528,6 +616,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Sub-pixel corner-refinement termination criteria for the chessboard. </p>
 
 </div>
 </div>
@@ -927,6 +1017,9 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">    5</span>    <span class="comment"># ((0.0,   125.0), (rx3, ry3)),</span></div>
 <div class="line"><span class="lineno">    6</span>]</div>
 </div><!-- fragment -->
+<p>Manual table-&gt;robot correspondences: ((table_x, table_y), (robot_x, robot_y)). </p>
+<p>Fill once with 4+ well-spread points; used if no saved transform file exists. </p>
+
 </div>
 </div>
 <a id="a4ea852539ecce7c036e2b736db7d3b52" name="a4ea852539ecce7c036e2b736db7d3b52"></a>

@@ -93,9 +93,12 @@ $(document).ready(function(){initNavTree('block__detection_8py.html',''); initRe
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
-  <div class="headertitle"><div class="title">block_detection.py File Reference</div></div>
+  <div class="headertitle"><div class="title">block_detection.py File Reference<div class="ingroups"><a class="el" href="group__python__host.html">Python Host Pipeline</a></div></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Vision-only detect-and-sort (host side): finds every enabled color in the camera frame and, on a key press, sends each block's robot-frame coordinate to the arm.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -105,18 +108,25 @@ Namespaces</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a71196de36d2d0be2fd5549ca0fb21471"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#a71196de36d2d0be2fd5549ca0fb21471">block_detection.fit_table_to_robot</a> (points)</td></tr>
+<tr class="memdesc:a71196de36d2d0be2fd5549ca0fb21471"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fit a full 2D affine (rotation, scale, reflection, slight shear).  <br /></td></tr>
 <tr class="separator:a71196de36d2d0be2fd5549ca0fb21471"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe55115f64d29928dfb2da61e6856c3c"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#afe55115f64d29928dfb2da61e6856c3c">block_detection.compute_workspace_homography</a> (gray)</td></tr>
+<tr class="memdesc:afe55115f64d29928dfb2da61e6856c3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estimate the pixel -&gt; table-mm homography from a chessboard.  <br /></td></tr>
 <tr class="separator:afe55115f64d29928dfb2da61e6856c3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a661ac7d3f3c3f5e49dd23f903460b204"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#a661ac7d3f3c3f5e49dd23f903460b204">block_detection.pixel_to_table</a> (u, v, H)</td></tr>
+<tr class="memdesc:a661ac7d3f3c3f5e49dd23f903460b204"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map an image pixel to table-frame millimetres via homography.  <br /></td></tr>
 <tr class="separator:a661ac7d3f3c3f5e49dd23f903460b204"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7565ee9d09595fd2ecba3b67dcfeebe"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#ab7565ee9d09595fd2ecba3b67dcfeebe">block_detection.table_to_robot</a> (x, y, M)</td></tr>
+<tr class="memdesc:ab7565ee9d09595fd2ecba3b67dcfeebe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map a table-frame point into the robot base frame via affine M.  <br /></td></tr>
 <tr class="separator:ab7565ee9d09595fd2ecba3b67dcfeebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a682da8b04eddf9c38cec1f96351042f1"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#a682da8b04eddf9c38cec1f96351042f1">block_detection.make_mask</a> (hsv, color_def)</td></tr>
+<tr class="memdesc:a682da8b04eddf9c38cec1f96351042f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build a cleaned binary mask for one color definition.  <br /></td></tr>
 <tr class="separator:a682da8b04eddf9c38cec1f96351042f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7142b1a24957f9bfce222eeef84ff218"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#a7142b1a24957f9bfce222eeef84ff218">block_detection.detect_blocks</a> (frame)</td></tr>
+<tr class="memdesc:a7142b1a24957f9bfce222eeef84ff218"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detect all configured colors in a frame.  <br /></td></tr>
 <tr class="separator:a7142b1a24957f9bfce222eeef84ff218"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf36f11a8aa5d8434cabf6501e18e2c9"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#adf36f11a8aa5d8434cabf6501e18e2c9">block_detection.send_pick</a> (ser, color, x, y, z)</td></tr>
+<tr class="memdesc:adf36f11a8aa5d8434cabf6501e18e2c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a pick command and wait for the MCU's ACK.  <br /></td></tr>
 <tr class="separator:adf36f11a8aa5d8434cabf6501e18e2c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -144,10 +154,13 @@ Variables</h2></td></tr>
 <tr class="memitem:af9e31d0b3e750f06520d9fbec9945b61"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#af9e31d0b3e750f06520d9fbec9945b61">block_detection.ROBOT_TF_FILE</a> = &quot;robot_transform.npz&quot;</td></tr>
 <tr class="separator:af9e31d0b3e750f06520d9fbec9945b61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21740c2a73cd25e46d433a64ca99f211"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#a21740c2a73cd25e46d433a64ca99f211">block_detection.criteria</a> = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 30, 0.001)</td></tr>
+<tr class="memdesc:a21740c2a73cd25e46d433a64ca99f211"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sub-pixel corner-refinement termination criteria for the chessboard.  <br /></td></tr>
 <tr class="separator:a21740c2a73cd25e46d433a64ca99f211"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a355df717a03b93b7bb17e21b12bba4ca"><td class="memItemLeft" align="right" valign="top">dict&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#a355df717a03b93b7bb17e21b12bba4ca">block_detection.COLOR_RANGES</a></td></tr>
+<tr class="memdesc:a355df717a03b93b7bb17e21b12bba4ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">HSV color definitions (OpenCV: H 0-179, S/V 0-255).  <br /></td></tr>
 <tr class="separator:a355df717a03b93b7bb17e21b12bba4ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d8e398aa3fc0654d975afb7f28ccb3b"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#a8d8e398aa3fc0654d975afb7f28ccb3b">block_detection.TABLE_ROBOT_POINTS</a></td></tr>
+<tr class="memdesc:a8d8e398aa3fc0654d975afb7f28ccb3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manual table-&gt;robot correspondences: ((table_x, table_y), (robot_x, robot_y)).  <br /></td></tr>
 <tr class="separator:a8d8e398aa3fc0654d975afb7f28ccb3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f1e891575824d0018bb0cfecb3001e4"><td class="memItemLeft" align="right" valign="top">dist&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#a6f1e891575824d0018bb0cfecb3001e4">block_detection.mtx</a> = None</td></tr>
 <tr class="separator:a6f1e891575824d0018bb0cfecb3001e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -206,7 +219,10 @@ Variables</h2></td></tr>
 <tr class="memitem:a8ba97b7e4bd3f1f583608f7fda7e9463"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detection.html#a8ba97b7e4bd3f1f583608f7fda7e9463">block_detection.new_H</a> = compute_workspace_homography(gray)</td></tr>
 <tr class="separator:a8ba97b7e4bd3f1f583608f7fda7e9463"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Vision-only detect-and-sort (host side): finds every enabled color in the camera frame and, on a key press, sends each block's robot-frame coordinate to the arm. </p>
+<p>No voice; the manual counterpart to <a class="el" href="voiceplusvision_8py.html" title="Voice + vision pick pipeline (host side): say a color, and the largest block of that color is located...">voiceplusvision.py</a>. </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

@@ -86,6 +86,7 @@ var NAVTREEINDEX0 =
 "arm__control_8h.html#af5be512e918214837a83d53e9cdce670":[3,0,1,5],
 "arm__control_8h_source.html":[3,0,1],
 "block__detection_8py.html":[3,0,2],
+"block__detection_8py.html":[1,0,0],
 "block__detection_8py.html#a03ddc30a1948646625077968bf1321e8":[3,0,2,48],
 "block__detection_8py.html#a066e27762947b1afb1dc037c2d382025":[3,0,2,7],
 "block__detection_8py.html#a07a65ce3e1d739e8a4f2c78b2fcd134f":[3,0,2,20],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "md_README.html":[0],
 "md_README.html#autotoc_md10":[0,2,2],
 "md_README.html#autotoc_md11":[0,2,3],
-"md_README.html#autotoc_md13":[0,3],
-"md_README.html#autotoc_md14":[0,4]
+"md_README.html#autotoc_md13":[0,3]
 };
