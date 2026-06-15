@@ -45,10 +45,13 @@ var NAVTREE =
         [ "Sensor Data Processing (vision)", "md_README.html#autotoc_md21", null ]
       ] ],
       [ "Repository Structure", "md_README.html#autotoc_md23", null ],
-      [ "Design Iteration & Challenges", "md_README.html#autotoc_md25", null ],
-      [ "Build & Run", "md_README.html#autotoc_md27", [
-        [ "Firmware (STM32)", "md_README.html#autotoc_md28", null ],
-        [ "Host pipeline (Python)", "md_README.html#autotoc_md29", null ]
+      [ "Design Iteration & Challenges", "md_README.html#autotoc_md25", [
+        [ "Design Iteration", "md_README.html#autotoc_md26", null ],
+        [ "PCB Challenges", "md_README.html#autotoc_md27", null ]
+      ] ],
+      [ "Build & Run", "md_README.html#autotoc_md29", [
+        [ "Firmware (STM32)", "md_README.html#autotoc_md30", null ],
+        [ "Host pipeline (Python)", "md_README.html#autotoc_md31", null ]
       ] ]
     ] ],
     [ "Modules", "modules.html", "modules" ],

@@ -268,19 +268,32 @@ Repository Structure</h1>
 <hr  />
 <h1><a class="anchor" id="autotoc_md25"></a>
 Design Iteration &amp; Challenges</h1>
+<h2><a class="anchor" id="autotoc_md26"></a>
+Design Iteration</h2>
+<p>To get ahead of the lengthy manufacturing and shipping times, the PCB was mocked up using a STM32 Nucleo Board (with an STM32L4A6ZG) connected to a breadboard with 3 DRV8825 motor drivers and a 24V 5A PSU.</p>
 <div class="image">
-<img src="Breadboard.HEIC" alt=""/>
+<img src="Breadboard.jpg" alt=""/>
 <div class="caption">
-Figure 11. Breadboard Prototype</div></div>
-    <p>Video of NEMA 17 Robot Arm Failure:</p>
+Figure 10. Breadboard Prototype</div></div>
+    <p>This proved useful for determining that the shoulder NEMA 17 motor produced insufficient torque.</p>
+<p>Video of NEMA 17 Robot Arm Failure:</p>
 <p><a href="https://youtu.be/QQMs0cIg0x4"><img src="https://img.youtube.com/vi/QQMs0cIg0x4/maxresdefault.jpg" alt="Robot Arm Failure" class="inline"/></a></p>
+<p>Due to time restrictions, it was decided to use a NEMA 23 at the shoulder joint instead of a gear system for more torque. Unfortunately, the PCB's TMC2240 motor drivers cap out at 2.1A RMS, a number substantially below the max 4.2A of a NEMA 23 stepper motor. This meant that while the motor did improve the torque issue of the arm somewhat, a more permenant solution would've been to redesign the shoulder joint to accomodate a gear train for a NEMA 17 stepper.</p>
+<h2><a class="anchor" id="autotoc_md27"></a>
+PCB Challenges</h2>
+<p>When purchasing the PCB, the MCU, crystal, and ferrite beads weren't available at JLPCB. To overcome this, it was decided to pruchase these parts from Mouser Electronics and hand solder them when the board arrived. The outstanding components were soldered on using a heat gun and lead-free solder paste.</p>
+<p><img src="images/mcu.jpg" alt="Figure 11. Breadboard Prototype" class="inline"/></p>
+<p><img src="images/crystal.jpg" alt="Figure 12. Breadboard Prototype" class="inline"/></p>
+<p><img src="images/ferrite.jpg" alt="Figure 13. Breadboard Prototype" class="inline"/></p>
+<p>Apart from some software hurdles (like matching pinouts to the PCB) and SPI communication issues regarding baud and data frame size, the board was entirely functional and worked as intended.</p>
+<p>Additional note: There were some tolerancing issues with the 3d prints, but these were alleviated with some intensive dremel work, reprints, and in the case of the end effector, wire ensuring gear meshing and torque transmission (pictured in Figure 9).</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md27"></a>
+<h1><a class="anchor" id="autotoc_md29"></a>
 Build &amp; Run</h1>
-<h2><a class="anchor" id="autotoc_md28"></a>
+<h2><a class="anchor" id="autotoc_md30"></a>
 Firmware (STM32)</h2>
 <p>Open the project in STM32CubeIDE, build, and flash to the board over ST-Link. The MCU enumerates as a USB CDC virtual COM port for the command link.</p>
-<h2><a class="anchor" id="autotoc_md29"></a>
+<h2><a class="anchor" id="autotoc_md31"></a>
 Host pipeline (Python)</h2>
 <div class="fragment"><div class="line">pip install vosk sounddevice pyserial opencv-python numpy</div>
 <div class="line"># download a Vosk model (e.g. vosk-model-small-en-us-0.15) next to the script</div>
