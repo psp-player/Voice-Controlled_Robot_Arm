@@ -221,11 +221,11 @@ Due to time restrictions, it was decided to use a NEMA 23 at the shoulder joint 
 
 When purchasing the PCB, the MCU, crystal, and ferrite beads weren't available at JLPCB. To overcome this, it was decided to pruchase these parts from Mouser Electronics and hand solder them when the board arrived. The outstanding components were soldered on using a heat gun and lead-free solder paste.
 
-![Figure 11. MCU Solder Job](images/mcu.jpg)
+![Figure 11. MCU Solder Job](images/mcu.JPG)
 
-![Figure 12. Crystal Solder Job](images/crystal.jpg)
+![Figure 12. Crystal Solder Job](images/crystal.JPG)
 
-![Figure 13. Ferrite Bead Solder Job](images/ferrite.jpg)
+![Figure 13. Ferrite Bead Solder Job](images/ferrite.JPG)
 
 Apart from some software hurdles (like matching pinouts to the PCB) and SPI communication issues regarding baud and data frame size, the board was entirely functional and worked as intended.
 
