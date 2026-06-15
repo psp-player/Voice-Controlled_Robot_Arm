@@ -104,6 +104,7 @@ The RRR linkage uses link lengths of **D1 = 145 mm** (base height), **L1 = 170 m
 <!-- TODO: add a CAD render and a labeled link-length / DOF diagram -->
 ![Figure 8. Robot Arm Cad](./images/Robot_arm_cad.jpg)
 <!-- ![CAD render](docs/images/cad_render.png) -->
+![Figure 9. Robot Arm End Effector](./images/end_effector1.gif)
 
 ---
 
