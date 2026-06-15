@@ -1,3 +1,10 @@
+## @file block_detection.py
+#  @brief Vision-only detect-and-sort (host side): finds every enabled color in
+#         the camera frame and, on a key press, sends each block's robot-frame
+#         coordinate to the arm. No voice; the manual counterpart to
+#         voiceplusvision.py.
+#  @ingroup python_host
+
 import os
 import time
 import numpy as np
@@ -7,22 +14,25 @@ import serial   # pip install pyserial
 # -----------------------------
 # Config
 # -----------------------------
-CHESSBOARD = (8, 6)
-SQUARE_SIZE_MM = 25.0
-MIN_AREA = 800
-KERNEL = np.ones((5, 5), np.uint8)
-PICK_Z_MM = 5.0          # height the arm should approach a block at, in robot frame
+CHESSBOARD = (8, 6)         ##< Inner-corner count of the calibration board.
+SQUARE_SIZE_MM = 25.0       ##< Physical chessboard square size (mm).
+MIN_AREA = 800              ##< Minimum contour area (px) to count as a block.
+KERNEL = np.ones((5, 5), np.uint8)  ##< Morphological kernel for mask cleanup.
+PICK_Z_MM = 5.0             ##< Approach height in the robot frame (mm).
 
-SERIAL_PORT = "COM5"     # <-- your STM32 virtual COM port (e.g. /dev/ttyACM0 on Linux)
-BAUD = 115200
-ACK_TIMEOUT_S = 15.0     # how long to wait for the MCU to report DONE
+SERIAL_PORT = "COM5"        ##< STM32 virtual COM port (e.g. /dev/ttyACM0 on Linux).
+BAUD = 115200               ##< Serial baud rate.
+ACK_TIMEOUT_S = 15.0        ##< Seconds to wait for the MCU to report DONE.
 
-CALIB_FILE = "camera_calib.npz"
-HOMOGRAPHY_FILE = "workspace_homography.npz"
-ROBOT_TF_FILE = "robot_transform.npz"
+CALIB_FILE = "camera_calib.npz"             ##< Saved camera intrinsics (mtx, dist).
+HOMOGRAPHY_FILE = "workspace_homography.npz"  ##< Saved pixel->table homography (H).
+ROBOT_TF_FILE = "robot_transform.npz"       ##< Saved table->robot affine (M).
 
+## Sub-pixel corner-refinement termination criteria for the chessboard.
 criteria = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 30, 0.001)
 
+## HSV color definitions (OpenCV: H 0-179, S/V 0-255). RED wraps the hue circle
+#  so it uses two bands; every entry is matched with the same cv.inRange logic.
 COLOR_RANGES = {
     "RED": {
         "ranges": [
@@ -48,10 +58,8 @@ COLOR_RANGES = {
 # -----------------------------
 # Table -> Robot calibration
 # -----------------------------
-# Fill this in once: place a block (or pointer) at a few spots, read the
-# table-frame (X,Y) printed on screen, and record the robot-frame (X,Y) that
-# your arm reports when its tool is at that same spot. 4+ well-spread points.
-#   ((table_x, table_y), (robot_x, robot_y))
+## Manual table->robot correspondences: ((table_x, table_y), (robot_x, robot_y)).
+#  Fill once with 4+ well-spread points; used if no saved transform file exists.
 TABLE_ROBOT_POINTS = [
     # ((0.0,   0.0),   (rx0, ry0)),
     # ((175.0, 0.0),   (rx1, ry1)),
@@ -61,7 +69,10 @@ TABLE_ROBOT_POINTS = [
 
 
 def fit_table_to_robot(points):
-    """Full 2D affine fit (handles rotation, scale, reflection, slight shear)."""
+    """! @brief Fit a full 2D affine (rotation, scale, reflection, slight shear).
+    @param points  List of ((table_x, table_y), (robot_x, robot_y)) pairs.
+    @return 2x3 affine matrix from cv.estimateAffine2D, or None if <3 points.
+    """
     if len(points) < 3:
         return None
     src = np.array([p[0] for p in points], dtype=np.float32)
@@ -73,16 +84,16 @@ def fit_table_to_robot(points):
 # -----------------------------
 # Load saved calibration
 # -----------------------------
-mtx = dist = None
+mtx = dist = None                   ##< Camera intrinsics (matrix, distortion) once loaded.
 if os.path.exists(CALIB_FILE):
     data = np.load(CALIB_FILE)
     mtx, dist = data["mtx"], data["dist"]
 
-H = None
+H = None                            ##< Pixel->table homography once loaded.
 if os.path.exists(HOMOGRAPHY_FILE):
     H = np.load(HOMOGRAPHY_FILE)["H"]
 
-M_robot = None
+M_robot = None                      ##< Table->robot affine; loaded from file or fit from points.
 if os.path.exists(ROBOT_TF_FILE):
     M_robot = np.load(ROBOT_TF_FILE)["M"]
 elif TABLE_ROBOT_POINTS:
@@ -95,6 +106,10 @@ elif TABLE_ROBOT_POINTS:
 # Geometry helpers
 # -----------------------------
 def compute_workspace_homography(gray):
+    """! @brief Estimate the pixel -> table-mm homography from a chessboard.
+    @param gray  Grayscale frame containing the calibration board lying flat.
+    @return 3x3 homography matrix, or None if the board was not found.
+    """
     found, corners = cv.findChessboardCorners(gray, CHESSBOARD, None)
     if not found:
         return None
@@ -107,12 +122,24 @@ def compute_workspace_homography(gray):
 
 
 def pixel_to_table(u, v, H):
+    """! @brief Map an image pixel to table-frame millimetres via homography.
+    @param u  Pixel column.
+    @param v  Pixel row.
+    @param H  Pixel->table homography (3x3).
+    @return (x, y) in table millimetres.
+    """
     w = H @ np.array([u, v, 1.0])
     w /= w[2]
     return float(w[0]), float(w[1])
 
 
 def table_to_robot(x, y, M):
+    """! @brief Map a table-frame point into the robot base frame via affine M.
+    @param x  Table-frame X (mm).
+    @param y  Table-frame Y (mm).
+    @param M  Table->robot affine (3x3).
+    @return (x, y) in robot-frame millimetres.
+    """
     p = M @ np.array([x, y, 1.0])
     return float(p[0]), float(p[1])
 
@@ -121,6 +148,15 @@ def table_to_robot(x, y, M):
 # Detection
 # -----------------------------
 def make_mask(hsv, color_def):
+    """! @brief Build a cleaned binary mask for one color definition.
+
+    ORs each HSV band in @p color_def together, then applies morphological
+    open+close to remove speckle and fill small gaps.
+
+    @param hsv        Frame already converted to HSV.
+    @param color_def  Entry from ::COLOR_RANGES.
+    @return Single-channel binary mask.
+    """
     mask = None
     for lower, upper in color_def["ranges"]:
         part = cv.inRange(hsv, lower, upper)
@@ -131,6 +167,14 @@ def make_mask(hsv, color_def):
 
 
 def detect_blocks(frame):
+    """! @brief Detect all configured colors in a frame.
+
+    Blurs, converts to HSV, masks each color in ::COLOR_RANGES, and returns one
+    record per contour above ::MIN_AREA with its centroid, bounding box, and color.
+
+    @param frame  BGR camera frame.
+    @return List of detection dicts (name, centroid, bbox, bgr).
+    """
     blurred = cv.GaussianBlur(frame, (5, 5), 0)
     hsv = cv.cvtColor(blurred, cv.COLOR_BGR2HSV)
     detections = []
@@ -157,7 +201,18 @@ def detect_blocks(frame):
 # Serial link to STM32
 # -----------------------------
 def send_pick(ser, color, x, y, z):
-    """Protocol: PC->MCU 'M,<COLOR>,<X>,<Y>,<Z>\\n'  |  MCU->PC 'DONE'/'ERR'."""
+    """! @brief Send a pick command and wait for the MCU's ACK.
+
+    Frames 'M,<COLOR>,<X>,<Y>,<Z>\\n', transmits, and waits up to ::ACK_TIMEOUT_S
+    for 'DONE' (success) or 'ERR' (rejected).
+
+    @param ser    Open pyserial port.
+    @param color  Color label sent with the command.
+    @param x      Robot-frame X (mm).
+    @param y      Robot-frame Y (mm).
+    @param z      Robot-frame Z (mm).
+    @return True on 'DONE', False on 'ERR' or timeout.
+    """
     line = f"M,{color},{x:.2f},{y:.2f},{z:.2f}\n"
     ser.reset_input_buffer()
     ser.write(line.encode("ascii"))
@@ -197,6 +252,9 @@ print("\n'w' - calibrate workspace (chessboard flat in view)")
 print("'p' - pick & sort every detected block")
 print("'q' - quit\n")
 
+# Main loop: draw live detections (with table/robot coords when calibrated);
+# 'w' recalibrates the workspace homography, 'p' sends a pick for each block,
+# 'q' quits.
 while True:
     ret, frame = cap.read()
     if not ret:
