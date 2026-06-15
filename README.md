@@ -83,12 +83,25 @@ A custom 4-layer board carries the MCU, the three TMC2240 drivers, power regulat
 - **Layout:** dedicated power and ground planes, local decoupling at each driver, and short SPI/step/dir routing to the drivers.
 
 <!-- TODO: add PCB renders/photos: schematic, 3D render, and the assembled board -->
-![PCB schematic sheet 1](images/pcbschematic1.png)
-![PCB schematic sheet 2](images/pcbschematic2.png)
-![PCB schematic sheet 3](images/pcbschematic3.png)
-![PCB schematic sheet 4](images/pcbschematic4.png)
-![PCB layout](images/pcbdesign.png)
-![PCB 3D render](images/pcbboard.png)
+
+<p align="center">
+  <img src="images/pcbschematic1.png" alt="PCB schematic sheet 1" width="65%">
+</p>
+<p align="center">
+  <img src="images/pcbschematic2.png" alt="PCB schematic sheet 2" width="65%">
+</p>
+<p align="center">
+  <img src="images/pcbschematic3.png" alt="PCB schematic sheet 3" width="65%">
+</p>
+<p align="center">
+  <img src="images/pcbschematic4.png" alt="PCB schematic sheet 4" width="65%">
+</p>
+<p align="center">
+  <img src="images/pcbdesign.png" alt="PCB Layout" width="65%">
+</p>
+<p align="center">
+  <img src="images/pcbboard.png" alt="PCB 3D Render" width="65%">
+</p>
 
 ### Mechanical Design
 The RRR linkage uses link lengths of **D1 = 145 mm** (base height), **L1 = 170 mm** (upper arm), and **L2 = 245 mm** (forearm, measured to the tool point), giving a workspace of roughly L1 + L2 from the shoulder pivot.
