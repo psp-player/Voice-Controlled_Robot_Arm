@@ -22,6 +22,7 @@ More code details hosted at the documentation page: ([page link](https://psp-pla
 
 <!-- TODO: add a hero photo / GIF of the finished arm here -->
 Video of Arm Function:
+
 [![Watch the video](https://img.youtube.com/vi/eV6sloEoMP8/maxresdefault.jpg)](https://youtu.be/eV6sloEoMP8)
 
 
