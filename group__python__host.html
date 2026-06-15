@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ME507 Final Project: File List</title>
+<title>ME507 Final Project: Python Host Pipeline</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,7 +63,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('files.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__python__host.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -89,22 +89,24 @@ $(document).ready(function(){initNavTree('files.html',''); initResizable(); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">File List</div></div>
+  <div class="summary">
+<a href="#files">Files</a>  </div>
+  <div class="headertitle"><div class="title">Python Host Pipeline</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock">Here is a list of all files with brief descriptions:</div><div class="directory">
-<table class="directory">
-<tr id="row_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="arm__control_8c.html" target="_self">arm_control.c</a></td><td class="desc">3-DoF (RRR) arm: inverse/forward kinematics, coordinated stepper motion with an acceleration ramp, and TMC2240 driver control </td></tr>
-<tr id="row_1_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="arm__control_8h_source.html"><span class="icondoc"></span></a><a class="el" href="arm__control_8h.html" target="_self">arm_control.h</a></td><td class="desc">Public API for the 3-DoF (RRR) robotic arm: kinematics, motion, TMC2240 stepper driver bring-up, and gripper control </td></tr>
-<tr id="row_2_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="block__detection_8py.html" target="_self">block_detection.py</a></td><td class="desc"></td></tr>
-<tr id="row_3_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="camera__calibration_8py.html" target="_self">camera_calibration.py</a></td><td class="desc"></td></tr>
-<tr id="row_4_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="main_8c.html" target="_self">main.c</a></td><td class="desc">: Voice &amp; vision controlled 3-DoF arm — command loop and peripheral init. Receives ASCII pick commands over USB CDC, runs inverse kinematics, and drives the steppers + gripper </td></tr>
-<tr id="row_5_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="main_8h_source.html"><span class="icondoc"></span></a><a class="el" href="main_8h.html" target="_self">main.h</a></td><td class="desc">: Header for <a class="el" href="main_8c.html" title=": Voice &amp; vision controlled 3-DoF arm — command loop and peripheral init. Receives ASCII pick command...">main.c</a> file. This file contains the common defines of the application </td></tr>
-<tr id="row_6_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="usbd__cdc__if_8c.html" target="_self">usbd_cdc_if.c</a></td><td class="desc">: Usb device for Virtual Com Port </td></tr>
-<tr id="row_7_" class="odd"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a href="usbd__cdc__if_8h_source.html"><span class="icondoc"></span></a><a class="el" href="usbd__cdc__if_8h.html" target="_self">usbd_cdc_if.h</a></td><td class="desc">: Header for <a class="el" href="usbd__cdc__if_8c.html" title=": Usb device for Virtual Com Port.">usbd_cdc_if.c</a> file </td></tr>
-<tr id="row_8_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icondoc"></span><a class="el" href="voiceplusvision_8py.html" target="_self">voiceplusvision.py</a></td><td class="desc">Voice + vision pick pipeline (host side): say a color, and the largest block of that color is located, transformed into the robot frame, and sent to the arm with an ACK handshake </td></tr>
+
+<p>Laptop-side voice recognition, computer vision, and the two-stage pixel -&gt; table -&gt; robot calibration that feeds Cartesian pick targets to the STM32 over serial.  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="files" name="files"></a>
+Files</h2></td></tr>
+<tr class="memitem:voiceplusvision_8py"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="voiceplusvision_8py.html">voiceplusvision.py</a></td></tr>
+<tr class="memdesc:voiceplusvision_8py"><td class="mdescLeft">&#160;</td><td class="mdescRight">Voice + vision pick pipeline (host side): say a color, and the largest block of that color is located, transformed into the robot frame, and sent to the arm with an ACK handshake. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- directory -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>Laptop-side voice recognition, computer vision, and the two-stage pixel -&gt; table -&gt; robot calibration that feeds Cartesian pick targets to the STM32 over serial. </p>
+<p>Comprises three scripts: live voice+vision picking, vision-only detect/sort, and camera intrinsic calibration. </p>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

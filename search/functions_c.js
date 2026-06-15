@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['send_5fpick_0',['send_pick',['../namespaceblock__detection.html#adf36f11a8aa5d8434cabf6501e18e2c9',1,'block_detection.send_pick()'],['../namespacevoiceplusvision.html#afe2f4989dd0901a672e49ef04c484cdd',1,'voiceplusvision.send_pick()']]],
-  ['systemclock_5fconfig_1',['SystemClock_Config',['../main_8c.html#a70af21c671abfcc773614a9a4f63d920',1,'main.c']]]
+  ['recognizer_5floop_0',['recognizer_loop',['../namespacevoiceplusvision.html#a8600d088588126f77ff519afff264e93',1,'voiceplusvision']]],
+  ['run_5fik_5fdemo_1',['run_ik_demo',['../namespacevoiceplusvision.html#a271c8ca5bbfb52d07e9fa0616410c293',1,'voiceplusvision']]]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['main_0',['main',['../main_8c.html#a840291bc02cba5474a4cb46a9b9566fe',1,'main.c']]],
+  ['main_0',['main',['../main_8c.html#a840291bc02cba5474a4cb46a9b9566fe',1,'main():&#160;main.c'],['../namespacevoiceplusvision.html#a4d1a1fc2abf2402756afe0ac7a8eec75',1,'voiceplusvision.main()']]],
   ['make_5fmask_1',['make_mask',['../namespaceblock__detection.html#a682da8b04eddf9c38cec1f96351042f1',1,'block_detection.make_mask()'],['../namespacevoiceplusvision.html#a90c3c325387aafe17853c3899ef432c3',1,'voiceplusvision.make_mask()']]],
   ['master_5fvelocity_2',['master_velocity',['../arm__control_8c.html#a26980277a3a94b2471d63f6ffa558279',1,'arm_control.c']]],
   ['mx_5fdfsdm1_5finit_3',['MX_DFSDM1_Init',['../main_8c.html#a54efad17c8fe43c948873060c880d1a5',1,'main.c']]],

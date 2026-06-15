@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['table_5fto_5frobot_0',['table_to_robot',['../namespaceblock__detection.html#ab7565ee9d09595fd2ecba3b67dcfeebe',1,'block_detection.table_to_robot()'],['../namespacevoiceplusvision.html#a652e747fc6558a4ea2dde9f7e8bb0de8',1,'voiceplusvision.table_to_robot()']]],
-  ['tmc_5fread_1',['tmc_read',['../arm__control_8c.html#a576cc4e629ce0c7885eb337ad4da49e4',1,'arm_control.c']]],
-  ['tmc_5fwrite_2',['tmc_write',['../arm__control_8c.html#af6300c4c1948573167fef567f7fdc9bd',1,'arm_control.c']]]
+  ['send_5fpick_0',['send_pick',['../namespaceblock__detection.html#adf36f11a8aa5d8434cabf6501e18e2c9',1,'block_detection.send_pick()'],['../namespacevoiceplusvision.html#afe2f4989dd0901a672e49ef04c484cdd',1,'voiceplusvision.send_pick()']]],
+  ['systemclock_5fconfig_1',['SystemClock_Config',['../main_8c.html#a70af21c671abfcc773614a9a4f63d920',1,'main.c']]]
 ];

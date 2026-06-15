@@ -99,27 +99,49 @@ $(document).ready(function(){initNavTree('namespacevoiceplusvision.html',''); in
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a5d024f8e2e565604e87f8ae61cada723"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevoiceplusvision.html#a5d024f8e2e565604e87f8ae61cada723">audio_cb</a> (indata, frames, time_, status)</td></tr>
+<tr class="memdesc:a5d024f8e2e565604e87f8ae61cada723"><td class="mdescLeft">&#160;</td><td class="mdescRight">sounddevice callback: push raw mic blocks onto the audio queue.  <br /></td></tr>
 <tr class="separator:a5d024f8e2e565604e87f8ae61cada723"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8600d088588126f77ff519afff264e93"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevoiceplusvision.html#a8600d088588126f77ff519afff264e93">recognizer_loop</a> ()</td></tr>
+<tr class="memdesc:a8600d088588126f77ff519afff264e93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vosk recognition thread with a color-only grammar.  <br /></td></tr>
 <tr class="separator:a8600d088588126f77ff519afff264e93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4894f87f3e62b4ded2bf842dddd6e422"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevoiceplusvision.html#a4894f87f3e62b4ded2bf842dddd6e422">compute_workspace_homography</a> (gray)</td></tr>
+<tr class="memdesc:a4894f87f3e62b4ded2bf842dddd6e422"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estimate the pixel -&gt; table-mm homography from a chessboard.  <br /></td></tr>
 <tr class="separator:a4894f87f3e62b4ded2bf842dddd6e422"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e89c0e8e689e99cda5f84e38519a9c4"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevoiceplusvision.html#a5e89c0e8e689e99cda5f84e38519a9c4">pixel_to_table</a> (u, v, <a class="el" href="namespacevoiceplusvision.html#a1a4d13125b0f24e0771ab4dd35b30c65">H</a>)</td></tr>
+<tr class="memdesc:a5e89c0e8e689e99cda5f84e38519a9c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map an image pixel to table-frame millimetres via homography.  <br /></td></tr>
 <tr class="separator:a5e89c0e8e689e99cda5f84e38519a9c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a652e747fc6558a4ea2dde9f7e8bb0de8"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevoiceplusvision.html#a652e747fc6558a4ea2dde9f7e8bb0de8">table_to_robot</a> (x, y, M)</td></tr>
+<tr class="memdesc:a652e747fc6558a4ea2dde9f7e8bb0de8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map a table-frame point into the robot base frame via affine M.  <br /></td></tr>
 <tr class="separator:a652e747fc6558a4ea2dde9f7e8bb0de8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90c3c325387aafe17853c3899ef432c3"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevoiceplusvision.html#a90c3c325387aafe17853c3899ef432c3">make_mask</a> (hsv, color_def)</td></tr>
+<tr class="memdesc:a90c3c325387aafe17853c3899ef432c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build a cleaned binary mask for one color definition.  <br /></td></tr>
 <tr class="separator:a90c3c325387aafe17853c3899ef432c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9590ad59f7362ce40f47c33ecc0e8ef2"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevoiceplusvision.html#a9590ad59f7362ce40f47c33ecc0e8ef2">detect_blocks</a> (frame)</td></tr>
+<tr class="memdesc:a9590ad59f7362ce40f47c33ecc0e8ef2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detect every enabled color in a frame (for the live overlay).  <br /></td></tr>
 <tr class="separator:a9590ad59f7362ce40f47c33ecc0e8ef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acac203b16bd9073ca06f3e4e42a36d50"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevoiceplusvision.html#acac203b16bd9073ca06f3e4e42a36d50">best_detection</a> (detections, color)</td></tr>
+<tr class="memdesc:acac203b16bd9073ca06f3e4e42a36d50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pick the largest detected blob of a given color.  <br /></td></tr>
 <tr class="separator:acac203b16bd9073ca06f3e4e42a36d50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe2f4989dd0901a672e49ef04c484cdd"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevoiceplusvision.html#afe2f4989dd0901a672e49ef04c484cdd">send_pick</a> (ser, color, x, y, z)</td></tr>
+<tr class="memdesc:afe2f4989dd0901a672e49ef04c484cdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a pick command and wait for the MCU's ACK.  <br /></td></tr>
 <tr class="separator:afe2f4989dd0901a672e49ef04c484cdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a069a960bcfed818f0733523a0e206bd0"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevoiceplusvision.html#a069a960bcfed818f0733523a0e206bd0">query_robot_pos</a> (ser)</td></tr>
+<tr class="memdesc:a069a960bcfed818f0733523a0e206bd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ask the MCU for its current tip position via the 'WHERE' command.  <br /></td></tr>
+<tr class="separator:a069a960bcfed818f0733523a0e206bd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35025142b5494b62db55b9730df4feb6"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevoiceplusvision.html#a35025142b5494b62db55b9730df4feb6">calibrate_robot_transform</a> (ser, cap)</td></tr>
+<tr class="memdesc:a35025142b5494b62db55b9730df4feb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interactively build the table-&gt;robot affine from correspondences.  <br /></td></tr>
+<tr class="separator:a35025142b5494b62db55b9730df4feb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a271c8ca5bbfb52d07e9fa0616410c293"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevoiceplusvision.html#a271c8ca5bbfb52d07e9fa0616410c293">run_ik_demo</a> (ser)</td></tr>
+<tr class="memdesc:a271c8ca5bbfb52d07e9fa0616410c293"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run a scripted sequence of fixed reachable poses (no vision).  <br /></td></tr>
+<tr class="separator:a271c8ca5bbfb52d07e9fa0616410c293"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d1a1fc2abf2402756afe0ac7a8eec75"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevoiceplusvision.html#a4d1a1fc2abf2402756afe0ac7a8eec75">main</a> ()</td></tr>
+<tr class="memdesc:a4d1a1fc2abf2402756afe0ac7a8eec75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Program entry point: start voice thread and run the vision loop.  <br /></td></tr>
+<tr class="separator:a4d1a1fc2abf2402756afe0ac7a8eec75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a87ec06dc0a8e1a71fbcda9bff0ee7b54"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevoiceplusvision.html#a87ec06dc0a8e1a71fbcda9bff0ee7b54">ENABLED_COLORS</a> = [&quot;RED&quot;, &quot;BLUE&quot;]</td></tr>
+<tr class="memdesc:a87ec06dc0a8e1a71fbcda9bff0ee7b54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Colors live this run; drives both the voice grammar and which masks run.  <br /></td></tr>
 <tr class="separator:a87ec06dc0a8e1a71fbcda9bff0ee7b54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e924cd8d12af99c8b543efb27b272e3"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevoiceplusvision.html#a4e924cd8d12af99c8b543efb27b272e3">CHESSBOARD</a> = (8, 6)</td></tr>
 <tr class="separator:a4e924cd8d12af99c8b543efb27b272e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -152,8 +174,10 @@ Variables</h2></td></tr>
 <tr class="memitem:a558fa9b4a6a635c9f4a57adcf97e6e38"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevoiceplusvision.html#a558fa9b4a6a635c9f4a57adcf97e6e38">ROBOT_TF_FILE</a> = &quot;robot_transform.npz&quot;</td></tr>
 <tr class="separator:a558fa9b4a6a635c9f4a57adcf97e6e38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57ef26ab36898dca422af05944ee5181"><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevoiceplusvision.html#a57ef26ab36898dca422af05944ee5181">criteria</a> = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 30, 0.001)</td></tr>
+<tr class="memdesc:a57ef26ab36898dca422af05944ee5181"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sub-pixel corner-refinement termination criteria for the chessboard.  <br /></td></tr>
 <tr class="separator:a57ef26ab36898dca422af05944ee5181"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6bd73b0b1213960349b7a8109efe02b"><td class="memItemLeft" align="right" valign="top">dict&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevoiceplusvision.html#ad6bd73b0b1213960349b7a8109efe02b">COLOR_RANGES</a></td></tr>
+<tr class="memdesc:ad6bd73b0b1213960349b7a8109efe02b"><td class="mdescLeft">&#160;</td><td class="mdescRight">HSV color definitions (OpenCV: H 0-179, S/V 0-255).  <br /></td></tr>
 <tr class="separator:ad6bd73b0b1213960349b7a8109efe02b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a289eda2e27f1d3904a3bea793831a2d9"><td class="memItemLeft" align="right" valign="top">queue&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevoiceplusvision.html#a289eda2e27f1d3904a3bea793831a2d9">audio_q</a> = queue.Queue()</td></tr>
 <tr class="separator:a289eda2e27f1d3904a3bea793831a2d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -173,29 +197,11 @@ Variables</h2></td></tr>
 <tr class="separator:a1a4d13125b0f24e0771ab4dd35b30c65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab23a77cb18eb78a33331b489c7d9c55d"><td class="memItemLeft" align="right" valign="top">None&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevoiceplusvision.html#ab23a77cb18eb78a33331b489c7d9c55d">M_robot</a> = None</td></tr>
 <tr class="separator:ab23a77cb18eb78a33331b489c7d9c55d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2a36ed0330bafd047e26d56800b80b0"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacevoiceplusvision.html#af2a36ed0330bafd047e26d56800b80b0">ROBOT_CALIB_POINTS</a></td></tr>
+<tr class="memdesc:af2a36ed0330bafd047e26d56800b80b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Robot-frame (x,y) targets the arm is driven to during transform calibration.  <br /></td></tr>
+<tr class="separator:af2a36ed0330bafd047e26d56800b80b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">Voice + vision pick pipeline for the 3-DoF robot arm  (laptop side).
-
-Say a color ("red", "black", ...).  Vosk recognizes it (grammar-constrained),
-OpenCV finds the largest block of that color in the camera frame, the two-stage
-transform maps pixel -&gt; table -&gt; robot coordinates, and the pick is sent as an
-ASCII line over serial to the STM32 with an ACK handshake.  The MCU receives
-coordinates + does IK.
-
-Backbone is the chessboard/affine vision+serial pipeline; the only thing voice
-adds is *which* color the vision stage looks for on each command.
-
-Keys (preview window):
-    w - calibrate workspace homography (chessboard flat in view)
-    q - quit
-Voice:
-    say an enabled color to pick the largest block of that color.
-
-Deps:
-    pip install vosk sounddevice pyserial opencv-python numpy
-    Model: download e.g. vosk-model-small-en-us-0.15 and point MODEL_PATH at it.
-</pre> </div><h2 class="groupheader">Function Documentation</h2>
+<h2 class="groupheader">Function Documentation</h2>
 <a id="a5d024f8e2e565604e87f8ae61cada723" name="a5d024f8e2e565604e87f8ae61cada723"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5d024f8e2e565604e87f8ae61cada723">&#9670;&#160;</a></span>audio_cb()</h2>
 
@@ -234,6 +240,17 @@ Deps:
       </table>
 </div><div class="memdoc">
 
+<p>sounddevice callback: push raw mic blocks onto the audio queue. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">indata</td><td>Raw audio buffer from the input stream. </td></tr>
+    <tr><td class="paramname">frames</td><td>Number of frames in this block (unused). </td></tr>
+    <tr><td class="paramname">time_</td><td>Stream timestamps (unused). </td></tr>
+    <tr><td class="paramname">status</td><td>Stream status flags; printed if non-zero. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="acac203b16bd9073ca06f3e4e42a36d50" name="acac203b16bd9073ca06f3e4e42a36d50"></a>
@@ -261,7 +278,55 @@ Deps:
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Largest detected blob of the given color, or None.</pre> 
+
+<p>Pick the largest detected blob of a given color. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">detections</td><td>Output of <a class="el" href="namespacevoiceplusvision.html#a9590ad59f7362ce40f47c33ecc0e8ef2" title="Detect every enabled color in a frame (for the live overlay).">detect_blocks</a>. </td></tr>
+    <tr><td class="paramname">color</td><td>Color name to filter on. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The largest-area detection of that color, or None. </dd></dl>
+
+</div>
+</div>
+<a id="a35025142b5494b62db55b9730df4feb6" name="a35025142b5494b62db55b9730df4feb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35025142b5494b62db55b9730df4feb6">&#9670;&#160;</a></span>calibrate_robot_transform()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def voiceplusvision.calibrate_robot_transform </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>ser</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>cap</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Interactively build the table-&gt;robot affine from correspondences. </p>
+<p>For each point in <a class="el" href="namespacevoiceplusvision.html#af2a36ed0330bafd047e26d56800b80b0" title="Robot-frame (x,y) targets the arm is driven to during transform calibration.">ROBOT_CALIB_POINTS</a> the arm drives to a known robot (x,y); the user places a block under the tip and presses SPACE, and vision reads the block's table coordinate. The collected (table, robot) pairs are fit with cv.estimateAffine2D, saved to <a class="el" href="namespacevoiceplusvision.html#a558fa9b4a6a635c9f4a57adcf97e6e38">ROBOT_TF_FILE</a>, and the residual error is reported so a poor calibration is obvious.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ser</td><td>Open pyserial port (required to drive the arm). </td></tr>
+    <tr><td class="paramname">cap</td><td>Open cv.VideoCapture for reading the block position. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a4894f87f3e62b4ded2bf842dddd6e422" name="a4894f87f3e62b4ded2bf842dddd6e422"></a>
@@ -280,6 +345,15 @@ Deps:
       </table>
 </div><div class="memdoc">
 
+<p>Estimate the pixel -&gt; table-mm homography from a chessboard. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gray</td><td>Grayscale frame containing the calibration board lying flat. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>3x3 homography matrix, or None if the board was not found. </dd></dl>
+
 </div>
 </div>
 <a id="a9590ad59f7362ce40f47c33ecc0e8ef2" name="a9590ad59f7362ce40f47c33ecc0e8ef2"></a>
@@ -297,7 +371,38 @@ Deps:
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Detect every enabled color in the frame (used for the live overlay).</pre> 
+
+<p>Detect every enabled color in a frame (for the live overlay). </p>
+<p>Blurs and converts to HSV, masks each enabled color, and returns one record per contour above <a class="el" href="namespacevoiceplusvision.html#ab701d57c816ed64d1c89c831b6b33249">MIN_AREA</a> with its centroid, area, bounding box, and color.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frame</td><td>BGR camera frame. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>List of detection dicts (name, centroid, area, bbox, bgr). </dd></dl>
+
+</div>
+</div>
+<a id="a4d1a1fc2abf2402756afe0ac7a8eec75" name="a4d1a1fc2abf2402756afe0ac7a8eec75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d1a1fc2abf2402756afe0ac7a8eec75">&#9670;&#160;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def voiceplusvision.main </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Program entry point: start voice thread and run the vision loop. </p>
+<p>Opens the serial link (falling back to vision-only if absent) and the camera, launches the Vosk recognizer thread, then loops: reads frames, on each voice command detects the requested color and (if calibrated and connected) sends a pick. Hotkeys: 'w' workspace homography, 'c' table-&gt;robot calibration, 'd' scripted IK demo, 'q' quit. Releases all resources on exit. </p>
+
 </div>
 </div>
 <a id="a90c3c325387aafe17853c3899ef432c3" name="a90c3c325387aafe17853c3899ef432c3"></a>
@@ -325,6 +430,17 @@ Deps:
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Build a cleaned binary mask for one color definition. </p>
+<p>ORs together each HSV band in <code>color_def</code> (so multi-band colors like red work), then applies morphological open+close to remove speckle and fill gaps.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hsv</td><td>Frame already converted to HSV. </td></tr>
+    <tr><td class="paramname">color_def</td><td>Entry from <a class="el" href="namespacevoiceplusvision.html#ad6bd73b0b1213960349b7a8109efe02b" title="HSV color definitions (OpenCV: H 0-179, S/V 0-255).">COLOR_RANGES</a> (its "ranges" list is used). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Single-channel binary mask. </dd></dl>
 
 </div>
 </div>
@@ -360,6 +476,44 @@ Deps:
       </table>
 </div><div class="memdoc">
 
+<p>Map an image pixel to table-frame millimetres via homography. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">u</td><td>Pixel column. </td></tr>
+    <tr><td class="paramname">v</td><td>Pixel row. </td></tr>
+    <tr><td class="paramname">H</td><td>Pixel-&gt;table homography (3x3). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>(x, y) in table millimetres. </dd></dl>
+
+</div>
+</div>
+<a id="a069a960bcfed818f0733523a0e206bd0" name="a069a960bcfed818f0733523a0e206bd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a069a960bcfed818f0733523a0e206bd0">&#9670;&#160;</a></span>query_robot_pos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def voiceplusvision.query_robot_pos </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>ser</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ask the MCU for its current tip position via the 'WHERE' command. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ser</td><td>Open pyserial port. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>(x, y) in robot millimetres, or None on timeout. </dd></dl>
+
 </div>
 </div>
 <a id="a8600d088588126f77ff519afff264e93" name="a8600d088588126f77ff519afff264e93"></a>
@@ -376,7 +530,37 @@ Deps:
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Vosk with a color-only grammar; updates target_color on each command.</pre> 
+
+<p>Vosk recognition thread with a color-only grammar. </p>
+<p>Runs until <a class="el" href="namespacevoiceplusvision.html#a1e35b18a6aec57172877a9385d41fe40">stop_flag</a> is set, pulling audio from <a class="el" href="namespacevoiceplusvision.html#a289eda2e27f1d3904a3bea793831a2d9">audio_q</a>. On a recognized color it updates the global <a class="el" href="namespacevoiceplusvision.html#a87b2c0f8538f2ea50678022498bedb18">target_color</a> and sets <a class="el" href="namespacevoiceplusvision.html#a9ef0ceae3a87caa9cf7044c8489981f1">new_command</a> so the vision loop performs one detection. The grammar is constrained to the enabled colors plus "[unk]" so non-color speech is rejected. </p>
+
+</div>
+</div>
+<a id="a271c8ca5bbfb52d07e9fa0616410c293" name="a271c8ca5bbfb52d07e9fa0616410c293"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a271c8ca5bbfb52d07e9fa0616410c293">&#9670;&#160;</a></span>run_ik_demo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def voiceplusvision.run_ik_demo </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>ser</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Run a scripted sequence of fixed reachable poses (no vision). </p>
+<p>Streams known-good Cartesian waypoints to the arm to show smooth coordinated motion and the gripper without needing calibration. Each move waits for DONE before the next. Bound to the 'd' key in the main loop.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ser</td><td>Open pyserial port. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="afe2f4989dd0901a672e49ef04c484cdd" name="afe2f4989dd0901a672e49ef04c484cdd"></a>
@@ -422,7 +606,21 @@ Deps:
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">PC-&gt;MCU 'M,&lt;COLOR&gt;,&lt;X&gt;,&lt;Y&gt;,&lt;Z&gt;\\n'  |  MCU-&gt;PC 'DONE'/'ERR'.</pre> 
+
+<p>Send a pick command and wait for the MCU's ACK. </p>
+<p>Frames 'M,&lt;COLOR&gt;,&lt;X&gt;,&lt;Y&gt;,&lt;Z&gt;\n', flushes input, transmits, and waits up to <a class="el" href="namespacevoiceplusvision.html#a9851cfac8de6d43181afbde6a8243e63">ACK_TIMEOUT_S</a> for 'DONE' (success) or 'ERR' (unreachable / rejected).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ser</td><td>Open pyserial port. </td></tr>
+    <tr><td class="paramname">color</td><td>Color label sent with the command. </td></tr>
+    <tr><td class="paramname">x</td><td>Robot-frame X (mm). </td></tr>
+    <tr><td class="paramname">y</td><td>Robot-frame Y (mm). </td></tr>
+    <tr><td class="paramname">z</td><td>Robot-frame Z (mm). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True on 'DONE', False on 'ERR' or timeout. </dd></dl>
+
 </div>
 </div>
 <a id="a652e747fc6558a4ea2dde9f7e8bb0de8" name="a652e747fc6558a4ea2dde9f7e8bb0de8"></a>
@@ -456,6 +654,17 @@ Deps:
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Map a table-frame point into the robot base frame via affine M. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Table-frame X (mm). </td></tr>
+    <tr><td class="paramname">y</td><td>Table-frame Y (mm). </td></tr>
+    <tr><td class="paramname">M</td><td>Table-&gt;robot affine (3x3, last row [0,0,1]). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>(x, y) in robot-frame millimetres. </dd></dl>
 
 </div>
 </div>
@@ -581,6 +790,9 @@ Deps:
 <div class="line"><span class="lineno">   24</span>    <span class="comment"># },</span></div>
 <div class="line"><span class="lineno">   25</span>}</div>
 </div><!-- fragment -->
+<p>HSV color definitions (OpenCV: H 0-179, S/V 0-255). </p>
+<p>RED wraps the hue circle, so it uses two bands. BLACK (commented out) is a low-V band rather than a hue. The same cv.inRange logic handles every entry. </p>
+
 </div>
 </div>
 <a id="a57ef26ab36898dca422af05944ee5181" name="a57ef26ab36898dca422af05944ee5181"></a>
@@ -594,6 +806,8 @@ Deps:
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Sub-pixel corner-refinement termination criteria for the chessboard. </p>
 
 </div>
 </div>
@@ -636,6 +850,9 @@ Deps:
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Colors live this run; drives both the voice grammar and which masks run. </p>
+<p>Must be keys in COLOR_RANGES. </p>
 
 </div>
 </div>
@@ -762,6 +979,28 @@ Deps:
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="af2a36ed0330bafd047e26d56800b80b0" name="af2a36ed0330bafd047e26d56800b80b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2a36ed0330bafd047e26d56800b80b0">&#9670;&#160;</a></span>ROBOT_CALIB_POINTS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">list voiceplusvision.ROBOT_CALIB_POINTS</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line"><span class="lineno">    1</span>=  [</div>
+<div class="line"><span class="lineno">    2</span>    (250.0,  30.0),</div>
+<div class="line"><span class="lineno">    3</span>    (250.0,  50.0),</div>
+<div class="line"><span class="lineno">    4</span>    (300.0,  30.0),</div>
+<div class="line"><span class="lineno">    5</span>    (300.0,  50.0),</div>
+<div class="line"><span class="lineno">    6</span>]</div>
+</div><!-- fragment -->
+<p>Robot-frame (x,y) targets the arm is driven to during transform calibration. </p>
 
 </div>
 </div>

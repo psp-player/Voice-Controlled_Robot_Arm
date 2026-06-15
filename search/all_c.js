@@ -34,7 +34,7 @@ var searchData=
   ['m3_5fen_5fgpio_5fport_31',['M3_EN_GPIO_Port',['../main_8h.html#aac33d3d79eee3377b015860dff621c5b',1,'main.h']]],
   ['m3_5fen_5fpin_32',['M3_EN_Pin',['../main_8h.html#a2369c5cbfaddf7e7fe885967957c2d3c',1,'main.h']]],
   ['m_5frobot_33',['M_robot',['../namespaceblock__detection.html#ac790e397695a9570adfb8523ad8314da',1,'block_detection.M_robot()'],['../namespacevoiceplusvision.html#ab23a77cb18eb78a33331b489c7d9c55d',1,'voiceplusvision.M_robot()']]],
-  ['main_34',['main',['../main_8c.html#a840291bc02cba5474a4cb46a9b9566fe',1,'main.c']]],
+  ['main_34',['main',['../main_8c.html#a840291bc02cba5474a4cb46a9b9566fe',1,'main():&#160;main.c'],['../namespacevoiceplusvision.html#a4d1a1fc2abf2402756afe0ac7a8eec75',1,'voiceplusvision.main()']]],
   ['main_2ec_35',['main.c',['../main_8c.html',1,'']]],
   ['main_2eh_36',['main.h',['../main_8h.html',1,'']]],
   ['make_5fmask_37',['make_mask',['../namespacevoiceplusvision.html#a90c3c325387aafe17853c3899ef432c3',1,'voiceplusvision.make_mask()'],['../namespaceblock__detection.html#a682da8b04eddf9c38cec1f96351042f1',1,'block_detection.make_mask()']]],

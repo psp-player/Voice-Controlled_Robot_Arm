@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['x_0',['x',['../namespaceblock__detection.html#a40265d9576f43750a8ea3382fed7cfa1',1,'block_detection']]]
+  ['w_0',['w',['../namespaceblock__detection.html#acfe92d47fb220725d9a70dd2d38c671d',1,'block_detection']]]
 ];

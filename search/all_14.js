@@ -1,6 +1,19 @@
 var searchData=
 [
-  ['v_5fstart_5fhz_0',['V_START_HZ',['../arm__control_8c.html#a05cdc26d9ba65cedb5a08c0faaf61c5d',1,'arm_control.c']]],
-  ['voiceplusvision_1',['voiceplusvision',['../namespacevoiceplusvision.html',1,'']]],
-  ['voiceplusvision_2epy_2',['voiceplusvision.py',['../voiceplusvision_8py.html',1,'']]]
+  ['usbd_5fcdc_5fif_0',['USBD_CDC_IF',['../group__USBD__CDC__IF.html',1,'']]],
+  ['usbd_5fcdc_5fif_2ec_1',['usbd_cdc_if.c',['../usbd__cdc__if_8c.html',1,'']]],
+  ['usbd_5fcdc_5fif_2eh_2',['usbd_cdc_if.h',['../usbd__cdc__if_8h.html',1,'']]],
+  ['usbd_5fcdc_5fif_5fexported_5fdefines_3',['USBD_CDC_IF_Exported_Defines',['../group__USBD__CDC__IF__Exported__Defines.html',1,'']]],
+  ['usbd_5fcdc_5fif_5fexported_5ffunctionsprototype_4',['USBD_CDC_IF_Exported_FunctionsPrototype',['../group__USBD__CDC__IF__Exported__FunctionsPrototype.html',1,'']]],
+  ['usbd_5fcdc_5fif_5fexported_5fmacros_5',['USBD_CDC_IF_Exported_Macros',['../group__USBD__CDC__IF__Exported__Macros.html',1,'']]],
+  ['usbd_5fcdc_5fif_5fexported_5ftypes_6',['USBD_CDC_IF_Exported_Types',['../group__USBD__CDC__IF__Exported__Types.html',1,'']]],
+  ['usbd_5fcdc_5fif_5fexported_5fvariables_7',['USBD_CDC_IF_Exported_Variables',['../group__USBD__CDC__IF__Exported__Variables.html',1,'']]],
+  ['usbd_5fcdc_5fif_5fprivate_5fdefines_8',['USBD_CDC_IF_Private_Defines',['../group__USBD__CDC__IF__Private__Defines.html',1,'']]],
+  ['usbd_5fcdc_5fif_5fprivate_5ffunctionprototypes_9',['USBD_CDC_IF_Private_FunctionPrototypes',['../group__USBD__CDC__IF__Private__FunctionPrototypes.html',1,'']]],
+  ['usbd_5fcdc_5fif_5fprivate_5fmacros_10',['USBD_CDC_IF_Private_Macros',['../group__USBD__CDC__IF__Private__Macros.html',1,'']]],
+  ['usbd_5fcdc_5fif_5fprivate_5ftypesdefinitions_11',['USBD_CDC_IF_Private_TypesDefinitions',['../group__USBD__CDC__IF__Private__TypesDefinitions.html',1,'']]],
+  ['usbd_5fcdc_5fif_5fprivate_5fvariables_12',['USBD_CDC_IF_Private_Variables',['../group__USBD__CDC__IF__Private__Variables.html',1,'']]],
+  ['usbd_5finterface_5ffops_5ffs_13',['USBD_Interface_fops_FS',['../group__USBD__CDC__IF__Exported__Variables.html#ga99394ed19b774f171df96c2848c411ed',1,'USBD_Interface_fops_FS():&#160;usbd_cdc_if.c'],['../group__USBD__CDC__IF.html#ga99394ed19b774f171df96c2848c411ed',1,'USBD_Interface_fops_FS():&#160;usbd_cdc_if.c']]],
+  ['userrxbufferfs_14',['UserRxBufferFS',['../group__USBD__CDC__IF__Private__Variables.html#ga1e37e6616e6affe5acf9c0befd063f6a',1,'usbd_cdc_if.c']]],
+  ['usertxbufferfs_15',['UserTxBufferFS',['../group__USBD__CDC__IF__Private__Variables.html#gad48fea85cdb7aed49bf62140a52f23e0',1,'usbd_cdc_if.c']]]
 ];

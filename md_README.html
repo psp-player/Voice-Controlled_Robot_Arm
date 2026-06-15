@@ -179,7 +179,7 @@ Main Loop &amp; Intelligence</h2>
 </li>
 <li>Reply <code>DONE</code> on success or <code>ERR</code> on an unreachable target / bad command.</li>
 </ol>
-<p>The higher-level decision making — <em>which</em> color to pick and <em>where</em> it is — runs on the host (<code><a class="el" href="voiceplusvision_8py.html">voiceplusvision.py</a></code>): a Vosk recognizer constrained to a small color grammar sets the target color, OpenCV finds the largest matching blob, and the two-stage coordinate transform produces the robot-frame target that gets sent down the wire.</p>
+<p>The higher-level decision making — <em>which</em> color to pick and <em>where</em> it is — runs on the host (<code><a class="el" href="voiceplusvision_8py.html" title="Voice + vision pick pipeline (host side): say a color, and the largest block of that color is located...">voiceplusvision.py</a></code>): a Vosk recognizer constrained to a small color grammar sets the target color, OpenCV finds the largest matching blob, and the two-stage coordinate transform produces the robot-frame target that gets sent down the wire.</p>
 <hr  />
 <h1><a class="anchor" id="autotoc_md17"></a>
 Mathematical &amp; Physical Modeling</h1>
