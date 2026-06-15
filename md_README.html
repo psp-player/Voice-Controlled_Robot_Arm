@@ -98,10 +98,10 @@ $(document).ready(function(){initNavTree('md_README.html',''); initResizable(); 
 <h3><a class="anchor" id="autotoc_md1"></a>
 Overview</h3>
 <div class="image">
-<img src="final_arm.jpg" alt="" width="65%"/>
+<img src="final_arm.jpg" alt="" width="50%"/>
 <div class="caption">
 Robot Arm</div></div>
-    <p>Figure 1. Robot Arm Structure </p>
+<p>Figure 1. Robot Arm Structure </p>
 <p>This page covers the documentation and codebase for a 3 degree-of-freedom (RRR) robotic arm that picks colored blocks on spoken command. A spoken color is recognized on the host PC, computer vision locates the matching block, the block's location is transformed into the arm's coordinate frame, and the target is streamed over USB to an STM32, which solves inverse kinematics and drives three closed-loop stepper joints plus a gripper to complete the pick. The arm runs using 2 NEMA 17 stepper motors and a NEMA 23 stepper motor, all driven by 3 TMC2240 driver + motion controller chips. It has a cheap servo motor for the end effector. The microcontroller is a STM32L4A6ZG (144 pin).</p>
 <p>More code details hosted at the documentation page: (<a href="https://psp-player.github.io/ME507/">page link</a>).</p>
 <hr  />
