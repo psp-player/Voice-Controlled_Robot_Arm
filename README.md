@@ -102,7 +102,7 @@ A custom 4-layer board carries the MCU, the three TMC2240 drivers, power regulat
 The RRR linkage uses link lengths of **D1 = 145 mm** (base height), **L1 = 170 mm** (upper arm), and **L2 = 245 mm** (forearm, measured to the tool point), giving a workspace of roughly L1 + L2 from the shoulder pivot.
 
 <!-- TODO: add a CAD render and a labeled link-length / DOF diagram -->
-![Figure 8. Robot Arm Cad](./images/Robot arm cad.jpg)
+![Figure 8. Robot Arm Cad](./images/Robot_arm_cad.jpg)
 <!-- ![CAD render](docs/images/cad_render.png) -->
 
 ---
