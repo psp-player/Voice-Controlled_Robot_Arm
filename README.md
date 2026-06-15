@@ -248,6 +248,8 @@ Set `SERIAL_PORT` near the top of the script to the arm's COM port. With the cam
 
 ---
 
+Overall, the robot worked as designed, but the performance wasn't great. There were a few pitfalls in this project, but we were able to overcome them. Many of the problems we encountered, had a fix that required tweaks of either the mechanical design or the electrical (pcb) design. The biggest issue we had gave us the most problems was that we weren't able to get enough torque from the shoulder joint. Time management is crucial in project planning, especially when ordering parts and having them manufactured. Our project was ambitious for this class, so we had to reduce the scope of it when we realized some of it wasn't going to be possible to achieve in the time frame we had. 
+
 ![Figure 12. Robot Arm Wave](images/final_arm2.JPG)
 
 <!-- TODO: add team member names / acknowledgments / course info -->
