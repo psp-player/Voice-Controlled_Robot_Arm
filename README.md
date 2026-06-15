@@ -203,12 +203,33 @@ ME507/
 
 ## Design Iteration & Challenges
 
+### Design Iteration
 
-![Figure 11. Breadboard Prototype](images/Breadboard.HEIC)
+To get ahead of the lengthy manufacturing and shipping times, the PCB was mocked up using a STM32 Nucleo Board (with an STM32L4A6ZG) connected to a breadboard with 3 DRV8825 motor drivers and a 24V 5A PSU. 
+
+![Figure 10. Breadboard Prototype](images/Breadboard.jpg)
+
+This proved useful for determining that the shoulder NEMA 17 motor produced insufficient torque.
 
 Video of NEMA 17 Robot Arm Failure:
 
 [![Robot Arm Failure](https://img.youtube.com/vi/QQMs0cIg0x4/maxresdefault.jpg)](https://youtu.be/QQMs0cIg0x4)
+
+Due to time restrictions, it was decided to use a NEMA 23 at the shoulder joint instead of a gear system for more torque. Unfortunately, the PCB's TMC2240 motor drivers cap out at 2.1A RMS, a number substantially below the max 4.2A of a NEMA 23 stepper motor. This meant that while the motor did improve the torque issue of the arm somewhat, a more permenant solution would've been to redesign the shoulder joint to accomodate a gear train for a NEMA 17 stepper.
+
+### PCB Challenges
+
+When purchasing the PCB, the MCU, crystal, and ferrite beads weren't available at JLPCB. To overcome this, it was decided to pruchase these parts from Mouser Electronics and hand solder them when the board arrived. The outstanding components were soldered on using a heat gun and lead-free solder paste.
+
+![Figure 11. Breadboard Prototype](images/mcu.jpg)
+
+![Figure 12. Breadboard Prototype](images/crystal.jpg)
+
+![Figure 13. Breadboard Prototype](images/ferrite.jpg)
+
+Apart from some software hurdles (like matching pinouts to the PCB) and SPI communication issues regarding baud and data frame size, the board was entirely functional and worked as intended.
+
+Additional note: There were some tolerancing issues with the 3d prints, but these were alleviated with some intensive dremel work, reprints, and in the case of the end effector, wire ensuring gear meshing and torque transmission (pictured in Figure 9).
 
 ---
 
