@@ -190,12 +190,19 @@ Figure 7. PCB Layout</div></div>
 <img src="pcbboard.png" alt=""/>
 <div class="caption">
 Figure 8. PCB 3D Render</div></div>
-    <h2><a class="anchor" id="autotoc_md13"></a>
+    <p><img src="./images/pcb.jpg" alt="Figure 9. Actual PCB" class="inline"/></p>
+<h2><a class="anchor" id="autotoc_md13"></a>
 Mechanical Design</h2>
 <p>The RRR linkage uses link lengths of <b>D1 = 145 mm</b> (base height), <b>L1 = 170 mm</b> (upper arm), and <b>L2 = 245 mm</b> (forearm, measured to the tool point), giving a workspace of roughly L1 + L2 from the shoulder pivot.</p>
-<p><img src="Robot_arm_cad.jpg" alt="" class="inline" title="Figure 9. Robot Arm Cad"/>    </p>
-<p><img src="end_effector1.gif" alt="" class="inline" title="Figure 10. Robot Arm End Effector"/>    </p>
-<hr  />
+<div class="image">
+<img src="Robot_arm_cad.jpg" alt=""/>
+<div class="caption">
+Figure 10. Robot Arm Cad</div></div>
+    <div class="image">
+<img src="end_effector1.gif" alt=""/>
+<div class="caption">
+Figure 11. Robot Arm End Effector</div></div>
+    <hr  />
 <h1><a class="anchor" id="autotoc_md15"></a>
 Software Implementation</h1>
 <p><b>Language &amp; structure.</b> C on the STM32 HAL. All motion logic lives in one module (<code><a class="el" href="arm__control_8c.html" title="3-DoF (RRR) arm: inverse/forward kinematics, coordinated stepper motion with an acceleration ramp,...">arm_control.c</a></code>) behind a small Cartesian API (<code><a class="el" href="arm__control_8h.html" title="Public API for the 3-DoF (RRR) robotic arm: kinematics, motion, TMC2240 stepper driver bring-up,...">arm_control.h</a></code>); CubeMX's <code><a class="el" href="main_8c.html" title=": Voice &amp; vision controlled 3-DoF arm — command loop and peripheral init. Receives ASCII pick command...">main.c</a></code> handles peripheral setup. Motion state is kept <code>static</code> and module-private rather than global.</p>
@@ -274,7 +281,7 @@ Design Iteration</h2>
 <div class="image">
 <img src="Breadboard.jpg" alt=""/>
 <div class="caption">
-Figure 10. Breadboard Prototype</div></div>
+Figure 11. Breadboard Prototype</div></div>
     <p>This proved useful for determining that the shoulder NEMA 17 motor produced insufficient torque.</p>
 <p>Video of NEMA 17 Robot Arm Failure:</p>
 <p><a href="https://youtu.be/QQMs0cIg0x4"><img src="https://img.youtube.com/vi/QQMs0cIg0x4/maxresdefault.jpg" alt="Robot Arm Failure" class="inline"/></a></p>
@@ -285,7 +292,7 @@ PCB Challenges</h2>
 <div class="image">
 <img src="mcu.JPG" alt=""/>
 <div class="caption">
-Figure 11. MCU Solder Job</div></div>
+Figure 12. MCU Solder Job</div></div>
     <div class="image">
 <img src="crystal.JPG" alt=""/>
 <div class="caption">
@@ -293,7 +300,7 @@ Figure 12. Crystal Solder Job</div></div>
     <div class="image">
 <img src="ferrite.JPG" alt=""/>
 <div class="caption">
-Figure 13. Ferrite Bead Solder Job</div></div>
+Figure 14. Ferrite Bead Solder Job</div></div>
     <p>Apart from some software hurdles (like matching pinouts to the PCB) and SPI communication issues regarding baud and data frame size, the board was entirely functional and worked as intended.</p>
 <p>Additional note: There were some tolerancing issues with the 3d prints, but these were alleviated with some intensive dremel work, reprints, and in the case of the end effector, wire ensuring gear meshing and torque transmission (pictured in Figure 9).</p>
 <hr  />
@@ -313,7 +320,7 @@ Host pipeline (Python)</h2>
 <div class="image">
 <img src="final_arm2.JPG" alt=""/>
 <div class="caption">
-Figure 12. Robot Arm Wave</div></div>
+Figure 15. Robot Arm Wave</div></div>
     <p><em>Cal Poly — ME 507</em> </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
