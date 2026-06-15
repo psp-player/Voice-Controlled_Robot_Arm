@@ -1,4 +1,15 @@
 #!/usr/bin/env python3
+## @defgroup python_host Python Host Pipeline
+#  @brief Laptop-side voice recognition, computer vision, and the two-stage
+#         pixel -> table -> robot calibration that feeds Cartesian pick targets
+#         to the STM32 over serial. Comprises three scripts: live voice+vision
+#         picking, vision-only detect/sort, and camera intrinsic calibration.
+
+## @file voiceplusvision.py
+#  @brief Voice + vision pick pipeline (host side): say a color, and the largest
+#         block of that color is located, transformed into the robot frame, and
+#         sent to the arm with an ACK handshake.
+#  @ingroup python_host
 """
 Voice + vision pick pipeline for the 3-DoF robot arm  (laptop side).
 
@@ -34,35 +45,35 @@ import serial                       # pip install pyserial
 from vosk import Model, KaldiRecognizer
 
 # ----------------------------- CONFIG -----------------------------
-# Which colors are live this run. Drives both the voice grammar and which
-# masks get computed. Must be keys in COLOR_RANGES below.
+## Colors live this run; drives both the voice grammar and which masks run.
+#  Must be keys in COLOR_RANGES.
 ENABLED_COLORS = ["RED", "BLUE"]
 
-CHESSBOARD     = (8, 6)
-SQUARE_SIZE_MM = 25.0
-MIN_AREA       = 800
-KERNEL         = np.ones((5, 5), np.uint8)
-PICK_Z_MM      = 100.0                # approach height in robot frame
+CHESSBOARD     = (8, 6)              ##< Inner-corner count of the calibration board.
+SQUARE_SIZE_MM = 25.0               ##< Physical chessboard square size (mm).
+MIN_AREA       = 800                ##< Minimum contour area (px) to count as a block.
+KERNEL         = np.ones((5, 5), np.uint8)  ##< Morphological kernel for mask cleanup.
+PICK_Z_MM      = 100.0              ##< Approach height in the robot frame (mm).
 
-SERIAL_PORT    = "COM8"             # "/dev/ttyACM0" on Linux/Mac
-BAUD           = 115200
-CAM_INDEX      = 0
-ACK_TIMEOUT_S  = 15.0               # how long to wait for the MCU to report DONE
+SERIAL_PORT    = "COM8"             ##< STM32 virtual COM port ("/dev/ttyACM0" on Linux/Mac).
+BAUD           = 115200             ##< Serial baud rate.
+CAM_INDEX      = 0                  ##< OpenCV camera index.
+ACK_TIMEOUT_S  = 15.0               ##< Seconds to wait for the MCU to report DONE.
 
-SCRIPT_DIR     = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH     = os.path.join(SCRIPT_DIR, "vosk-model-small-en-us-0.15")
-SAMPLE_RATE    = 16000
+SCRIPT_DIR     = os.path.dirname(os.path.abspath(__file__))  ##< Folder of this script.
+MODEL_PATH     = os.path.join(SCRIPT_DIR, "vosk-model-small-en-us-0.15")  ##< Vosk model dir.
+SAMPLE_RATE    = 16000             ##< Microphone sample rate (Hz) for Vosk.
 
-CALIB_FILE      = "camera_calib.npz"
-HOMOGRAPHY_FILE = "workspace_homography.npz"
-ROBOT_TF_FILE   = "robot_transform.npz"
+CALIB_FILE      = "camera_calib.npz"        ##< Saved camera intrinsics (mtx, dist).
+HOMOGRAPHY_FILE = "workspace_homography.npz"  ##< Saved pixel->table homography (H).
+ROBOT_TF_FILE   = "robot_transform.npz"     ##< Saved table->robot affine (M).
 
+## Sub-pixel corner-refinement termination criteria for the chessboard.
 criteria = (cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER, 30, 0.001)
 
-# HSV ranges. OpenCV: H 0-179, S/V 0-255.
-# RED wraps the hue circle -> two bands. BLACK is not a hue -> low-V band
-# (any H/S, V capped); tune the V ceiling (60) to your lighting. Same
-# cv.inRange logic handles both, so black is just another entry here.
+## HSV color definitions (OpenCV: H 0-179, S/V 0-255).
+#  RED wraps the hue circle, so it uses two bands. BLACK (commented out) is a
+#  low-V band rather than a hue. The same cv.inRange logic handles every entry.
 COLOR_RANGES = {
     "RED": {
         "ranges": [
@@ -95,23 +106,35 @@ COLOR_RANGES = {
 # ------------------------------------------------------------------
 
 # Shared state between the voice thread and the vision loop
-audio_q      = queue.Queue()
-target_color = None                 # set by voice thread, e.g. "RED"
-new_command  = threading.Event()
-stop_flag    = threading.Event()
+audio_q      = queue.Queue()        ##< Thread-safe queue of raw mic audio blocks.
+target_color = None                 ##< Color requested by the voice thread (e.g. "RED").
+new_command  = threading.Event()    ##< Set when a fresh voice command is ready.
+stop_flag    = threading.Event()    ##< Set on shutdown to stop the voice thread.
 
 
 # -----------------------------
 # Voice (Vosk) thread
 # -----------------------------
 def audio_cb(indata, frames, time_, status):
+    """! @brief sounddevice callback: push raw mic blocks onto the audio queue.
+    @param indata  Raw audio buffer from the input stream.
+    @param frames  Number of frames in this block (unused).
+    @param time_   Stream timestamps (unused).
+    @param status  Stream status flags; printed if non-zero.
+    """
     if status:
         print(status, flush=True)
     audio_q.put(bytes(indata))
 
 
 def recognizer_loop():
-    """Vosk with a color-only grammar; updates target_color on each command."""
+    """! @brief Vosk recognition thread with a color-only grammar.
+
+    Runs until ::stop_flag is set, pulling audio from ::audio_q. On a recognized
+    color it updates the global ::target_color and sets ::new_command so the
+    vision loop performs one detection. The grammar is constrained to the enabled
+    colors plus "[unk]" so non-color speech is rejected.
+    """
     global target_color
     spoken = [c.lower() for c in ENABLED_COLORS]
     grammar = json.dumps(spoken + ["[unk]"])        # [unk] lets it reject non-colors
@@ -139,16 +162,16 @@ def recognizer_loop():
 # -----------------------------
 # Load saved calibration
 # -----------------------------
-mtx = dist = None
+mtx = dist = None                   ##< Camera intrinsics (matrix, distortion) once loaded.
 if os.path.exists(CALIB_FILE):
     data = np.load(CALIB_FILE)
     mtx, dist = data["mtx"], data["dist"]
 
-H = None
+H = None                            ##< Pixel->table homography once loaded/calibrated.
 if os.path.exists(HOMOGRAPHY_FILE):
     H = np.load(HOMOGRAPHY_FILE)["H"]
 
-M_robot = None
+M_robot = None                      ##< Table->robot affine transform once loaded/calibrated.
 if os.path.exists(ROBOT_TF_FILE):
     M_robot = np.load(ROBOT_TF_FILE)["M"]
 
@@ -157,6 +180,10 @@ if os.path.exists(ROBOT_TF_FILE):
 # Geometry helpers
 # -----------------------------
 def compute_workspace_homography(gray):
+    """! @brief Estimate the pixel -> table-mm homography from a chessboard.
+    @param gray  Grayscale frame containing the calibration board lying flat.
+    @return 3x3 homography matrix, or None if the board was not found.
+    """
     found, corners = cv.findChessboardCorners(gray, CHESSBOARD, None)
     if not found:
         return None
@@ -169,12 +196,24 @@ def compute_workspace_homography(gray):
 
 
 def pixel_to_table(u, v, H):
+    """! @brief Map an image pixel to table-frame millimetres via homography.
+    @param u  Pixel column.
+    @param v  Pixel row.
+    @param H  Pixel->table homography (3x3).
+    @return (x, y) in table millimetres.
+    """
     w = H @ np.array([u, v, 1.0])
     w /= w[2]
     return float(w[0]), float(w[1])
 
 
 def table_to_robot(x, y, M):
+    """! @brief Map a table-frame point into the robot base frame via affine M.
+    @param x  Table-frame X (mm).
+    @param y  Table-frame Y (mm).
+    @param M  Table->robot affine (3x3, last row [0,0,1]).
+    @return (x, y) in robot-frame millimetres.
+    """
     p = M @ np.array([x, y, 1.0])
     return float(p[0]), float(p[1])
 
@@ -183,6 +222,15 @@ def table_to_robot(x, y, M):
 # Detection
 # -----------------------------
 def make_mask(hsv, color_def):
+    """! @brief Build a cleaned binary mask for one color definition.
+
+    ORs together each HSV band in @p color_def (so multi-band colors like red
+    work), then applies morphological open+close to remove speckle and fill gaps.
+
+    @param hsv        Frame already converted to HSV.
+    @param color_def  Entry from ::COLOR_RANGES (its "ranges" list is used).
+    @return Single-channel binary mask.
+    """
     mask = None
     for lower, upper in color_def["ranges"]:
         part = cv.inRange(hsv, lower, upper)
@@ -193,7 +241,14 @@ def make_mask(hsv, color_def):
 
 
 def detect_blocks(frame):
-    """Detect every enabled color in the frame (used for the live overlay)."""
+    """! @brief Detect every enabled color in a frame (for the live overlay).
+
+    Blurs and converts to HSV, masks each enabled color, and returns one record
+    per contour above ::MIN_AREA with its centroid, area, bounding box, and color.
+
+    @param frame  BGR camera frame.
+    @return List of detection dicts (name, centroid, area, bbox, bgr).
+    """
     blurred = cv.GaussianBlur(frame, (5, 5), 0)
     hsv = cv.cvtColor(blurred, cv.COLOR_BGR2HSV)
     detections = []
@@ -219,7 +274,11 @@ def detect_blocks(frame):
 
 
 def best_detection(detections, color):
-    """Largest detected blob of the given color, or None."""
+    """! @brief Pick the largest detected blob of a given color.
+    @param detections  Output of ::detect_blocks.
+    @param color       Color name to filter on.
+    @return The largest-area detection of that color, or None.
+    """
     hits = [d for d in detections if d["name"] == color]
     return max(hits, key=lambda d: d["area"]) if hits else None
 
@@ -228,7 +287,18 @@ def best_detection(detections, color):
 # Serial link to STM32
 # -----------------------------
 def send_pick(ser, color, x, y, z):
-    """PC->MCU 'M,<COLOR>,<X>,<Y>,<Z>\\n'  |  MCU->PC 'DONE'/'ERR'."""
+    """! @brief Send a pick command and wait for the MCU's ACK.
+
+    Frames 'M,<COLOR>,<X>,<Y>,<Z>\\n', flushes input, transmits, and waits up to
+    ::ACK_TIMEOUT_S for 'DONE' (success) or 'ERR' (unreachable / rejected).
+
+    @param ser    Open pyserial port.
+    @param color  Color label sent with the command.
+    @param x      Robot-frame X (mm).
+    @param y      Robot-frame Y (mm).
+    @param z      Robot-frame Z (mm).
+    @return True on 'DONE', False on 'ERR' or timeout.
+    """
     line = f"M,{color},{x:.2f},{y:.2f},{z:.2f}\n"
     ser.reset_input_buffer()
     ser.write(line.encode("ascii"))
@@ -247,7 +317,8 @@ def send_pick(ser, color, x, y, z):
     print("   (timed out waiting for MCU)")
     return False
 
-ROBOT_CALIB_POINTS = [   # robot-frame (x,y) targets you'll drive the arm to
+## Robot-frame (x,y) targets the arm is driven to during transform calibration.
+ROBOT_CALIB_POINTS = [
     (250.0,  30.0),
     (250.0,  50.0),
     (300.0,  30.0),
@@ -255,7 +326,10 @@ ROBOT_CALIB_POINTS = [   # robot-frame (x,y) targets you'll drive the arm to
 ]
 
 def query_robot_pos(ser):
-    """Ask the MCU where its tip currently is. Returns (x,y) or None."""
+    """! @brief Ask the MCU for its current tip position via the 'WHERE' command.
+    @param ser  Open pyserial port.
+    @return (x, y) in robot millimetres, or None on timeout.
+    """
     ser.reset_input_buffer()
     ser.write(b"WHERE\n")
     deadline = time.time() + 3.0
@@ -267,10 +341,16 @@ def query_robot_pos(ser):
     return None
 
 def calibrate_robot_transform(ser, cap):
-    """
-    Build M_robot (table-mm -> robot-mm) from N correspondences.
-    For each calibration point: arm drives to a known robot (x,y), you place a
-    block exactly under the tip, press SPACE, vision reads its table coord.
+    """! @brief Interactively build the table->robot affine from correspondences.
+
+    For each point in ::ROBOT_CALIB_POINTS the arm drives to a known robot (x,y);
+    the user places a block under the tip and presses SPACE, and vision reads the
+    block's table coordinate. The collected (table, robot) pairs are fit with
+    cv.estimateAffine2D, saved to ::ROBOT_TF_FILE, and the residual error is
+    reported so a poor calibration is obvious.
+
+    @param ser  Open pyserial port (required to drive the arm).
+    @param cap  Open cv.VideoCapture for reading the block position.
     """
     global M_robot
     if H is None:
@@ -360,8 +440,14 @@ def calibrate_robot_transform(ser, cap):
         print("   WARNING: >10mm error — re-check block placement accuracy.")
 
 def run_ik_demo(ser):
-    """Scripted IK demo — fixed reachable poses, no vision/calibration needed.
-    Shows smooth coordinated motion + gripper. Press 'd' to run."""
+    """! @brief Run a scripted sequence of fixed reachable poses (no vision).
+
+    Streams known-good Cartesian waypoints to the arm to show smooth coordinated
+    motion and the gripper without needing calibration. Each move waits for DONE
+    before the next. Bound to the 'd' key in the main loop.
+
+    @param ser  Open pyserial port.
+    """
     if ser is None:
         print("[demo] No serial link — can't run demo.")
         return
@@ -397,6 +483,14 @@ def run_ik_demo(ser):
 # Main
 # -----------------------------
 def main():
+    """! @brief Program entry point: start voice thread and run the vision loop.
+
+    Opens the serial link (falling back to vision-only if absent) and the camera,
+    launches the Vosk recognizer thread, then loops: reads frames, on each voice
+    command detects the requested color and (if calibrated and connected) sends a
+    pick. Hotkeys: 'w' workspace homography, 'c' table->robot calibration,
+    'd' scripted IK demo, 'q' quit. Releases all resources on exit.
+    """
     global H, M_robot
 
     ser = None
