@@ -203,6 +203,13 @@ ME507/
 
 ## Design Iteration & Challenges
 
+
+![Figure 10. Breadboard Prototype](images/Breadboard.HEIC)
+
+Video of NEMA 17 Robot Arm Failure:
+
+[![Robot Arm Failure](https://img.youtube.com/vi/QQMs0cIg0x4/maxresdefault.jpg)](https://youtu.be/QQMs0cIg0x4)
+
 ---
 
 ## Build & Run
@@ -220,7 +227,7 @@ Set `SERIAL_PORT` near the top of the script to the arm's COM port. With the cam
 
 ---
 
-![Figure 10. Robot Arm Wave](images/final_arm2.JPG)
+![Figure 11. Robot Arm Wave](images/final_arm2.JPG)
 
 <!-- TODO: add team member names / acknowledgments / course info -->
 *Cal Poly — ME 507*
