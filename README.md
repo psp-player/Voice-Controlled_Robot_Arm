@@ -87,20 +87,49 @@ A custom 4-layer board carries the MCU, the three TMC2240 drivers, power regulat
 <p align="center">
   <img src="images/pcbschematic1.png" alt="PCB schematic sheet 1" width="65%">
 </p>
+
+<p align="center">
+  Figure 2. PCB schematic sheet 1
+</p>
+
 <p align="center">
   <img src="images/pcbschematic2.png" alt="PCB schematic sheet 2" width="65%">
 </p>
+
+<p align="center">
+  Figure 3. PCB schematic sheet 2
+</p>
+
 <p align="center">
   <img src="images/pcbschematic3.png" alt="PCB schematic sheet 3" width="65%">
 </p>
+
+<p align="center">
+  Figure 4. PCB schematic sheet 3
+</p>
+
 <p align="center">
   <img src="images/pcbschematic4.png" alt="PCB schematic sheet 4" width="65%">
 </p>
+
+<p align="center">
+  Figure 5. PCB schematic sheet 4
+</p>
+
 <p align="center">
   <img src="images/pcbdesign.png" alt="PCB Layout" width="65%">
 </p>
+
+<p align="center">
+  Figure 6. PCB Layout
+</p>
+
 <p align="center">
   <img src="images/pcbboard.png" alt="PCB 3D Render" width="65%">
+</p>
+
+<p align="center">
+  Figure 7. PCB 3D Render
 </p>
 
 ### Mechanical Design
