@@ -133,14 +133,14 @@ Hardware</h1>
 <h2><a class="anchor" id="autotoc_md8"></a>
 Actuators</h2>
 <ul>
-<li><b>Three stepper-driven joints (base, shoulder, elbow).</b> Each joint is a NEMA-frame stepper run at 16× microstepping for smooth, quiet motion.</li>
-<li><b>TMC2240 stepper drivers (one per joint).</b> SPI-configurable drivers chosen for their quiet SpreadCycle chopper, fine microstepping, and built-in diagnostics (stall, over-temperature, supply monitoring) read back over SPI. Run/hold currents are tuned <b>per joint</b> in firmware — the shoulder, which carries the most load, runs at maximum current in its range, while the lighter base and elbow run lower to stay cool.</li>
+<li><b>Three stepper-driven joints (base, shoulder, elbow).</b> Each joint is a NEMA-frame stepper run at 16× microstepping.</li>
+<li><b>TMC2240 stepper drivers (one per joint).</b> SPI-configurable drivers read back over SPI. Run/hold currents are tuned <b>per joint</b> in firmware — the shoulder, which carries the most load, runs at maximum current in its range, while the lighter base and elbow run lower to stay cool.</li>
 <li><b>Hobby servo gripper.</b> A single RC servo on a 50 Hz PWM channel (TIM4 CH2), with calibrated open/close pulse widths.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md9"></a>
 Sensors</h2>
 <ul>
-<li><b>PDM MEMS microphone</b> routed into the STM32's DFSDM peripheral with DMA, for on-board audio capture.</li>
+<li><b>PDM MEMS microphone</b> routed into the STM32's DFSDM peripheral with DMA, for on-board audio capture. This was the initial plan, but we ended up using the usb mic because we weren't able to get the tinyml on stm32 working in time. The mic we ordered for the DFSDM was also bad.</li>
 <li><b>USB webcam</b> on the host PC for block detection and workspace calibration.</li>
 <li><b>TMC2240 driver telemetry</b> — each driver's <code>DRV_STATUS</code> register is readable over SPI, providing stall and fault flags that act as motion sensing.</li>
 </ul>
@@ -154,7 +154,7 @@ Custom PCB</h2>
 </ul>
 <h2><a class="anchor" id="autotoc_md11"></a>
 Mechanical Design</h2>
-<p>The RRR linkage uses link lengths of <b>D1 = 145 mm</b> (base height), <b>L1 = 170 mm</b> (upper arm), and <b>L2 = 245 mm</b> (forearm, measured to the tool point), giving a reachable envelope of roughly L1 + L2 from the shoulder pivot.</p>
+<p>The RRR linkage uses link lengths of <b>D1 = 145 mm</b> (base height), <b>L1 = 170 mm</b> (upper arm), and <b>L2 = 245 mm</b> (forearm, measured to the tool point), giving a workspace of roughly L1 + L2 from the shoulder pivot.</p>
 <hr  />
 <h1><a class="anchor" id="autotoc_md13"></a>
 Software Implementation</h1>
