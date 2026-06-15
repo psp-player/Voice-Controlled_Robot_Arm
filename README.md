@@ -84,15 +84,15 @@ The RRR linkage uses link lengths of **D1 = 145 mm** (base height), **L1 = 170 m
 
 ## Software Implementation
 
-### Coding Style
-The firmware is written in **C** for STM32 HAL, **bare-metal (no RTOS)**. It follows a deliberately small, flat structure: a single application module (`arm_control.c`) exposes a clean Cartesian API, and all peripheral setup stays in the CubeMX-generated `main.c`. State that belongs to the motion engine is kept `static` and module-private rather than global, so the public surface in `arm_control.h` is just the handful of functions a caller actually needs.
+## Software Implementation
 
-Concurrency is handled with a **cooperative, flag-driven main loop** plus **interrupt-driven step generation** — there are no tasks or threads on the MCU. The main loop blocks on nothing except an incoming-command flag; everything time-critical happens in timer ISRs. This keeps the control flow easy to reason about and the timing jitter low.
+**Language & structure.** C on the STM32 HAL. All motion logic lives in one module (`arm_control.c`) behind a small Cartesian API (`arm_control.h`); CubeMX's `main.c` handles peripheral setup. Motion state is kept `static` and module-private rather than global.
 
-### Drivers Worth Highlighting
-**`arm_control.c` — coordinated stepper motion.** Each joint owns a hardware timer (TIM1/2/3) in PWM mode; one update event = one microstep. The elegant part is the **master-joint coordination**: for any move, the joint with the most steps becomes the master, its progress drives a single velocity profile, and every other joint's step rate is continuously rescaled in the timer ISR so that all three joints **start and finish together** regardless of how far each must travel. The entire motion engine lives in one interrupt callback (`HAL_TIM_PeriodElapsedCallback`) and a small launch function.
+**How it runs.** A cooperative main loop polls a single "command ready" flag and dispatches commands, while all time-critical step generation happens in timer interrupts. No tasks, no threads — the control flow stays easy to follow and the timing jitter low.
 
-**TMC2240 SPI driver.** A compact `tmc_write` / `tmc_read` pair handles the 40-bit SPI frames, including the TMC2240's quirk of returning a register's value on the *following* transfer. `arm_drivers_init()` configures all three drivers and reads back each one's version byte to confirm communication, returning a bitmask of healthy drivers — so a wiring fault is caught at startup, not mid-demo.
+**Notable drivers.**
+- **Coordinated motion (`arm_control.c`).** Each joint runs off its own hardware timer, where one update event = one microstep. The joint with the most steps drives a shared trapezoidal velocity profile, and every other joint's rate is rescaled in the ISR so all three start and finish together.
+- **TMC2240 SPI driver.** A compact read/write pair handles the 40-bit SPI frames; `arm_drivers_init()` reads back each driver's version byte at startup, so a wiring fault surfaces immediately instead of mid-demo.
 
 ### Main Loop & Intelligence
 The "intelligence" is split across the two processors by design. The MCU's main loop is a simple command interpreter:
