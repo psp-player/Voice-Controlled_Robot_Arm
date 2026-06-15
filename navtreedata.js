@@ -34,19 +34,18 @@ var NAVTREE =
         [ "Custom PCB", "md_README.html#autotoc_md10", null ],
         [ "Mechanical Design", "md_README.html#autotoc_md11", null ]
       ] ],
-      [ "Software Implementation", "md_README.html#autotoc_md13", null ],
-      [ "Software Implementation", "md_README.html#autotoc_md14", [
-        [ "Main Loop & Intelligence", "md_README.html#autotoc_md15", null ]
+      [ "Software Implementation", "md_README.html#autotoc_md13", [
+        [ "Main Loop & Intelligence", "md_README.html#autotoc_md14", null ]
       ] ],
-      [ "Mathematical & Physical Modeling", "md_README.html#autotoc_md17", [
-        [ "Inverse & Forward Kinematics", "md_README.html#autotoc_md18", null ],
-        [ "Motion Profiling (actuation dynamics)", "md_README.html#autotoc_md19", null ],
-        [ "Sensor Data Processing (vision)", "md_README.html#autotoc_md20", null ]
+      [ "Mathematical & Physical Modeling", "md_README.html#autotoc_md16", [
+        [ "Inverse & Forward Kinematics", "md_README.html#autotoc_md17", null ],
+        [ "Motion Profiling (actuation dynamics)", "md_README.html#autotoc_md18", null ],
+        [ "Sensor Data Processing (vision)", "md_README.html#autotoc_md19", null ]
       ] ],
-      [ "Repository Structure", "md_README.html#autotoc_md22", null ],
-      [ "Build & Run", "md_README.html#autotoc_md24", [
-        [ "Firmware (STM32)", "md_README.html#autotoc_md25", null ],
-        [ "Host pipeline (Python)", "md_README.html#autotoc_md26", null ]
+      [ "Repository Structure", "md_README.html#autotoc_md21", null ],
+      [ "Build & Run", "md_README.html#autotoc_md23", [
+        [ "Firmware (STM32)", "md_README.html#autotoc_md24", null ],
+        [ "Host pipeline (Python)", "md_README.html#autotoc_md25", null ]
       ] ]
     ] ],
     [ "Modules", "modules.html", "modules" ],
