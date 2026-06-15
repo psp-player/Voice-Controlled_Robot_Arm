@@ -1,23 +1,29 @@
+## @file camera_calibration.py
+#  @brief Camera intrinsic calibration (host side): captures chessboard views and
+#         computes the camera matrix + distortion coefficients used to undistort
+#         frames in the detection scripts. Run once per camera.
+#  @ingroup python_host
+
 import numpy as np
 import cv2 as cv
 
 # -----------------------------
 # Chessboard Settings
 # -----------------------------
-CHESSBOARD = (8, 6)   # inner corners
+CHESSBOARD = (8, 6)   ##< Inner-corner count of the calibration board.
+## Sub-pixel corner-refinement termination criteria.
 criteria = (
     cv.TERM_CRITERIA_EPS + cv.TERM_CRITERIA_MAX_ITER,
     30,
     0.001
 )
 
-# Prepare object points
+## Template object points for one board view (z=0 plane, unit grid).
 objp = np.zeros((CHESSBOARD[0] * CHESSBOARD[1], 3), np.float32)
 objp[:, :2] = np.mgrid[0:CHESSBOARD[0], 0:CHESSBOARD[1]].T.reshape(-1, 2)
 
-# Arrays to store calibration points
-objpoints = []
-imgpoints = []
+objpoints = []   ##< Accumulated 3D object points, one set per saved view.
+imgpoints = []   ##< Accumulated 2D image corner points, one set per saved view.
 
 # -----------------------------
 # Open Camera
@@ -32,6 +38,8 @@ print("Press 's' to save a calibration frame")
 print("Press 'c' to calibrate camera")
 print("Press 'q' to quit")
 
+# Live capture loop: detect and draw chessboard corners each frame; 's' stores a
+# view, 'c' runs calibration once enough views are collected, 'q' quits.
 while True:
 
     ret, frame = cap.read()
