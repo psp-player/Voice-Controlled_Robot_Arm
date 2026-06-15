@@ -39,9 +39,7 @@ link:
 | Coordinate transform | Host PC | pixel → table (homography) → robot frame (affine) |
 | Inverse kinematics & motion | STM32 (C firmware) | Solve IK, generate coordinated stepper motion, drive the gripper |
 
-The PC sends an ASCII command (`M,<COLOR>,<X>,<Y>,<Z>\n`); the firmware performs
-the motion and replies `DONE` or `ERR`. Keeping IK and real-time step generation
-on the MCU means the host never has to meet hard timing deadlines.
+The PC sends an ASCII command (`M,<COLOR>,<X>,<Y>,<Z>\n`); the firmware performs the motion and replies `DONE` or `ERR`. Keeping IK and real-time step generation on the MCU means the host never has to meet hard timing deadlines.
 
 <!-- TODO: a block diagram of the full pipeline reads very well here -->
 <!-- ![System block diagram](docs/images/system_diagram.png) -->
@@ -51,46 +49,33 @@ on the MCU means the host never has to meet hard timing deadlines.
 ## Hardware
 
 ### Actuators
-- **Three stepper-driven joints (base, shoulder, elbow).** Each joint is a
-  NEMA-frame stepper run at 16× microstepping for smooth, quiet motion.
+- **Three stepper-driven joints (base, shoulder, elbow).** Each joint is a NEMA-frame stepper run at 16× microstepping.
   <!-- TODO: confirm exact motor part numbers, e.g. NEMA 17 (base/elbow) and NEMA 23 (shoulder) -->
-- **TMC2240 stepper drivers (one per joint).** SPI-configurable drivers chosen
-  for their quiet SpreadCycle chopper, fine microstepping, and built-in
-  diagnostics (stall, over-temperature, supply monitoring) read back over SPI.
-  Run/hold currents are tuned **per joint** in firmware — the shoulder, which
-  carries the most load, runs at maximum current in its range, while the lighter
-  base and elbow run lower to stay cool.
-- **Hobby servo gripper.** A single RC servo on a 50 Hz PWM channel (TIM4 CH2),
-  with calibrated open/close pulse widths.
+- **TMC2240 stepper drivers (one per joint).** SPI-configurable drivers read back over SPI.
+  Run/hold currents are tuned **per joint** in firmware — the shoulder, which carries the most load, runs at maximum current in its range, while the lighter base and elbow run lower to stay cool.
+- **Hobby servo gripper.** A single RC servo on a 50 Hz PWM channel (TIM4 CH2), with calibrated open/close pulse widths.
 
 ### Sensors
-- **PDM MEMS microphone** routed into the STM32's DFSDM peripheral with DMA, for
-  on-board audio capture.
+- **PDM MEMS microphone** routed into the STM32's DFSDM peripheral with DMA, for on-board audio capture. This was the initial plan, but we ended up using the usb mic because we weren't able to get the tinyml on stm32 working in time. The mic we ordered for the DFSDM was also bad.
   <!-- TODO: confirm mic part (e.g. Adafruit PDM MEMS) -->
 - **USB webcam** on the host PC for block detection and workspace calibration.
-- **TMC2240 driver telemetry** — each driver's `DRV_STATUS` register is readable
-  over SPI, providing stall and fault flags that act as motion sensing.
+- **TMC2240 driver telemetry** — each driver's `DRV_STATUS` register is readable over SPI, providing stall and fault flags that act as motion sensing.
 
 ### Custom PCB
-A custom 4-layer board carries the MCU, the three TMC2240 drivers, power
-regulation, and connectors for the motors, microphone, and USB.
+A custom 4-layer board carries the MCU, the three TMC2240 drivers, power regulation, and connectors for the motors, microphone, and USB.
 
-- **Power:** a buck converter steps the 24 V motor supply down to 5 V, and an LDO
-  derives the 3.3 V logic rail.
+- **Power:** a buck converter steps the 24 V motor supply down to 5 V, and an LDO derives the 3.3 V logic rail.
   <!-- TODO: confirm regulators, e.g. TPS54360 buck (24V->5V) + MCP1700 LDO (5V->3.3V) -->
 - **USB protection:** an ESD-protection device on the USB data lines.
   <!-- TODO: confirm part, e.g. USBLC6-2SC6 -->
-- **Layout:** dedicated power and ground planes, local decoupling at each driver,
-  and short SPI/step/dir routing to the drivers.
+- **Layout:** dedicated power and ground planes, local decoupling at each driver, and short SPI/step/dir routing to the drivers.
 
 <!-- TODO: add PCB renders/photos: schematic, 3D render, and the assembled board -->
 <!-- ![PCB 3D render](docs/images/pcb_render.png) -->
 <!-- ![Assembled PCB](docs/images/pcb_assembled.jpg) -->
 
 ### Mechanical Design
-The RRR linkage uses link lengths of **D1 = 145 mm** (base height), **L1 = 170
-mm** (upper arm), and **L2 = 245 mm** (forearm, measured to the tool point),
-giving a reachable envelope of roughly L1 + L2 from the shoulder pivot.
+The RRR linkage uses link lengths of **D1 = 145 mm** (base height), **L1 = 170 mm** (upper arm), and **L2 = 245 mm** (forearm, measured to the tool point), giving a workspace of roughly L1 + L2 from the shoulder pivot.
 
 <!-- TODO: add a CAD render and a labeled link-length / DOF diagram -->
 <!-- ![CAD render](docs/images/cad_render.png) -->
@@ -100,38 +85,17 @@ giving a reachable envelope of roughly L1 + L2 from the shoulder pivot.
 ## Software Implementation
 
 ### Coding Style
-The firmware is written in **C** for STM32 HAL, **bare-metal (no RTOS)**. It
-follows a deliberately small, flat structure: a single application module
-(`arm_control.c`) exposes a clean Cartesian API, and all peripheral setup stays
-in the CubeMX-generated `main.c`. State that belongs to the motion engine is kept
-`static` and module-private rather than global, so the public surface in
-`arm_control.h` is just the handful of functions a caller actually needs.
+The firmware is written in **C** for STM32 HAL, **bare-metal (no RTOS)**. It follows a deliberately small, flat structure: a single application module (`arm_control.c`) exposes a clean Cartesian API, and all peripheral setup stays in the CubeMX-generated `main.c`. State that belongs to the motion engine is kept `static` and module-private rather than global, so the public surface in `arm_control.h` is just the handful of functions a caller actually needs.
 
-Concurrency is handled with a **cooperative, flag-driven main loop** plus
-**interrupt-driven step generation** — there are no tasks or threads on the MCU.
-The main loop blocks on nothing except an incoming-command flag; everything
-time-critical happens in timer ISRs. This keeps the control flow easy to reason
-about and the timing jitter low.
+Concurrency is handled with a **cooperative, flag-driven main loop** plus **interrupt-driven step generation** — there are no tasks or threads on the MCU. The main loop blocks on nothing except an incoming-command flag; everything time-critical happens in timer ISRs. This keeps the control flow easy to reason about and the timing jitter low.
 
 ### Drivers Worth Highlighting
-**`arm_control.c` — coordinated stepper motion.** Each joint owns a hardware
-timer (TIM1/2/3) in PWM mode; one update event = one microstep. The elegant part
-is the **master-joint coordination**: for any move, the joint with the most steps
-becomes the master, its progress drives a single velocity profile, and every
-other joint's step rate is continuously rescaled in the timer ISR so that all
-three joints **start and finish together** regardless of how far each must
-travel. The entire motion engine lives in one interrupt callback
-(`HAL_TIM_PeriodElapsedCallback`) and a small launch function.
+**`arm_control.c` — coordinated stepper motion.** Each joint owns a hardware timer (TIM1/2/3) in PWM mode; one update event = one microstep. The elegant part is the **master-joint coordination**: for any move, the joint with the most steps becomes the master, its progress drives a single velocity profile, and every other joint's step rate is continuously rescaled in the timer ISR so that all three joints **start and finish together** regardless of how far each must travel. The entire motion engine lives in one interrupt callback (`HAL_TIM_PeriodElapsedCallback`) and a small launch function.
 
-**TMC2240 SPI driver.** A compact `tmc_write` / `tmc_read` pair handles the
-40-bit SPI frames, including the TMC2240's quirk of returning a register's value
-on the *following* transfer. `arm_drivers_init()` configures all three drivers
-and reads back each one's version byte to confirm communication, returning a
-bitmask of healthy drivers — so a wiring fault is caught at startup, not mid-demo.
+**TMC2240 SPI driver.** A compact `tmc_write` / `tmc_read` pair handles the 40-bit SPI frames, including the TMC2240's quirk of returning a register's value on the *following* transfer. `arm_drivers_init()` configures all three drivers and reads back each one's version byte to confirm communication, returning a bitmask of healthy drivers — so a wiring fault is caught at startup, not mid-demo.
 
 ### Main Loop & Intelligence
-The "intelligence" is split across the two processors by design. The MCU's main
-loop is a simple command interpreter:
+The "intelligence" is split across the two processors by design. The MCU's main loop is a simple command interpreter:
 
 1. Wait for the USB CDC receive ISR to set the `cmd_ready` flag.
 2. Parse the ASCII line:
@@ -140,11 +104,7 @@ loop is a simple command interpreter:
    - `WHERE` → reply with the current tip position from forward kinematics
 3. Reply `DONE` on success or `ERR` on an unreachable target / bad command.
 
-The higher-level decision making — *which* color to pick and *where* it is — runs
-on the host (`voiceplusvision.py`): a Vosk recognizer constrained to a small
-color grammar sets the target color, OpenCV finds the largest matching blob, and
-the two-stage coordinate transform produces the robot-frame target that gets sent
-down the wire.
+The higher-level decision making — *which* color to pick and *where* it is — runs on the host (`voiceplusvision.py`): a Vosk recognizer constrained to a small color grammar sets the target color, OpenCV finds the largest matching blob, and the two-stage coordinate transform produces the robot-frame target that gets sent down the wire.
 
 ---
 
@@ -153,10 +113,7 @@ down the wire.
 ### Inverse & Forward Kinematics
 The arm is a base yaw joint followed by a 2-link planar arm (shoulder + elbow).
 
-**Inverse kinematics** (`arm_ik`): the base angle comes straight from the planar
-projection of the target, `θ₀ = atan2(y, x)`. In the arm plane, with planar reach
-`r = √(x² + y²)` and height `z' = z − D1`, the elbow angle follows from the law
-of cosines:
+**Inverse kinematics** (`arm_ik`): the base angle comes straight from the planar projection of the target, `θ₀ = atan2(y, x)`. In the arm plane, with planar reach `r = √(x² + y²)` and height `z' = z − D1`, the elbow angle follows from the law of cosines:
 
 ```
 D  = (r² + z'² − L1² − L2²) / (2·L1·L2)
@@ -164,16 +121,10 @@ D  = (r² + z'² − L1² − L2²) / (2·L1·L2)
 θ₁ = atan2(z', r) − atan2(L2·sinθ₂, L1 + L2·cosθ₂)
 ```
 
-A target is flagged unreachable when `|D| > 1`. **Forward kinematics** (`arm_fk`)
-inverts this to report the tip position and is used to answer `WHERE`.
+A target is flagged unreachable when `|D| > 1`. **Forward kinematics** (`arm_fk`) inverts this to report the tip position and is used to answer `WHERE`.
 
 ### Motion Profiling (actuation dynamics)
-Stepping a motor straight to cruise speed stalls it, so each move uses a
-**symmetric trapezoidal velocity profile** derived from a constant-acceleration
-model. From the kinematic relation `v² = v₀² + 2·a·s`, the firmware computes two
-candidate speeds each master step — one that ramps **up** with distance travelled
-and one that ramps **down** with distance remaining — and takes the smaller,
-capped at the cruise rate:
+Stepping a motor straight to cruise speed stalls it, so each move uses a **symmetric trapezoidal velocity profile** derived from a constant-acceleration model. From the kinematic relation `v² = v₀² + 2·a·s`, the firmware computes two candidate speeds each master step — one that ramps **up** with distance travelled and one that ramps **down** with distance remaining — and takes the smaller, capped at the cruise rate:
 
 ```
 v_acc = √(v_start² + 2·a·steps_done)
@@ -181,26 +132,16 @@ v_dec = √(v_start² + 2·a·steps_left)
 v     = min(v_acc, v_dec, v_max)
 ```
 
-This yields a clean accelerate → cruise → decelerate motion. Joint angles are
-converted to microsteps via `STEPS_PER_RAD = 200 · 16 / (2π)`, and the timer
-auto-reload is computed from the desired step rate against the 1 MHz tick.
+This yields a clean accelerate → cruise → decelerate motion. Joint angles are converted to microsteps via `STEPS_PER_RAD = 200 · 16 / (2π)`, and the timer auto-reload is computed from the desired step rate against the 1 MHz tick.
 
 ### Sensor Data Processing (vision)
-The vision pipeline turns camera pixels into robot coordinates in two calibrated
-stages:
+The vision pipeline turns camera pixels into robot coordinates in two calibrated stages:
 
-1. **Camera calibration** (`camera_calibration.py`) removes lens distortion using
-   a chessboard and OpenCV's `calibrateCamera`.
-2. **Workspace homography** maps undistorted pixels to flat **table** millimetres
-   (`findHomography` on a chessboard lying in the workspace).
-3. **Table → robot affine** (`estimateAffine2D`) maps table coordinates into the
-   arm's base frame from a handful of touch-off correspondences, with the mean
-   and max residual reported so a bad calibration is obvious.
+1. **Camera calibration** (`camera_calibration.py`) removes lens distortion using a chessboard and OpenCV's `calibrateCamera`.
+2. **Workspace homography** maps undistorted pixels to flat **table** millimetres (`findHomography` on a chessboard lying in the workspace).
+3. **Table → robot affine** (`estimateAffine2D`) maps table coordinates into the arm's base frame from a handful of touch-off correspondences, with the mean and max residual reported so a bad calibration is obvious.
 
-Block detection itself converts each frame to HSV, builds a per-color mask
-(red spans two hue bands because it wraps the hue circle), cleans it with
-morphological open/close, and takes the largest contour above a minimum area as
-the target — its centroid is the pixel coordinate fed into the transform chain.
+Block detection itself converts each frame to HSV, builds a per-color mask (red spans two hue bands because it wraps the hue circle), cleans it with morphological open/close, and takes the largest contour above a minimum area as the target — its centroid is the pixel coordinate fed into the transform chain.
 
 ---
 
@@ -235,8 +176,7 @@ ME507/
 ## Build & Run
 
 ### Firmware (STM32)
-Open the project in STM32CubeIDE, build, and flash to the board over ST-Link.
-The MCU enumerates as a USB CDC virtual COM port for the command link.
+Open the project in STM32CubeIDE, build, and flash to the board over ST-Link. The MCU enumerates as a USB CDC virtual COM port for the command link.
 
 ### Host pipeline (Python)
 ```bash
@@ -244,9 +184,7 @@ pip install vosk sounddevice pyserial opencv-python numpy
 # download a Vosk model (e.g. vosk-model-small-en-us-0.15) next to the script
 python voiceplusvision.py
 ```
-Set `SERIAL_PORT` near the top of the script to the arm's COM port. With the
-camera running, press `w` to calibrate the workspace, `c` to calibrate the
-table→robot transform, then say an enabled color to trigger a pick.
+Set `SERIAL_PORT` near the top of the script to the arm's COM port. With the camera running, press `w` to calibrate the workspace, `c` to calibrate the table→robot transform, then say an enabled color to trigger a pick.
 
 ---
 
