@@ -8,9 +8,9 @@ California Polytechnic State University, San Luis Obispo
 
 #### Overview
 
-A 3 degree-of-freedom (RRR) robotic arm that picks colored blocks on spoken command. A spoken color is recognized on the host PC, computer vision locates the matching block, the block's location is transformed into the arm's coordinate frame, and the target is streamed over USB to an STM32, which solves inverse kinematics and drives three closed-loop stepper joints plus a gripper to complete the pick. The arm runs using 2 NEMA 17 stepper motors and a NEMA 23 stepper motor, all driven by 3 TMC2240 driver + motion controller chips. It has a cheap servo motor for the end effector. The microcontroller is a STM32L4A6ZG (144 pin).
+<img src="images/final_arm.jpg" alt="Robot Arm" width="50%">
 
-![Robot Arm](images/final_arm.jpg)
+A 3 degree-of-freedom (RRR) robotic arm that picks colored blocks on spoken command. A spoken color is recognized on the host PC, computer vision locates the matching block, the block's location is transformed into the arm's coordinate frame, and the target is streamed over USB to an STM32, which solves inverse kinematics and drives three closed-loop stepper joints plus a gripper to complete the pick. The arm runs using 2 NEMA 17 stepper motors and a NEMA 23 stepper motor, all driven by 3 TMC2240 driver + motion controller chips. It has a cheap servo motor for the end effector. The microcontroller is a STM32L4A6ZG (144 pin).
 
 More details hosted at the documentation page: ([page link](https://psp-player.github.io/ME507/)).
 
