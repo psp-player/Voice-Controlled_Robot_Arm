@@ -9,11 +9,8 @@ California Polytechnic State University, San Luis Obispo
 #### Overview
 
 
-<div align="center">
-
 ![Robot Arm](./images/final_arm.jpg)
 
-</div>
 
 <p align="center">
   Figure 1. Robot Arm Structure
@@ -87,49 +84,42 @@ A custom 4-layer board carries the MCU, the three TMC2240 drivers, power regulat
 
 <!-- TODO: add PCB renders/photos: schematic, 3D render, and the assembled board -->
 
-<p align="center">
-  <img src="images/pcbschematic1.png" alt="PCB schematic sheet 1" width="65%">
-</p>
+![PCB schematic sheet 1](./images/pcbschematic1.png)
 
 <p align="center">
   Figure 2. PCB schematic sheet 1
 </p>
 
-<p align="center">
-  <img src="images/pcbschematic2.png" alt="PCB schematic sheet 2" width="65%">
-</p>
+![PCB schematic sheet 2](./images/pcbschematic2.png)
+
 
 <p align="center">
   Figure 3. PCB schematic sheet 2
 </p>
 
-<p align="center">
-  <img src="images/pcbschematic3.png" alt="PCB schematic sheet 3" width="65%">
-</p>
+
+![PCB schematic sheet 3](./images/pcbschematic3.png)
 
 <p align="center">
   Figure 4. PCB schematic sheet 3
 </p>
 
-<p align="center">
-  <img src="images/pcbschematic4.png" alt="PCB schematic sheet 4" width="65%">
-</p>
+
+![PCB schematic sheet 4](./images/pcbschematic4.png)
 
 <p align="center">
   Figure 5. PCB schematic sheet 4
 </p>
 
-<p align="center">
-  <img src="images/pcbdesign.png" alt="PCB Layout" width="65%">
-</p>
+
+![PCB Layout](./images/pcbdesign.png)
 
 <p align="center">
   Figure 6. PCB Layout
 </p>
 
-<p align="center">
-  <img src="images/pcbboard.png" alt="PCB 3D Render" width="65%">
-</p>
+
+![PCB 3D Render](./images/pcbboard.png)
 
 <p align="center">
   Figure 7. PCB 3D Render
