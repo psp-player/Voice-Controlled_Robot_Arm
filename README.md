@@ -38,8 +38,9 @@ Video of Arm Function:
 
 ## System Overview
 
-The project splits across two processors connected by a single USB CDC serial
-link:
+### Objective
+
+The original intended function of the robot arm was to sort various shapes of different colors and forms based on user voice commands. The arm was planned use TinyML on the STM32L4A6ZG MCU via a I2S MEMS microphone chip to process a user's voice and idenitfy intent to then select objects with visual detection and command the arm to sort them. Unfortunately timeline restrictions prevented fulfillment of the entire desired scope of the project. The table below highlights the demonstration edition functionality:
 
 | Stage | Where | Responsibility |
 |-------|-------|----------------|
@@ -49,6 +50,8 @@ link:
 | Inverse kinematics & motion | STM32 (C firmware) | Solve IK, generate coordinated stepper motion, drive the gripper |
 
 The PC sends an ASCII command (`M,<COLOR>,<X>,<Y>,<Z>\n`); the firmware performs the motion and replies `DONE` or `ERR`. Keeping IK and real-time step generation on the MCU means the host never has to meet hard timing deadlines.
+
+
 
 <!-- TODO: a block diagram of the full pipeline reads very well here -->
 <!-- ![System block diagram](docs/images/system_diagram.png) -->
