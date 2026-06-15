@@ -31,6 +31,7 @@ Video of Arm Function:
 - [Software Implementation](#software-implementation)
 - [Mathematical & Physical Modeling](#mathematical--physical-modeling)
 - [Repository Structure](#repository-structure)
+- [Challenges](#design-iteration--challenges)
 - [Build & Run](#build--run)
 
 ---
@@ -194,6 +195,10 @@ ME507/
 
 <!-- TODO (optional, per rubric): reorganize firmware into a CubeIDE-style
      Core/Src, Core/Inc, Drivers/ layout and update the Doxyfile INPUT paths. -->
+
+---
+
+## Design Iteration & Challenges
 
 ---
 
