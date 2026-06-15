@@ -102,13 +102,14 @@ A custom 4-layer board carries the MCU, the three TMC2240 drivers, power regulat
 ![Figure 8. PCB 3D Render](./images/pcbboard.png)
 
 
+![Figure 9. Actual PCB](./images/pcb.jpg)
+
 ### Mechanical Design
 The RRR linkage uses link lengths of **D1 = 145 mm** (base height), **L1 = 170 mm** (upper arm), and **L2 = 245 mm** (forearm, measured to the tool point), giving a workspace of roughly L1 + L2 from the shoulder pivot.
 
-<!-- TODO: add a CAD render and a labeled link-length / DOF diagram -->
-![Figure 9. Robot Arm Cad](./images/Robot_arm_cad.jpg)
-<!-- ![CAD render](docs/images/cad_render.png) -->
-![Figure 10. Robot Arm End Effector](./images/end_effector1.gif)
+![Figure 10. Robot Arm Cad](./images/Robot_arm_cad.jpg)
+
+![Figure 11. Robot Arm End Effector](./images/end_effector1.gif)
 
 ---
 
@@ -207,7 +208,7 @@ ME507/
 
 To get ahead of the lengthy manufacturing and shipping times, the PCB was mocked up using a STM32 Nucleo Board (with an STM32L4A6ZG) connected to a breadboard with 3 DRV8825 motor drivers and a 24V 5A PSU. 
 
-![Figure 10. Breadboard Prototype](images/Breadboard.jpg)
+![Figure 11. Breadboard Prototype](images/Breadboard.jpg)
 
 This proved useful for determining that the shoulder NEMA 17 motor produced insufficient torque.
 
@@ -221,11 +222,11 @@ Due to time restrictions, it was decided to use a NEMA 23 at the shoulder joint 
 
 When purchasing the PCB, the MCU, crystal, and ferrite beads weren't available at JLPCB. To overcome this, it was decided to pruchase these parts from Mouser Electronics and hand solder them when the board arrived. The outstanding components were soldered on using a heat gun and lead-free solder paste.
 
-![Figure 11. MCU Solder Job](images/mcu.JPG)
+![Figure 12. MCU Solder Job](images/mcu.JPG)
 
 ![Figure 12. Crystal Solder Job](images/crystal.JPG)
 
-![Figure 13. Ferrite Bead Solder Job](images/ferrite.JPG)
+![Figure 14. Ferrite Bead Solder Job](images/ferrite.JPG)
 
 Apart from some software hurdles (like matching pinouts to the PCB) and SPI communication issues regarding baud and data frame size, the board was entirely functional and worked as intended.
 
@@ -250,7 +251,7 @@ Set `SERIAL_PORT` near the top of the script to the arm's COM port. With the cam
 
 Overall, the robot worked as designed, but the performance wasn't great. There were a few pitfalls in this project, but we were able to overcome them. Many of the problems we encountered, had a fix that required tweaks of either the mechanical design or the electrical (pcb) design. The biggest issue we had gave us the most problems was that we weren't able to get enough torque from the shoulder joint. Time management is crucial in project planning, especially when ordering parts and having them manufactured. Our project was ambitious for this class, so we had to reduce the scope of it when we realized some of it wasn't going to be possible to achieve in the time frame we had. 
 
-![Figure 12. Robot Arm Wave](images/final_arm2.JPG)
+![Figure 15. Robot Arm Wave](images/final_arm2.JPG)
 
 <!-- TODO: add team member names / acknowledgments / course info -->
 *Cal Poly — ME 507*
