@@ -51,7 +51,7 @@ The original intended function of the robot arm was to sort various shapes of di
 
 The PC sends an ASCII command (`M,<COLOR>,<X>,<Y>,<Z>\n`); the firmware performs the motion and replies `DONE` or `ERR`. Keeping IK and real-time step generation on the MCU means the host never has to meet hard timing deadlines.
 
-
+![Figure 2. Flowchart](./images/control_flowchart.drawio.png)
 
 <!-- TODO: a block diagram of the full pipeline reads very well here -->
 <!-- ![System block diagram](docs/images/system_diagram.png) -->
@@ -84,31 +84,31 @@ A custom 4-layer board carries the MCU, the three TMC2240 drivers, power regulat
 
 <!-- TODO: add PCB renders/photos: schematic, 3D render, and the assembled board -->
 
-![Figure 2. PCB schematic sheet 1](./images/pcbschematic1.png)
+![Figure 3. PCB schematic sheet 1](./images/pcbschematic1.png)
 
 
-![Figure 3. PCB schematic sheet 2](./images/pcbschematic2.png)
+![Figure 4. PCB schematic sheet 2](./images/pcbschematic2.png)
 
 
-![Figure 4. PCB schematic sheet 3](./images/pcbschematic3.png)
+![Figure 5. PCB schematic sheet 3](./images/pcbschematic3.png)
 
 
-![Figure 5. PCB schematic sheet 4](./images/pcbschematic4.png)
+![Figure 6. PCB schematic sheet 4](./images/pcbschematic4.png)
 
 
-![Figure 6. PCB Layout](./images/pcbdesign.png)
+![Figure 7. PCB Layout](./images/pcbdesign.png)
 
 
-![Figure 7. PCB 3D Render](./images/pcbboard.png)
+![Figure 8. PCB 3D Render](./images/pcbboard.png)
 
 
 ### Mechanical Design
 The RRR linkage uses link lengths of **D1 = 145 mm** (base height), **L1 = 170 mm** (upper arm), and **L2 = 245 mm** (forearm, measured to the tool point), giving a workspace of roughly L1 + L2 from the shoulder pivot.
 
 <!-- TODO: add a CAD render and a labeled link-length / DOF diagram -->
-![Figure 8. Robot Arm Cad](./images/Robot_arm_cad.jpg)
+![Figure 9. Robot Arm Cad](./images/Robot_arm_cad.jpg)
 <!-- ![CAD render](docs/images/cad_render.png) -->
-![Figure 9. Robot Arm End Effector](./images/end_effector1.gif)
+![Figure 10. Robot Arm End Effector](./images/end_effector1.gif)
 
 ---
 
@@ -204,7 +204,7 @@ ME507/
 ## Design Iteration & Challenges
 
 
-![Figure 10. Breadboard Prototype](images/Breadboard.HEIC)
+![Figure 11. Breadboard Prototype](images/Breadboard.HEIC)
 
 Video of NEMA 17 Robot Arm Failure:
 
@@ -227,7 +227,7 @@ Set `SERIAL_PORT` near the top of the script to the arm's COM port. With the cam
 
 ---
 
-![Figure 11. Robot Arm Wave](images/final_arm2.JPG)
+![Figure 12. Robot Arm Wave](images/final_arm2.JPG)
 
 <!-- TODO: add team member names / acknowledgments / course info -->
 *Cal Poly — ME 507*
